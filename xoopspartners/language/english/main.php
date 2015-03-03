@@ -17,10 +17,9 @@
 
 define('_XO_MD_TITLE','Partners');
 
-
 /**
  * Form fields
- */ 
+ */
 define('_XO_MD_CATEGORY','Category');
 define('_XO_MD_URL','Url');
 define('_XO_MD_IMAGE','Image');
@@ -52,7 +51,5 @@ define('_XO_MD_ERRORNOCAT','Error: There are no Categories created yet. Please c
 
 /**
  * Mails
- */ 
+ */
 define('_XO_MD_NEWPARTNER','%s Partners Request');
-
-?>

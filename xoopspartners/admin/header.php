@@ -31,5 +31,3 @@ $menu_handler->addMenuTop( XOOPS_URL . '/modules/' . $xoopsModule->getVar( 'dirn
 foreach ( $xoopsModule->getAdminMenu() as $menu ) {
   $menu_handler->addMenuTabs( $menu['link'], $menu['title'] );
 }
-
-?>

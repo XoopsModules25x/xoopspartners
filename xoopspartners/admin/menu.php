@@ -20,5 +20,3 @@ defined( 'XOOPS_ROOT_PATH' ) or die( 'Restricted access' );
  */
 $adminmenu[] = array( 'title' => _XO_MI_MENU_ADMININDEX, 'link' => 'admin/index.php' );
 $adminmenu[] = array( 'title' => _XO_MI_MENU_ADMINPARTNERS, 'link' => 'admin/partners.php?op=add&amp;type=partners' );
-
-?>

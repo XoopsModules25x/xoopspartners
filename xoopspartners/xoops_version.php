@@ -30,8 +30,8 @@ $modversion = array(
     'credits'      => 'The Xoops Module Development Team',
     'contributors' => '',
     'image'        => 'images/logo.png',
-	'website_url'  => 'http://www.xoops.org',
-	'dirname'      => basename( dirname( __FILE__ ) )
+    'website_url'  => 'http://www.xoops.org',
+    'dirname'      => basename( dirname( __FILE__ ) )
 );
 
 /**
@@ -95,7 +95,7 @@ $modversion['blocks'][] = array(
     'description' => _XO_MI_PARTNERS_DESC,
     'show_func'   => 'b_xoopsPartners_show',
     'edit_func'   => 'b_xoopsPartners_edit',
-    'options'	  => '0',
+    'options'      => '0',
     'template'    => 'xoopspartners_block_site.html'
     );
 
@@ -106,7 +106,7 @@ xoops_load('xoopslists');
 
 $modversion['config'][] = array(
     'name'        => 'editor',
-    'title'	      => '_XO_MI_PARTNERS_EDITOR',
+    'title'          => '_XO_MI_PARTNERS_EDITOR',
     'description' => '_XO_MI_PARTNERS_EDITOR_DESC',
     'formtype'    => 'select',
     'valuetype'   => 'text',
@@ -115,12 +115,10 @@ $modversion['config'][] = array(
     );
 $modversion['config'][] = array(
     'name'        => 'cookietime',
-    'title'	      => '_XO_MI_PARTNERS_RECLICK',
+    'title'          => '_XO_MI_PARTNERS_RECLICK',
     'description' => '_XO_MI_PARTNERS_RECLICK_DESC',
     'formtype'    => 'select',
     'valuetype'   => 'int',
     'default'     => 86400,
     'options'     => array('_XO_MI_PARTNERS_HOUR' => '3600','_XO_MI_PARTNERS_3HOURS' => '10800','_XO_MI_PARTNERS_5HOURS' =>  '18000','_XO_MI_PARTNERS_10HOURS'  =>  '36000','_XO_MI_PARTNERS_DAY' => '86400')
     );
-
-?>

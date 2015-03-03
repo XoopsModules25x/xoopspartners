@@ -19,11 +19,11 @@ if(!defined('XOOPS_ROOT_PATH')) exit ;
 
 /**
  * Function executed during an update of the module
- * 
+ *
  * @String  $module  array of the module
  * @return  Boolean
  */
-function xoops_module_update_xoopspartners(&$module) 
+function xoops_module_update_xoopspartners(&$module)
 {
     global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsModule;
 
@@ -54,20 +54,21 @@ function xoops_module_update_xoopspartners(&$module)
 
 /**
  * Check if table already exist in mysql
- * 
+ *
  * @String  $tablename  name of the table with the Xoops DB prefix
  * @return  Boolean
  */
-function content_table_exists( $tablename ) 
+function content_table_exists( $tablename )
 {
     global $xoopsDB;
     $result=$xoopsDB->queryF("SHOW TABLES LIKE '$tablename'");
+
     return($xoopsDB->getRowsNum($result) > 0);
 }
 
 /**
  * Check if field already exist in table
- * 
+ *
  * @String  $fieldname  name of the field
  * @String  $table      name of the table with the Xoops DB prefix
  * @return  Boolean
@@ -76,7 +77,6 @@ function partners_fieldExists( $fieldname, $table )
 {
     global $xoopsDB;
     $result=$xoopsDB->queryF("SHOW COLUMNS FROM	$table LIKE '$fieldname'");
+
     return($xoopsDB->getRowsNum($result) > 0);
 }
-
-?>

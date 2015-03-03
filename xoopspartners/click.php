@@ -28,5 +28,3 @@ if ( !isset($_COOKIE['partners'.$id]) ) {
 }
 // Include footer
 include_once 'footer.php';
-
-?>

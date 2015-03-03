@@ -16,5 +16,3 @@
  */
 
 define('_XO_MB_PARTNERS_CATEGORY','Choose category:');
-
-?>

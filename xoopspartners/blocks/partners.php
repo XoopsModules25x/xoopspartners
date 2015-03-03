@@ -18,24 +18,24 @@
 define('_XOOPSPARTNERS_DIRNAME', basename( dirname( dirname( __FILE__ ) ) ) );
 
 function b_xoopsPartners_show( $options ) {
-	global $xoTheme;
-	$block = array();
+    global $xoTheme;
+    $block = array();
     // Get module handler
-	$partners_handler = &xoops_getModuleHandler( 'partners', _XOOPSPARTNERS_DIRNAME );
-	// Add stylesheet and scripts	
-	$xoTheme->addStylesheet( XOOPS_URL . '/modules/' . _XOOPSPARTNERS_DIRNAME . '/css/class.css', null );
-	$xoTheme->addScript( XOOPS_URL . '/modules/' . _XOOPSPARTNERS_DIRNAME . '/js/functions.js', null, '' );
+    $partners_handler = &xoops_getModuleHandler( 'partners', _XOOPSPARTNERS_DIRNAME );
+    // Add stylesheet and scripts
+    $xoTheme->addStylesheet( XOOPS_URL . '/modules/' . _XOOPSPARTNERS_DIRNAME . '/css/class.css', null );
+    $xoTheme->addScript( XOOPS_URL . '/modules/' . _XOOPSPARTNERS_DIRNAME . '/js/functions.js', null, '' );
     $xoTheme->addScript( XOOPS_URL . '/modules/' . _XOOPSPARTNERS_DIRNAME . '/js/mootools-1.2-core.js', null);
     $xoTheme->addScript( XOOPS_URL . '/modules/' . _XOOPSPARTNERS_DIRNAME . '/js/mooticker.js', null);
     // Get partner list
     $partners = $partners_handler->getActive( $options[1] );
-	if ( $partners['count'] > 0 ) {
-		foreach( $partners['list'] as $partner ) {
+    if ( $partners['count'] > 0 ) {
+        foreach( $partners['list'] as $partner ) {
             $block[] = $partner->toArray();
-		}
-	}
-	// Return infos
-	return $block;
+        }
+    }
+    // Return infos
+    return $block;
 }
 
 function b_xoopsPartners_edit( $options ) {
@@ -44,18 +44,17 @@ function b_xoopsPartners_edit( $options ) {
     // Construct option
     $form = _XO_MB_PARTNERS_CATEGORY . '<select name="' . $options[1] . '">';
     $objects = $category_handler->getObj();
-	if ( $objects['count'] > 0 ) {
-		foreach( $objects['list'] as $object ) {
-			$category = array();
-			$category['id']   = $object->getVar( 'cat_id' );
-			$category['name'] = $object->getVar( 'cat_title' );
-			$category['desc'] = $object->getVar( 'cat_description' );
-			$form .= '<option value="' . $category['id'] . '">' . $category['name'] . '</option>';  
-			unset( $category );
-		}
-	}
+    if ( $objects['count'] > 0 ) {
+        foreach( $objects['list'] as $object ) {
+            $category = array();
+            $category['id']   = $object->getVar( 'cat_id' );
+            $category['name'] = $object->getVar( 'cat_title' );
+            $category['desc'] = $object->getVar( 'cat_description' );
+            $form .= '<option value="' . $category['id'] . '">' . $category['name'] . '</option>';
+            unset( $category );
+        }
+    }
     $form .= '</select>';
     // Return form
-	return $form;
+    return $form;
 }
-?>

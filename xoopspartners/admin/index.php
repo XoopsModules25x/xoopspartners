@@ -37,7 +37,7 @@ if ( $objects['count'] > 0 ) {
         $contentsObj = $partners_handler->getByCategory( $object->getVar( 'cat_id' ) );
         if ( $contentsObj['count'] ) {
             foreach( $contentsObj['list'] as $content ) {
-                $category['partners'][] = $content->toArray();	
+                $category['partners'][] = $content->toArray();
             }
         }
         $tpl->append_by_ref( 'categories', $category );
@@ -48,5 +48,3 @@ if ( $objects['count'] > 0 ) {
 echo $tpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/templates/admin/xoopspartners_index.html');
 // Display Xoops footer
 xoops_cp_footer();
-    
-?>

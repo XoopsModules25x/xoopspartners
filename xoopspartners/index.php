@@ -35,23 +35,23 @@ if ( $cat_id < 1 ) {
     $xoopsTpl->assign('module_name', $xoopsModule->getVar('name', 's'));
     
     $objects = $category_handler->getObj();
-	if ( $objects['count'] > 0 ) {
-		foreach( $objects['list'] as $object ) {
-			$category = array();
-			$category['id']   = $object->getVar( 'cat_id' );
-			$category['name'] = $object->getVar( 'cat_title' );
-			$category['desc'] = $object->getVar( 'cat_description' );
+    if ( $objects['count'] > 0 ) {
+        foreach( $objects['list'] as $object ) {
+            $category = array();
+            $category['id']   = $object->getVar( 'cat_id' );
+            $category['name'] = $object->getVar( 'cat_title' );
+            $category['desc'] = $object->getVar( 'cat_description' );
 
-			$contentsObj = $partners_handler->getActive( $object->getVar( 'cat_id' ) );
-			if ( $contentsObj['count'] ) {
-				foreach( $contentsObj['list'] as $content ) {
-                    $category['partners'][] = $content->toArray();	
-				}
-			}
-			$xoopsTpl->append_by_ref( 'categories', $category );
-			unset( $category );
-		}
-	}
+            $contentsObj = $partners_handler->getActive( $object->getVar( 'cat_id' ) );
+            if ( $contentsObj['count'] ) {
+                foreach( $contentsObj['list'] as $content ) {
+                    $category['partners'][] = $content->toArray();
+                }
+            }
+            $xoopsTpl->append_by_ref( 'categories', $category );
+            unset( $category );
+        }
+    }
 
 } else {
     // Define template file
@@ -67,12 +67,11 @@ if ( $cat_id < 1 ) {
     $cat = $category_handler->get( $cat_id );
     $xoopsTpl->assign('category', $cat->toArray());
     $partners = $partners_handler->getActive( $cat_id );
-	if ( $partners['count'] > 0 ) {
-		foreach( $partners['list'] as $partner ) {
+    if ( $partners['count'] > 0 ) {
+        foreach( $partners['list'] as $partner ) {
             $xoopsTpl->append_by_ref( 'list', $partner->toArray() );
-		}
-	}
+        }
+    }
 }
 // Include Xoops footer
 include_once XOOPS_ROOT_PATH . '/footer.php';
-?>

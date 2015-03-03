@@ -23,5 +23,3 @@ xoops_load('xoopsformloader');
 xoops_load('template');
 // Admin language
 xoops_loadLanguage('admin', $xoopsModule->getVar( 'dirname' ));
-
-?>

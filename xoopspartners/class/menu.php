@@ -110,6 +110,7 @@ class XoopspartnersMenuHandler {
             $arr = $str;
             $return_str .= ' &gt; <a href="' . $bc_site . $arr . '/">' . $bc_label[$arr] . '</a>';
         }
+
         return $return_str;
     }
 
@@ -119,14 +120,14 @@ class XoopspartnersMenuHandler {
         $_dirname = $this->_obj->getVar( 'dirname' );
         $i = 0;
         /*
-		* Selects current menu tab
-		*/
+        * Selects current menu tab
+        */
         foreach ( $this->_menutabs as $k => $menus ) {
             $menuItems[] = $menus;
         }
         $breadcrumb = $menuItems[$currentoption];
         $menuItems[$currentoption] = 'current';
-		//Not the best method of adding CSS but the only method available at the moment since xoops is shitty with the backend
+        //Not the best method of adding CSS but the only method available at the moment since xoops is shitty with the backend
         $menu = "<style type=\"text/css\" media=\"screen\">@import \"" . XOOPS_URL . "/modules/" . $this->_obj->getVar( 'dirname' ) . "/css/menu.css\";</style>";
         $menu .= "<div id='buttontop_mod'>";
         $menu .= "<table style='width: 100%; padding: 0;' cellspacing='0'>\n<tr>";
@@ -170,5 +171,3 @@ class XoopspartnersMenuHandler {
         }
     }
 }
-
-?>

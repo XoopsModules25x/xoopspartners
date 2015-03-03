@@ -31,7 +31,7 @@ if ( $xoopsUser ){
     $xoopsTpl->assign('module_name', $xoopsModule->getVar('name', 's'));
     $xoopsTpl->assign('sub_title', _XO_MD_JOIN);
     
-    // Load Partners Handler 
+    // Load Partners Handler
     $partners_handler = &xoops_getModuleHandler( 'partners' );
     // Retreive form data for all case
     switch ($op) {
@@ -86,12 +86,10 @@ if ( $xoopsUser ){
             }
             // Display Error
             xoops_error( $ret, _XO_AD_PARTNER_SUBERROR );
-            break;    
+            break;
     }
 } else {
     redirect_header( 'index.php', 2, _NOPERM );
 }
 // Include Xoops Footer
 include_once XOOPS_ROOT_PATH . '/footer.php';
-
-?>
