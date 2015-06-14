@@ -31,9 +31,9 @@ if( !isset($_POST['post']) && isset($_POST['formtype']) ){
     // Include footer
     xoops_cp_footer();
     // Quit procedure
-    exit;  
+    exit;
 }
-// Load Partner/Category Handler 
+// Load Partner/Category Handler
 $partners_handler = &xoops_getModuleHandler( $type );
 // Retreive form data for all case
 switch ($op) {
@@ -54,58 +54,56 @@ switch ($op) {
 
     case 'save':
         if ( !$GLOBALS['xoopsSecurity']->check() ) {
-			redirect_header( 'index.php', 0, $GLOBALS['xoopsSecurity']->getErrors( true ) );
-		}
-		// Diplay navigation menu
+            redirect_header( 'index.php', 0, $GLOBALS['xoopsSecurity']->getErrors( true ) );
+        }
+        // Diplay navigation menu
         $menu_handler->render( 1 );
-		$id = xoopsPartners_CleanVars( $_REQUEST, $partners_handler->keyName, 0, 'int' );
-		$obj = ( $id == 0 ) ? $partners_handler->create() : $partners_handler->get( $id );
-		if ( is_object( $obj ) ) {
-			$obj->setVars( $_REQUEST );
-			$obj->setVar( 'dohtml', isset( $_REQUEST['dohtml'] ) ? 1 : 0 );
-			$obj->setVar( 'dosmiley', isset( $_REQUEST['dosmiley'] ) ? 1 : 0 );
-			$obj->setVar( 'doxcode', isset( $_REQUEST['doxcode'] ) ? 1 : 0 );
-			$obj->setVar( 'doimage', isset( $_REQUEST['doimage'] ) ? 1 : 0 );
-			$obj->setVar( 'dobr', isset( $_REQUEST['dobr'] ) ? 1 : 0 );
-			$ret = $partners_handler->insert( $obj, true );
-			if ( $ret ) {
-				xoopsPartners_redirect( 'index.php', 1, _XO_AD_DBSUCCESS );
-				// Display Xoops footer
+        $id = xoopsPartners_CleanVars( $_REQUEST, $partners_handler->keyName, 0, 'int' );
+        $obj = ( $id == 0 ) ? $partners_handler->create() : $partners_handler->get( $id );
+        if ( is_object( $obj ) ) {
+            $obj->setVars( $_REQUEST );
+            $obj->setVar( 'dohtml', isset( $_REQUEST['dohtml'] ) ? 1 : 0 );
+            $obj->setVar( 'dosmiley', isset( $_REQUEST['dosmiley'] ) ? 1 : 0 );
+            $obj->setVar( 'doxcode', isset( $_REQUEST['doxcode'] ) ? 1 : 0 );
+            $obj->setVar( 'doimage', isset( $_REQUEST['doimage'] ) ? 1 : 0 );
+            $obj->setVar( 'dobr', isset( $_REQUEST['dobr'] ) ? 1 : 0 );
+            $ret = $partners_handler->insert( $obj, true );
+            if ( $ret ) {
+                xoopsPartners_redirect( 'index.php', 1, _XO_AD_DBSUCCESS );
+                // Display Xoops footer
                 xoops_cp_footer();
-				exit;
-			}
-		}
+                exit;
+            }
+        }
         // Display Error
-		xoops_error( $ret, _XO_AD_PARTNER_SUBERROR );
+        xoops_error( $ret, _XO_AD_PARTNER_SUBERROR );
         break;
         
     case 'delete':
         $ok = xoopsPartners_CleanVars( $_REQUEST, 'ok', 0, 'int' );
-		$id = xoopsPartners_CleanVars( $_REQUEST, $partners_handler->keyName, 0, 'int' );
-		if ( $ok == 1 ) {
-			$obj = $partners_handler->get( $id );
-			if ( is_object( $obj ) ) {
-				if ( $partners_handler->delete( $obj ) ) {
-					// Diplay navigation menu
+        $id = xoopsPartners_CleanVars( $_REQUEST, $partners_handler->keyName, 0, 'int' );
+        if ( $ok == 1 ) {
+            $obj = $partners_handler->get( $id );
+            if ( is_object( $obj ) ) {
+                if ( $partners_handler->delete( $obj ) ) {
+                    // Diplay navigation menu
                     $menu_handler->render( 0 );
-					xoopsPartners_redirect( 'index.php', 1, _XO_AD_DBSUCCESS );
-					// Display Xoops footer
+                    xoopsPartners_redirect( 'index.php', 1, _XO_AD_DBSUCCESS );
+                    // Display Xoops footer
                     xoops_cp_footer();
-				}
-			}
-		} else {
-			// Diplay navigation menu
+                }
+            }
+        } else {
+            // Diplay navigation menu
             $menu_handler->render( 0 );
             
             $obj = $partners_handler->get( $id );
             
             $message = ($type == 'partners') ? _XO_AD_DELETE_PARTNER : _XO_AD_DELETE_CAT ;
             $message .= '<div class="txtcenter">' . $obj->getVar( $partners_handler->identifierName, 's' ) . '</div>';
-			xoops_confirm( array( 'op' => 'delete', $partners_handler->keyName => $id, 'ok' => 1 ), 'partners.php', $message );
-		}
-		break;
+            xoops_confirm( array( 'op' => 'delete', $partners_handler->keyName => $id, 'ok' => 1 ), 'partners.php', $message );
+        }
+        break;
 }
 // Display Xoops footer
 xoops_cp_footer();
-
-?>

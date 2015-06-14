@@ -143,7 +143,7 @@ class XoopspartnersCategoryHandler extends XoopsPersistableObjectHandler {
         
         $obj['count'] = $this->getCount( $criteria );
         $obj['list'] = &$this->getObjects( $criteria, false );
+
         return $obj;
     }
 }
-?>

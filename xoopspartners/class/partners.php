@@ -22,7 +22,7 @@ class XoopspartnersPartners extends XoopsObject
 {
     /**
      * Constructor
-     */ 
+     */
     function __construct()
     {
         $this->XoopsObject();
@@ -53,15 +53,16 @@ class XoopspartnersPartners extends XoopsObject
     /**
      * Display the partner form for admin area
      *
-     */              
+     */
     function displayJoinForm ($mode='add') {
         $category_handler = &xoops_getModuleHandler( 'category' );
         if ( !$category_handler->getCount() ) {
             xoops_error('index.php', 3, _XO_MD_ERRORNOCAT);
+
             return;
         }
         // Create Form Partner
-        $title = _XO_MD_JOIN; 
+        $title = _XO_MD_JOIN;
         $form = new XoopsThemeForm( $title, 'partner', 'join.php', 'post', true );
         $form->setExtra('enctype="multipart/form-data"');
 
@@ -69,7 +70,7 @@ class XoopspartnersPartners extends XoopsObject
         $category = new XoopsFormSelect( _XO_AD_CATEGORY, 'category_id', $this->getVar( 'category_id', 'e' ), 1, false );
         $category->addOptionArray( $objects );
         $form->addElement( $category );
-        // Title         
+        // Title
         $form->addElement( new XoopsFormText( _XO_AD_TITLE, 'title', 50, 50, $this->getVar('title')), true );
         // URL
         $form->addElement( new XoopsFormText( _XO_AD_URL, 'url', 50, 150, $this->getVar('url')), true );
@@ -138,7 +139,7 @@ class XoopspartnersPartners extends XoopsObject
     /**
      * Display the partner form for admin area
      *
-     */              
+     */
     function displayAdminForm ($mode='add') {
         $category_handler = &xoops_getModuleHandler( 'category' );
         if ( !$category_handler->getCount() ) {
@@ -147,7 +148,7 @@ class XoopspartnersPartners extends XoopsObject
             exit;
         }
         // Create Form Partner
-        $title = ($mode == 'add') ? _XO_AD_ADD_PARTNER : _XO_AD_EDIT_PARTNER ; 
+        $title = ($mode == 'add') ? _XO_AD_ADD_PARTNER : _XO_AD_EDIT_PARTNER ;
         $form = new XoopsThemeForm( $title, 'partner', 'partners.php', 'post', true );
         $form->setExtra('enctype="multipart/form-data"');
         // Type
@@ -162,7 +163,7 @@ class XoopspartnersPartners extends XoopsObject
         $category = new XoopsFormSelect( _XO_AD_CATEGORY, 'category_id', $this->getVar( 'category_id', 'e' ), 1, false );
         $category->addOptionArray( $objects );
         $form->addElement( $category );
-        // Title         
+        // Title
         $form->addElement( new XoopsFormText( _XO_AD_TITLE, 'title', 50, 50, $this->getVar('title')), true );
         // URL
         $form->addElement( new XoopsFormText( _XO_AD_URL, 'url', 50, 150, $this->getVar('url')), true );
@@ -273,6 +274,7 @@ class XoopspartnersPartnersHandler extends XoopsPersistableObjectHandler {
             $criteria->setLimit( 0 );
         }
         $obj['list'] = &$this->getObjects( $criteria, false );
+
         return $obj;
     }
     
@@ -295,6 +297,7 @@ class XoopspartnersPartnersHandler extends XoopsPersistableObjectHandler {
             $criteria->setLimit( 0 );
         }
         $obj['list'] = &$this->getObjects( $criteria, false );
+
         return $obj;
     }
 
@@ -315,15 +318,15 @@ class XoopspartnersPartnersHandler extends XoopsPersistableObjectHandler {
             $criteria->setOrder( 'title' );
         }
         $obj['list'] = &$this->getObjects( $criteria, false );
+
         return $obj;
     }
     
     /**
      * Update counter when user click on link
-     */     
+     */
     function setHits ($id) {
         $db =& Database::getInstance();
         $db->queryF("UPDATE ".$db->prefix("partners")." SET hits=hits+1 WHERE id=$id");
     }
 }
-?>

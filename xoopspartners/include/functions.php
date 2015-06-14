@@ -33,12 +33,13 @@ function xoopsPartners_CleanVars( &$global, $key, $default = '', $type = 'int' )
     if ( $ret === false ) {
         return $default;
     }
+
     return $ret;
 }
 
 /**
  * xoopsParteners_setting
- *  
+ *
  * @author      Instant Zero (http://xoops.instant-zero.com)
  * @copyright   Instant Zero
  * @param       string      $option module option's name
@@ -68,6 +69,7 @@ function xoopsPartners_setting($option, $repmodule='xoopspartners')
         }
     }
     $tbloptions[$option]=$retval;
+
     return $retval;
 }
 
@@ -81,13 +83,14 @@ function xoopsPartners_isEditorHTML() {
     if ( isset( $xoopsModuleConfig['editor'] ) && in_array( $xoopsModuleConfig['editor'], array( 'tinymce', 'fckeditor', 'koivi', 'inbetween', 'spaw' ) ) ) {
         return true;
     }
+
     return false;
 }
 
 /**
  * Redirect to any page inside administration area
- *  
- */ 
+ *
+ */
 function xoopsPartners_redirect($url, $time = 3, $message = '') {
     global $xoopsModule;
     if ( preg_match( "/[\\0-\\31]|about:|script:/i", $url) ) {
@@ -107,7 +110,3 @@ function xoopsPartners_redirect($url, $time = 3, $message = '') {
     // Force redirection
     header("refresh: ".$time."; url=".$url);
 }
-
-
-
-?>

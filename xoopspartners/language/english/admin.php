@@ -17,7 +17,7 @@
 
 /**
  * Form fields
- */ 
+ */
 define('_XO_AD_CATEGORY','Category');
 define('_XO_AD_TITLE','Title');
 define('_XO_AD_URL','Url');
@@ -64,5 +64,3 @@ define('_XO_AD_ERRORCOULDNOTUPCONTENTS','Error: Could not update Partner content
 define('_XO_AD_ERRORCOULDNOTADDCONTENTS','Error: Could not add Partner contents.');
 define('_XO_AD_NOTHTINGTOSHOW','No Items To Display');
 define('_XO_AD_ERRORNOCAT','Error: There are no Categories created yet. Before you can create a new Partner, you must create a Category first.');
-
-?>

@@ -36,7 +36,7 @@ define('_XO_MI_MENU_JOIN','Join');
 
 /**
  * Module Settings
- */ 
+ */
 define('_XO_MI_PARTNERS_EDITOR','Editor');
 define('_XO_MI_PARTNERS_EDITOR_DESC','Choose editor for edit partner');
 define('_XO_MI_PARTNERS_RECLICK','Reclick Time');
@@ -46,5 +46,3 @@ define('_XO_MI_PARTNERS_3HOURS','3 hours');
 define('_XO_MI_PARTNERS_5HOURS','5 hours');
 define('_XO_MI_PARTNERS_10HOURS','10 hours');
 define('_XO_MI_PARTNERS_DAY','1 day');
-
-?>
