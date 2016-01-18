@@ -25,7 +25,7 @@ class XoopspartnersCategory extends XoopsObject
      */
     function __construct()
     {
-        $this->XoopsObject();
+        parent::__construct();
         $this->initVar( 'cat_id', XOBJ_DTYPE_INT, null, false );
         $this->initVar( 'cat_title', XOBJ_DTYPE_TXTBOX, null, false );
         $this->initVar( 'cat_description', XOBJ_DTYPE_TXTAREA, null, false );

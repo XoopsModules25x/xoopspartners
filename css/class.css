@@ -1,0 +1,54 @@
+/* Author kris */
+.floatleft{float:left;margin:1em 1em 0 0;padding-left:4px;border:0;}
+.floatright{float:right;margin:0 0	1em 1em;padding:2px;border:0;}
+.txtleft{text-align:left;}
+.txtright{text-align:right;}
+.txtcenter{text-align:center;}
+.txtjustify{text-align:justify;}
+.alignmiddle{vertical-align:middle;}
+.aligntop{vertical-align:top;}
+.alignbottom{vertical-align:bottom;}
+.positop{margin-top:0;padding-top:0;}
+.posibottom{margin-bottom:0;padding-bottom:0;}
+.width100{width:100%;}
+.width98{width:98%;}
+.width95{width:95%;}
+.width90{width:90%;}
+.width85{width:85%;}
+.width80{width:80%;}
+.width75{width:75%;}
+.width66{width:66%;}
+.width50{width:50%;}
+.width33{width:33%;}
+.width25{width:25%;}
+.width20{width:20%;}
+.width10{width:10%;}
+.width5{width:5%;}
+.width1{width:1%;}
+.extrasmall{font-size:.7em;}
+.small{	font-size:.8em;}
+.normal{font-size:1em;}
+.big{font-size:1.2em;}
+.maxi{font-size:1.5em;}
+.bold{font-weight:bold;}
+.italic{font-style:italic;}
+.red{background-color:inherit;color:#ff0000;}
+.blue{background-color:inherit;color:#0000ff;}
+.black{background-color:inherit;color:#000;}
+.white{background-color:inherit;color:#fff;}
+.yellow{background-color:inherit;color:#ffff00;}
+.orange{background-color:inherit;color:#ffa500;}
+.green{	background-color:inherit;color:#32CD32;}
+.silver{background-color:inherit;color:#c0c0c0;}
+.clear{clear:both;height:0;font-size:0;line-height:0;}
+.clearleft{clear:left;height:0;font-size:0;line-height:0;}
+.clearright{clear:right;height:0;font-size:0;line-height:0;}
+.block{display:block;}
+.hide{display:none;}
+.spacer{padding:0 0 3px 0;}
+.child{padding-left:10px;}
+.sub{padding-left:20px;}
+/* Cursor class */
+.cursordefault{cursor:default;}
+.cursorpointer{cursor:pointer;}
+.cursorhelp{cursor:help;}

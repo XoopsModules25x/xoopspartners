@@ -25,7 +25,7 @@ class XoopspartnersPartners extends XoopsObject
      */
     function __construct()
     {
-        $this->XoopsObject();
+        parent::__construct();
         $this->initVar( 'id', XOBJ_DTYPE_INT, null, false );
         $this->initVar( 'title', XOBJ_DTYPE_TXTBOX, null, false );
         $this->initVar( 'description', XOBJ_DTYPE_TXTAREA, null, false );
