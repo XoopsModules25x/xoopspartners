@@ -49,7 +49,7 @@ $pathImageIcon = $GLOBALS['xoops']->url('www/' . $moduleInfo->getInfo('icons16')
 $myts = MyTextSanitizer::getInstance();
 
 xoops_load('XoopsRequest');
-$op = XoopsRequest::getCmd('op', '');
+$op = XoopsRequest::getString('op', '');
 $id = XoopsRequest::getInt('id', 0);
 
 $del         = isset($_POST['del']) ? XoopsRequest::getInt('del', XoopspartnersConstants::CONFIRM_NOT_OK, 'POST') : null;
