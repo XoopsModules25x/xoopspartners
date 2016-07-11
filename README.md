@@ -2,9 +2,9 @@
 ##XoopsPartners module for  [XOOPS CMS 2.5.8+](https://xoops.org)
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/XoopsModules25x/xoopspartners.svg?style=flat)](https://scrutinizer-ci.com/g/XoopsModules25x/xoopspartners/?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/177664bcc7874ab7bddc1192c59e480d)](https://www.codacy.com/app/mambax7/xoopspartners_2)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/923baea16e434afcbe15ef6964a06eb4)](https://www.codacy.com/app/mambax7/xoopspartners_2)
 [![Code Climate](https://img.shields.io/codeclimate/github/XoopsModules25x/xoopspartners.svg?style=flat)](https://codeclimate.com/github/XoopsModules25x/xoopspartners)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/f9b47b9f-9d03-4d6f-a639-badc6e3b1475/mini.png)](https://insight.sensiolabs.com/projects/f9b47b9f-9d03-4d6f-a639-badc6e3b1475)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c4491118-313a-4306-a41d-9ced1dbfca72/mini.png)](https://insight.sensiolabs.com/projects/c4491118-313a-4306-a41d-9ced1dbfca72)
 [![Latest Pre-Release](https://img.shields.io/github/tag/XoopsModules25x/xoopspartners.svg?style=flat)](https://github.com/XoopsModules25x/xoopspartners/tags/)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/xoopspartners.svg?style=flat)](https://github.com/XoopsModules25x/xoopspartners/releases/)
 
