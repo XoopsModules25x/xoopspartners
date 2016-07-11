@@ -23,8 +23,8 @@
  */
 
 if (!isset($moduleInfo) || !is_a($moduleInfo, 'XoopsModule')) {
-    $moduleHandler = xoops_getHandler('module');
-    $xoopsModule    = XoopsModule::getByDirname('mylinks');
+    $moduleHandler  = xoops_getHandler('module');
+    $xoopsModule    = XoopsModule::getByDirname('xoopspartners');
     $moduleInfo     = $moduleHandler->get($xoopsModule->getVar('mid'));
     $pathIcon32     = $moduleInfo->getInfo('icons32');
 }
