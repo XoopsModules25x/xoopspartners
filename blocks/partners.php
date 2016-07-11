@@ -78,6 +78,7 @@ function b_xoopspartners_show($options)
     }
     $pObjs = $partnerHandler->getAll($criteria, $pFields);
     foreach ($pObjs as $pObj) {
+        $partners    = array();
         $url         = $pObj->getVar('url');
         $origtitle   = $pObj->getVar('title');
         $title       = $origtitle;
