@@ -1,5 +1,9 @@
-<u><b>1.12 Final [2016-07-10] </b></u>
+<u><b>1.13 RC1 [2016-07-10] </b></u>
+- removed unnecessary instantiation of MyTextSanitizer in block
+- initialized partners array in block
+- fixed bug in XoopsModule definition in ./admin/admin_header.php
 
+<u><b>1.12 Final [2016-07-10] </b></u>
 - changed "op" request from cmd to string (mamba)
 - updated Help (mamba)
 - addNavigation(basename(__FILE__))  (mamba)
