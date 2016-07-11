@@ -96,3 +96,19 @@ define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'
 
 //1.12
 define('_AM_XPARTNERS_NOPARTNERS', 'No Partners in the database.');
+
+//1.13
+define('_AM_XPARTNERS_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
+define('_AM_XPARTNERS_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
+
+// Help Issues page defines
+define('_AM_XPARTNERS_ISSUES_ERR_UNKNOWN', "Unknown Error");
+define('_AM_XPARTNERS_ISSUES_ERR_STATUS', "Unknown Status");
+define('_AM_XPARTNERS_ISSUES_NONE', "There are currently no open issues.");
+define('_AM_XPARTNERS_ISSUES_NOTE', "Note: * indicates issue is a GitHub pull request");
+define('_AM_XPARTNERS_ISSUES_OPEN', "Open Issues");
+define('_AM_XPARTNERS_HELP_ISSUE', "Issue #");
+define('_AM_XPARTNERS_HELP_DATE', "Date");
+define('_AM_XPARTNERS_HELP_TITLE', "Title");
+define('_AM_XPARTNERS_HELP_SUBMITTER', "Submitter");
+

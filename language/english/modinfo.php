@@ -67,6 +67,10 @@ define('_MI_XPARTNERS_5HOURS', '5 hours');
 define('_MI_XPARTNERS_10HOURS', '10 hours');
 define('_MI_XPARTNERS_DAY', '1 day');
 
+//1.13
+define('_MI_XPARTNERS_HELP_OVERVIEW', "Overview");
+define('_MI_XPARTNERS_HELP_ISSUES', "Issues");
+
 //1.11-1.12
 // index.php
 define('_MI_XPARTNERS_ADMIN_HOME', 'Home');

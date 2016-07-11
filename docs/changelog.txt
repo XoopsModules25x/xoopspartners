@@ -1,9 +1,15 @@
-<u><b>1.13 RC1 [2016-07-10] </b></u>
+<u><b>1.13 RC1 [2016-07-11] </b></u>
 - removed unnecessary instantiation of MyTextSanitizer in block
 - initialized partners array in block
 - fixed bug in XoopsModule definition in ./admin/admin_header.php
+- created XoopspartnersUtilities class for install/update routines
+- updated pre-install/pre-update version check routines
+- created GITHUB issues tab in ./admin/help
+- updated changelog.txt for 1.12 Final to indicate change to require new XOOPS/PHP versions
 
 <u><b>1.12 Final [2016-07-10] </b></u>
+- require XOOPS 2.5.8+
+- require PHP 5.5+
 - changed "op" request from cmd to string (mamba)
 - updated Help (mamba)
 - addNavigation(basename(__FILE__))  (mamba)
@@ -11,7 +17,6 @@
 - Unnecessary double quotes (mamba)
 - reference mismatch (mamba)
 - Hardening to type safe (mamba)
-- update Help (mamba)
 - replaced intval with (int) (mamba)
 
 <u>1.12 BETA 3 [2016-05-29] (ZySpec)</u>

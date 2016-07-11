@@ -58,6 +58,15 @@ $modversion = array(
     'help'                => 'page=help',
     'image'               => 'assets/images/logoModule.png',
     'dirname'             => $moduleDirname,
+
+    //help files
+    'helpsection'         =>(array(array('name' => _MI_XPARTNERS_HELP_OVERVIEW,
+                                         'link' => "page=help"),
+                                   array('name' => _MI_XPARTNERS_HELP_ISSUES,
+                                         'link' => "page=issues")
+                                   )
+    ),
+
     /**
      * About
      */
