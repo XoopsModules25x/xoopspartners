@@ -1,0 +1,56 @@
+<u><b>1.12 Final [2016-07-10] </b></u>
+
+- changed "op" request from cmd to string (mamba)
+- updated Help (mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- Unnecessary double quotes (mamba)
+- reference mismatch (mamba)
+- Hardening to type safe (mamba)
+- update Help (mamba)
+- replaced intval with (int) (mamba)
+
+<u>1.12 BETA 3 [2016-05-29] (ZySpec)</u>
+- removed '/' from void HTML elements (&lt;br&gt;, &lt;img&gt;, &lt;input&gt;, etc)
+- updated phpdocumentor comments (XOOPS copyright, XOOPS Url, etc.)
+
+<u>1.12 BETA 2 [2015-02-20] (Mamba / ZySpec)</u>
+- require XOOPS 2.5.7+
+- require PHP 5.3.7+
+- added XOOPS & PHP version checks on install/update
+- moved images and css directories to ./assets
+- renamed all template extensions from .html to .tpl
+- general code cleanup for PSRx
+- load stylesheet in block
+- added XoopspartnersConstants class for constant definitions
+- added block config to be able to trim title length
+- added _MI_XPARTNERS_INCADMIN define, missing in previous BETA
+- refactored /admin/main.php from functions to switch statement
+- moved install/uninstall/upgrade functions to ./include/action.module.php
+
+<u>1.12 BETA [2011-12-04] (Mamba / ZySpec)</u>
+- removed all icons files and point them to /Frameworks/moduleclasses
+- updated to the latest ModuleAdmin Class
+- cleaned up page loads to reduce reduntant attempts at loading headers/footers
+- fixed partner sorting bug in reorderPartners() function in ./admin/main.php
+- minor cleanup of HTML output (display title below image in block if 'both' selected)
+- fixed partner sorting bug in in ./index.php
+- fixed bug in ./join.php template assign
+- added ./footer.php, allows incorporation of language specific CSS
+- changed defines naming to be more standardized with XOOPS norms
+- added _AM_XPARTNERS_ADMIN_FOOTER & deleted _AM_MYLINKS_ADMIN_FOOTER in ./language/xxx/admin.php
+- created ./language/xxx/mail_template directory and moved join.tpl, make consistent with other modules
+- fixed inconsistent height/width maximums for images between admin and front side (now 150 width x 110 height)
+- updated module version to 1.12 to be consistent with previously checked in 'changelog.txt'
+- replaced Database::getInstance() with XoopsDatabaseFactory::getDatabaseConnection();
+
+<u>1.11 [2011-04-15] (Mamba) Internal version</u>
+- moved changelog.txt back to /docs
+- added Selenium Tests
+- added Dashboard
+- added Help
+- changed Edit/Delete text links to Icons
+- updated GUI to XOOPS Standard Module GUI (mamba)
+
+<u>1.10 Raul Recio (AKA UNFOR)</u>
+- Original
