@@ -1,95 +1,180 @@
 <?php
-/**
- * Join page for the Xoops Partners Module
+/*
+ *  ------------------------------------------------------------------------
+ *                XOOPS - PHP Content Management System
+ *                    Copyright (c) 2000 XOOPS.org
+ *                       <http://www.xoops.org/>
+ *  ------------------------------------------------------------------------
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * LICENSE
+ *  You may not change or alter any portion of this comment or credits
+ *  of supporting developers from this source code or any supporting
+ *  source code which is considered copyrighted (c) material of the
+ *  original comment or credit authors.
  *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
- * @author      Andricq Nicolas (AKA MusS)
- * @version     $Id: join.php 9326 2012-04-14 21:53:58Z beckmi $
- * @since       2.3.0
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ * -------------------------------------------------------------------------
+ * Author: Raul Recio (AKA UNFOR)
+ * Project: The XOOPS Project
+ * -------------------------------------------------------------------------
  */
- 
-// Include header
-include_once 'header.php';
-if ( $xoopsUser ){
-    $op = xoopsPartners_CleanVars( $_REQUEST, 'op', 'add', 'string' );
-    // Define template file
-    $xoopsOption['template_main'] = 'xoopspartners_join.html';
-    // Include Xoops header
-    include XOOPS_ROOT_PATH . '/header.php';
-    // Add module stylesheet and scripts
-    $xoTheme->addStylesheet( XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/css/class.css', null );
-    $xoTheme->addStylesheet( XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/css/module.css', null );
-    $xoTheme->addScript( XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/js/functions.js', null, '' );
-    // Module Name
-    $xoopsTpl->assign('module_name', $xoopsModule->getVar('name', 's'));
-    $xoopsTpl->assign('sub_title', _XO_MD_JOIN);
-    
-    // Load Partners Handler
-    $partners_handler = &xoops_getModuleHandler( 'partners' );
-    // Retreive form data for all case
-    switch ($op) {
-        case 'add': // Add Partner/Category
-        // Retreive form data for all case
-        $obj = $partners_handler->create();
-        $obj->displayJoinForm();
-        break;
-        case 'save':
-            if ( !$GLOBALS['xoopsSecurity']->check() ) {
-                redirect_header( 'index.php', 0, $GLOBALS['xoopsSecurity']->getErrors( true ) );
-            }
-            // Diplay navigation menu
-            $menu_handler->render( 1 );
-            $id = xoopsPartners_CleanVars( $_REQUEST, $partners_handler->keyName, 0, 'int' );
-            $obj = ( $id == 0 ) ? $partners_handler->create() : $partners_handler->get( $id );
-            if ( is_object( $obj ) ) {
-                $obj->setVars( $_REQUEST );
-                $obj->setVar( 'dohtml', isset( $_REQUEST['dohtml'] ) ? 1 : 0 );
-                $obj->setVar( 'dosmiley', isset( $_REQUEST['dosmiley'] ) ? 1 : 0 );
-                $obj->setVar( 'doxcode', isset( $_REQUEST['doxcode'] ) ? 1 : 0 );
-                $obj->setVar( 'doimage', isset( $_REQUEST['doimage'] ) ? 1 : 0 );
-                $obj->setVar( 'dobr', isset( $_REQUEST['dobr'] ) ? 1 : 0 );
-                $ret = $partners_handler->insert( $obj, true );
-                if ( $ret ) {
-                    $xoopsMailer =& getMailer();
-                    $xoopsMailer->useMail();
-                    $xoopsMailer->setTemplateDir( XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar( 'dirname', 'n') . '/language/'.$xoopsConfig['language'] . '/');
-                    $xoopsMailer->setTemplate( 'join.tpl' );
-                    $xoopsMailer->assign( 'SITENAME', $xoopsConfig['sitename'] );
-                    $xoopsMailer->assign( 'SITEURL', XOOPS_URL . '/');
-                    $xoopsMailer->assign( 'IP', $_SERVER['REMOTE_ADDR']);
-                    $xoopsMailer->assign( 'USER', $xoopsUser->getVar( 'uname', 's' ) );
-                    $xoopsMailer->assign( 'TITLE', $obj->getVar( 'title', 's' ) );
-                    // Get category title
-                    $category_handler = &xoops_getModuleHandler( 'category' );
-                    $category_handler->get( $obj->getVar( 'category_id', 's' ) );
-                    $xoopsMailer->assign( 'CATEGORY', $obj->getVar( 'cat_title', 's' ) );
-                    
-                    $xoopsMailer->setToEmails( $xoopsConfig['adminmail'] );
-                    $xoopsMailer->setFromEmail( $xoopsUser->getVar( 'email', 's' ) );
-                    $xoopsMailer->setFromName( $xoopsUser->getVar( 'uname', 's' ) );
-                    $xoopsMailer->setSubject(sprintf( _XO_MD_NEWPARTNER, $xoopsConfig['sitename'] ) );
-                    if ( !$xoopsMailer->send() ) {
-                    }
-                    // Redirect
-                    xoopsPartners_redirect( 'index.php', 1, _XO_AD_DBSUCCESS );
-                    // Display Xoops footer
-                    xoops_cp_footer();
-                    exit;
+/**
+ * XoopsPartners - a partner affiliation links module
+ *
+ * @category     Module
+ * @package      xoopspartners
+ * @subpackage   front
+ * @author       Raul Recio (aka UNFOR)
+ * @author       XOOPS Module Development Team
+ * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
+ * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @link         http://xoops.org XOOPS
+ */
+
+include __DIR__ . '/header.php';
+/** @var string $xoopsOption */
+$xoopsOption['template_main'] = 'xoopspartners_join.tpl';
+include $GLOBALS['xoops']->path('/header.php');
+$myts = MyTextSanitizer::getInstance();
+
+$op = XoopsRequest::getCmd('op', '', 'POST');
+
+if (!$GLOBALS['xoopsUser'] instanceof XoopsUser) {
+    redirect_header('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);
+}
+
+if ('sendMail' === $op) {
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+    }
+    //Changed - don't extract $_POST vars directly into var table space
+    //extract($_POST);
+    extract($_POST, EXTR_PREFIX_ALL, 'unsafe');
+    if (empty($unsafe_title) || empty($unsafe_description) || empty($unsafe_url) || $unsafe_url === 'http://') {
+        $GLOBALS['xoopsTpl']->assign(array(
+                                         'content4join'      => _MD_XPARTNERS_ERROR1,
+                                         'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
+                                         'sitename'          => $GLOBALS['xoopsConfig']['sitename']
+                                     ));
+        //        $xoopsContentsTpl = 'xoopspartners_join.tpl';
+        include_once __DIR__ . '/footer.php';
+        exit();
+    }
+    include $GLOBALS['xoops']->path('/class/xoopsmailer.php');
+    $url         = formatURL($myts->htmlSpecialChars($unsafe_url));
+    $title       = $myts->htmlSpecialChars($unsafe_title);
+    $description = $myts->htmlSpecialChars($unsafe_description);
+    $image       = formatURL($myts->htmlSpecialChars($unsafe_image));
+    $image       = xoops_trim($image);
+    $image       = (('http://' === $image) || ('https://' === $image)) ? '' : $image;
+    if (!empty($image)) {
+        $allowed_mimetypes = array(
+            'gif'  => 'image/gif',
+            'jpg'  => 'image/jpeg',
+            'pjpe' => 'image/pjpeg',  //IE7
+            'png'  => 'image/png',
+            'xpng' => 'image/x-png',  //IE7
+            //                           'bmp' => 'image/bmp',
+            //                          'tiff' => 'image/tiff',
+            //                           'tif' => 'image/tif',
+        );
+        $maxfilesize       = ((int)$GLOBALS['xoopsModule']->getInfo('maxuploadsize') > 0) ? $GLOBALS['xoopsModule']->getInfo('maxuploadsize') : XoopspartnersConstants::DEFAULT_UPLOAD_SIZE;
+        $maxfilewidth      = ((int)$GLOBALS['xoopsModule']->getInfo('maxwidth') > 0) ? $GLOBALS['xoopsModule']->getInfo('maxwidth') : XoopspartnersConstants::DEFAULT_MAX_WIDTH;
+        $maxfileheight     = ((int)$GLOBALS['xoopsModule']->getInfo('maxheight') > 0) ? $GLOBALS['xoopsModule']->getInfo('maxheight') : XoopspartnersConstants::DEFAULT_MAX_HEIGHT;
+        if (preg_match('^http:\/\/|https:\/\/[^\s]', $image)) {
+            // image is from external source
+            XoopsLoad::load('xoopsmediauploader');
+            $uploader = new XoopsMediaUploader($GLOBALS['xoops']->path('/uploads/xoopspartners'), $allowed_mimetypes, $maxfilesize);
+            if ($uploader->fetchMedia($image)) {
+                if ($uploader->upload()) {
+                    //        echo "<h4>File uploaded successfully!</h4>\n";
+                    $image = $uploader->getSavedFileName();  // get file name to save in db
+                    //        echo 'Full path: ' . $uploader->getSavedDestination();
                 }
             }
-            // Display Error
-            xoops_error( $ret, _XO_AD_PARTNER_SUBERROR );
-            break;
+        }
+
+        $imageInfo  = @getimagesize($image);
+        $uploadErrs = ($uploader instanceof XoopsMediaUploader) ? $uploader->getErrors() : '';
+        if (false == $imageInfo || !empty($uploadErrs)) { // could not find image
+            $GLOBALS['xoopsTpl']->assign(array(
+                                             'content4join'      => sprintf(_MD_XPARTNERS_ERROR3, $image) . '<br>' . $uploader->getErrors(),
+                                             'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
+                                             'sitename'          => $GLOBALS['xoopsConfig']['sitename']
+                                         ));
+            //            $xoopsContentsTpl = 'xoopspartners_join.tpl';
+            include_once __DIR__ . '/footer.php';
+            exit();
+        }
     }
+    $xoopsMailer =& xoops_getMailer();
+    $xoopsMailer->useMail();
+    $xoopsMailer->setTemplateDir($GLOBALS['xoops']->path('/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . "/language/{$GLOBALS['xoopsConfig']['language']}/mail_template/"));
+    $xoopsMailer->setTemplate('join.tpl');
+    $xoopsMailer->assign(array(
+                             'SITENAME'    => $GLOBALS['xoopsConfig']['sitename'],
+                             'SITEURL'     => $GLOBALS['xoops']->url('www'),
+                             'IP'          => $_SERVER['REMOTE_ADDR'],
+                             'URL'         => $url,
+                             'IMAGE'       => $image,
+                             'TITLE'       => $title,
+                             'DESCRIPTION' => $description,
+                             'USER'        => $GLOBALS['xoopsUser']->getVar('uname'),
+                             'MODULENAME'  => $GLOBALS['xoopsModule']->getVar('dirname')
+                         ));
+    $xoopsMailer->setToEmails($GLOBALS['xoopsConfig']['adminmail']);
+    $xoopsMailer->setFromEmail($GLOBALS['xoopsUser']->getVar('email'));
+    $xoopsMailer->setFromName($GLOBALS['xoopsUser']->getVar('uname'));
+    $xoopsMailer->setSubject(sprintf(_MD_XPARTNERS_NEWPARTNER, $GLOBALS['xoopsConfig']['sitename']));
+    if (!$xoopsMailer->send()) {
+        $GLOBALS['xoopsTpl']->assign(array(
+                                         'content4join'      => '<br>' . $xoopsMailer->getErrors() . _MD_XPARTNERS_GOBACK,
+                                         'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
+                                         'lang_join'         => _MD_XPARTNERS_JOIN,
+                                         'sitename'          => $GLOBALS['xoopsConfig']['sitename']
+                                     ));
+    } else {
+        $GLOBALS['xoopsTpl']->assign(array(
+                                         'content4join'      => '<br>' . _MD_XPARTNERS_SENDMAIL,
+                                         'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
+                                         'lang_join'         => _MD_XPARTNERS_JOIN,
+                                         'sitename'          => $GLOBALS['xoopsConfig']['sitename']
+                                     ));
+    }
+    //    $xoopsContentsTpl = 'xoopspartners_join.tpl';
 } else {
-    redirect_header( 'index.php', 2, _NOPERM );
+    include $GLOBALS['xoops']->path('/class/xoopsformloader.php');
+    $form = new XoopsThemeForm('', 'joinform', 'join.php', 'post', true);
+    $form->setExtra('enctype="multipart/form-data"');
+    $titlePartner       = new XoopsFormText(_MD_XPARTNERS_TITLE, 'title', 100, 150);
+    $imagePartner       = new XoopsFormText(_MD_XPARTNERS_IMAGE, 'image', 100, 150, 'http://');
+    $urlPartner         = new XoopsFormText(_MD_XPARTNERS_URL, 'url', 100, 150, 'http://');
+    $descriptionPartner = new XoopsFormTextArea(_MD_XPARTNERS_DESCRIPTION, 'description', '', 7, 50);
+    $op_hidden          = new XoopsFormHidden('op', 'sendMail');
+    $submitButton       = new XoopsFormButton('', 'dbsubmit', _MD_XPARTNERS_SEND, 'submit');
+    $form->addElement($titlePartner, true);
+    $form->addElement($imagePartner);
+    $form->addElement($urlPartner, true);
+    $form->addElement($descriptionPartner, true);
+    $form->addElement($op_hidden);
+    $form->addElement($submitButton);
+    $content = $form->render();
+    $GLOBALS['xoopsTpl']->assign(array(
+                                     'content4join'      => $content,
+                                     'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
+                                     'lang_join'         => _MD_XPARTNERS_JOIN,
+                                     'sitename'          => $GLOBALS['xoopsConfig']['sitename']
+                                 ));
 }
-// Include Xoops Footer
-include_once XOOPS_ROOT_PATH . '/footer.php';
+
+include_once __DIR__ . '/footer.php';

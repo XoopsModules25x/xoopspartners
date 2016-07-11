@@ -1,0 +1,23 @@
+INSTALL/UNINSTALL
+=================
+
+No special measures necessary, follow the standard installation process -
+extract the xoopspartners folder into the ../modules directory. Install the
+module through Admin -> System Module -> Modules.
+
+Detailed instructions on installing modules are available in the XOOPS Operations Manual (http://goo.gl/adT2i)
+
+UPGRADE
+=======
+
+To upgrade from previous versions to v1.12 complete the following steps:
+1. Go to Admin -> System -> Modules and Deactivate the XoopsPartners module
+   (do not uninstall it unless you want to clear all partner data too).
+2. Using an FTP client (or Cpanel in *nix installations) delete the
+   ./module/xoopspartners directory and all it's contents (including
+   all subdirectories) on your XOOPS installation.
+3. Copy the ./xoopspartners directory and it's contents from the archive file
+   (everything under the ./xoopspartners folder) to the ./modules folder on the
+   server.
+4. Go to Admin -> System -> Modules and update the XoopsPartners module.
+5. Go back to Admin -> System -> Modules and Activate the module.
