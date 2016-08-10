@@ -32,9 +32,7 @@
  * the value(s) before module installation. Additionally the module may not
  * work correctly if trying to upgrade if these values have been changed.
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   class
+ * @package      module\xoopspartners\class
  * @author       zyspec <owners@zyspec.com>
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}

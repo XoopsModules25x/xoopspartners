@@ -12,8 +12,7 @@
 /**
  * Module: Partners
  *
- * @category        Module
- * @package         xoopspartners
+ * @package         module\xoopspartners\class
  * @author          XOOPS Module Development Team
  * @author          Mamba, ZySpec
  * @copyright       {@link http://xoops.org 2001-2016 XOOPS Project}

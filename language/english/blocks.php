@@ -32,9 +32,7 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   language
+ * @package      module\xoopspartners\language
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}

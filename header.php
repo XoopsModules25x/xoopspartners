@@ -32,9 +32,7 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   front
+ * @package      module\xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
@@ -44,5 +42,7 @@
 $moduleDirname = basename(__DIR__);
 include __DIR__ . '/../../mainfile.php';
 xoops_load('pagenav');
-xoops_load('XoopsRequest');
-xoops_load('constants', $moduleDirname);
+if (!interface_exists('XoopspartnersConstants')) {
+    require_once __DIR__ . '/class/constants.php';
+//    xoops_load('constants', $moduleDirname);
+}

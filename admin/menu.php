@@ -31,9 +31,7 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   admin
+ * @package      module\xoopspartners\admin
  * @author       Mage, Mamba
  * @author       ::     Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team

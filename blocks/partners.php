@@ -32,10 +32,8 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   admin
- * @author       ::     Raul Recio (aka UNFOR)
+ * @package      module\xoopspartners\admin
+ * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
@@ -66,7 +64,7 @@ function b_xoopspartners_show($options)
     $moduleDirname  = basename(dirname(__DIR__));
     $block['xpDir'] = $moduleDirname;
 
-    $partnerHandler = xoops_getModuleHandler('partners', $moduleDirname);
+    $xpPartnersHandler = xoops_getModuleHandler('partners', $moduleDirname);
     $pFields         = array('id', 'url', 'image', 'title', 'description');
     $criteria        = new CriteriaCompo();
     $criteria->setLimit($options[3]);
@@ -76,7 +74,7 @@ function b_xoopspartners_show($options)
         $criteria->setSort($options[5]);
         $criteria->setOrder($options[6]);
     }
-    $pObjs = $partnerHandler->getAll($criteria, $pFields);
+    $pObjs = $xpPartnersHandler->getAll($criteria, $pFields);
     foreach ($pObjs as $pObj) {
         $partners    = array();
         $url         = $pObj->getVar('url');

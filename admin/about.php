@@ -12,9 +12,7 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   admin
+ * @package      module\xoopspartners\admin
  * @author       Mage, Mamba
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
@@ -22,13 +20,16 @@
  * @link         http://xoops.org XOOPS
  * @since        1.11
  */
+use Xmf\Module\Admin;
 
 require __DIR__ . '/admin_header.php';
 include __DIR__ . '/../../../class/xoopsformloader.php';
 
-$aboutAdmin = new ModuleAdmin();
+xoops_cp_header();
 
-echo $aboutAdmin->addNavigation('about.php');
-echo $aboutAdmin->renderAbout('6KJ7RW5DR3VTJ', false);
+$moduleAdmin = Admin::getInstance();
+$moduleAdmin->displayNavigation(basename(__FILE__));
+Admin::setPaypal('6KJ7RW5DR3VTJ');
+$moduleAdmin->displayAbout(false);
 
 include __DIR__ . '/admin_footer.php';

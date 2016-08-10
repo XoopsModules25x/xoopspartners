@@ -31,25 +31,24 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   front
+ * @package      module\xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         http://xoops.org XOOPS
  */
+use Xmf\Request;
 
 include __DIR__ . '/header.php';
-$xpPartnerHandler = xoops_getModuleHandler('partners', $moduleDirname);
+$xpPartnersHandler = xoops_getModuleHandler('partners', $moduleDirname);
 
-$id = XoopsRequest::getInt('id', XoopspartnersConstants::DEFAULT_PID, 'GET');
+$id = Request::getInt('id', XoopspartnersConstants::DEFAULT_PID, 'GET');
 if (XoopspartnersConstants::DEFAULT_PID == $id) {
     redirect_header('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XPARTNERS_NOPART);
 }
 
-$partnerObj = $xpPartnerHandler->get($id);
+$partnerObj = $xpPartnersHandler->get($id);
 if (($partnerObj instanceof XoopspartnersPartners) && $partnerObj->getVar('url') && (XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
     $modMid = ($GLOBALS['xoopsModule'] instanceof XoopsModule) ? $GLOBALS['xoopsModule']->getVar('mid') : XoopspartnersConstants::DEFAULT_MID;
     if (!($GLOBALS['xoopsUser'] instanceof XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin($modMid) || !$GLOBALS['xoopsModule']->getInfo('incadmin')) {
@@ -58,11 +57,11 @@ if (($partnerObj instanceof XoopspartnersPartners) && $partnerObj->getVar('url')
             $hitCount = $partnerObj->getVar('hits');
             ++$hitCount;
             $partnerObj->setVar('hits', $hitCount);
-            $xpPartnerHandler->insert($partnerObj);
+            $xpPartnersHandler->insert($partnerObj);
         }
     }
     echo "<html>\n" . "  <head>\n" . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url')) . "'>\n" . "  </head>\n" . "  <body></body>\n" . "</html>\n";
 } else {
-    unset($xpPartnerHandler);
+    unset($xpPartnersHandler);
     redirect_header('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XPARTNERS_NOPART);
 }

@@ -31,36 +31,40 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   front
+ * @package      module\xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         http://xoops.org XOOPS
  */
+use Xmf\Request;
+use Xmf\Module;
 
 require __DIR__ . '/header.php';
+
+$start = Request::getInt('start', 0, 'GET');
+
 /** @var string $xoopsOption */
 $xoopsOption['template_main'] = 'xoopspartners_index.tpl';
 include $GLOBALS['xoops']->path('/header.php');
 
-$start = XoopsRequest::getInt('start', 0, 'GET');
-
+$xpPartnersHandler = $xpHelper->getHandler('partners');
+$pathIcon16        = $xpHelper->getModule()->getInfo('icons16');
+/*
 $xpPartnersHandler = xoops_getModuleHandler('partners', $moduleDirname);
-
 $moduleHandler = xoops_getHandler('module');
 $moduleInfo    = $moduleHandler->get($GLOBALS['xoopsModule']->getVar('mid'));
 $pathIcon16    = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getInfo('icons16'));
-
+*/
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('status', XoopspartnersConstants::STATUS_ACTIVE, '='));
 $criteria->setSort($GLOBALS['xoopsModuleConfig']['modsort']);
 $criteria->setOrder($GLOBALS['xoopsModuleConfig']['modorder']);
 $criteria->setLimit($GLOBALS['xoopsModuleConfig']['modlimit']);
 
-if (0 != $GLOBALS['xoopsModuleConfig']['modlimit'] && ($start > 0)) {
+if (0 != $xpHelper->getConfig('modlimit') && ($start > 0)) {
+//if (0 != $GLOBALS['xoopsModuleConfig']['modlimit'] && ($start > 0)) {
     $criteria->setStart($start);
 }
 
@@ -71,13 +75,15 @@ $numPartners   = is_array($partnersArray) ? count($partnersArray) : 0;
 $GLOBALS['xoopsTpl']->assign('partner_join', ($GLOBALS['xoopsUser'] instanceof XoopsUser) ? XoopspartnersConstants::JOIN_OK : XoopspartnersConstants::JOIN_NOT_OK);
 
 /**
- * $GLOBALS['xoopsModuleConfig']['modshow']
- *    = 1        images
- *    = 2        text
- *    = 3        both
+ * XOOPS Module config ['modshow']
+ *    = 1   images
+ *    = 2   text
+ *    = 3   both
  */
+$modShow = (int)$xpHelper->getConfig('modshow');
 foreach ($partnersArray as $thisPartner) {
-    switch ($GLOBALS['xoopsModuleConfig']['modshow']) {
+    switch ($modShow) {
+//    switch ($GLOBALS['xoopsModuleConfig']['modshow']) {
         case 3: //both image and text
             if (empty($thisPartner['image'])) {
                 $thisPartner['image'] = $thisPartner['title'];
@@ -98,16 +104,20 @@ foreach ($partnersArray as $thisPartner) {
             break;
     }
 
-    if ($xoopsUserIsAdmin) {
+    if (isset($GLOBALS['xoopsUser']) && $xpHelper->isUserAdmin()) {
+//    if ($xoopsUserIsAdmin) {
         $thisPartner['admin_option'] =
-            "<a href='admin/main.php?op=editPartner&amp;id={$thisPartner['id']}'><img src='{$pathIcon16}/edit.png' alt='" . _EDIT . "' title='" . _EDIT . "'></a>&nbsp;<a href='admin/main.php?op=delPartner&amp;id={$thisPartner['id']}'><img src='{$pathIcon16}/delete.png' alt='" . _DELETE . "' title='"
-            . _DELETE . "'></a>";
+            "<a href='admin/main.php?op=editPartner&amp;id={$thisPartner['id']}'>"
+          . "<img src='{$pathIcon16}/edit.png' alt='" . _EDIT . "' title='" . _EDIT . "'></a>&nbsp;"
+          . "<a href='admin/main.php?op=delPartner&amp;id={$thisPartner['id']}'>"
+          . "<img src='{$pathIcon16}/delete.png' alt='" . _DELETE . "' title='" . _DELETE . "'></a>";
     }
     $GLOBALS['xoopsTpl']->append('partners', $thisPartner);
 }
 
-if (0 != (int)$GLOBALS['xoopsModuleConfig']['modlimit']) {
-    $nav     = new XoopsPageNav($numPartners, (int)$GLOBALS['xoopsModuleConfig']['modlimit'], $start);
+$modLimit = (int)$xpHelper->getConfig('modlimit');
+if (0 !== $modLimit) {
+    $nav     = new XoopsPageNav($numPartners, $modLimit, $start);
     $pagenav = $nav->renderImageNav();
 }
 $GLOBALS['xoopsTpl']->assign(array(
@@ -116,7 +126,7 @@ $GLOBALS['xoopsTpl']->assign(array(
                                  'lang_hits'         => _MD_XPARTNERS_HITS,
                                  'lang_no_partners'  => _MD_XPARTNERS_NOPART,
                                  'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
-                                 'sitename'          => $GLOBALS['xoopsConfig']['sitename'],
+//                                 'sitename'          => $GLOBALS['xoopsConfig']['sitename'],
                                  'pagenav'           => $pagenav
                              ));
 include_once __DIR__ . '/footer.php';

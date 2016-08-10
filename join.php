@@ -31,15 +31,14 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   front
+ * @package      module\xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         http://xoops.org XOOPS
  */
+use Xmf\Request;
 
 include __DIR__ . '/header.php';
 /** @var string $xoopsOption */
@@ -47,7 +46,7 @@ $xoopsOption['template_main'] = 'xoopspartners_join.tpl';
 include $GLOBALS['xoops']->path('/header.php');
 $myts = MyTextSanitizer::getInstance();
 
-$op = XoopsRequest::getCmd('op', '', 'POST');
+$op = Request::getCmd('op', '', 'POST');
 
 if (!$GLOBALS['xoopsUser'] instanceof XoopsUser) {
     redirect_header('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);

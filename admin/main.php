@@ -31,9 +31,7 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   admin
+ * @package      module\xoopspartners\admin
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
@@ -41,6 +39,7 @@
  * @link         http://xoops.org XOOPS
  * @since        1.11
  */
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 $adminClass    = new ModuleAdmin();
@@ -48,23 +47,22 @@ $pathImageIcon = $GLOBALS['xoops']->url('www/' . $moduleInfo->getInfo('icons16')
 
 $myts = MyTextSanitizer::getInstance();
 
-xoops_load('XoopsRequest');
-$op = XoopsRequest::getString('op', '');
-$id = XoopsRequest::getInt('id', 0);
+$op = Request::getString('op', '');
+$id = Request::getInt('id', 0);
 
-$del         = isset($_POST['del']) ? XoopsRequest::getInt('del', XoopspartnersConstants::CONFIRM_NOT_OK, 'POST') : null;
-$hits        = isset($_POST['hits']) ? XoopsRequest::getInt('hits', 0, 'POST') : null;
-$url         = isset($_POST['url']) ? XoopsRequest::getString('url', '', 'POST') : null;
-$image       = isset($_POST['image']) ? XoopsRequest::getText('image', '', 'POST') : null;
-$title       = isset($_POST['title']) ? XoopsRequest::getString('title', '', 'POST') : null;
-$description = isset($_POST['description']) ? XoopsRequest::getText('description', '', 'POST') : null;
-$status      = isset($_POST['status']) ? XoopsRequest::getInt('status', array(), 'POST') : null;
+$del         = isset($_POST['del']) ? Request::getInt('del', XoopspartnersConstants::CONFIRM_NOT_OK, 'POST') : null;
+$hits        = isset($_POST['hits']) ? Request::getInt('hits', 0, 'POST') : null;
+$url         = isset($_POST['url']) ? Request::getString('url', '', 'POST') : null;
+$image       = isset($_POST['image']) ? Request::getText('image', '', 'POST') : null;
+$title       = isset($_POST['title']) ? Request::getString('title', '', 'POST') : null;
+$description = isset($_POST['description']) ? Request::getText('description', '', 'POST') : null;
+$status      = isset($_POST['status']) ? Request::getInt('status', array(), 'POST') : null;
 
 switch ($op) {
 
     case 'partnersAdmin':
     default:
-        $xpPartnerHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
+        $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
 
         echo $adminClass->addNavigation('main.php');
         $adminClass->addItemButton(_AM_XPARTNERS_ADD, 'main.php' . '?op=partnersAdminAdd', $icon = 'add');
@@ -77,7 +75,7 @@ switch ($op) {
         $criteria = new CriteriaCompo();
         $criteria->setSort('status DESC, weight ASC, title');
         $criteria->setOrder('DESC');
-        $partnerObjs = $xpPartnerHandler->getAll($criteria);
+        $partnerObjs = $xpPartnersHandler->getAll($criteria);
         $class       = 'even';
         $maxWidth    = $GLOBALS['xoopsModuleConfig']['maxwidth'];
         $maxHeight   = $GLOBALS['xoopsModuleConfig']['maxheight'];
@@ -133,20 +131,20 @@ switch ($op) {
         break;
 
     case 'reorderPartners':
-        $weight = isset($_POST['weight']) ? XoopsRequest::getArray('weight', array(), 'POST') : null;
-        $status = isset($_POST['status']) ? XoopsRequest::getArray('status', array(), 'POST') : null;
+        $weight = isset($_POST['weight']) ? Request::getArray('weight', array(), 'POST') : null;
+        $status = isset($_POST['status']) ? Request::getArray('status', array(), 'POST') : null;
 
-        $xpPartnerHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
-        $partnerCount     = $xpPartnerHandler->getCount();
+        $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
+        $partnerCount      = $xpPartnersHandler->getCount();
         if ($partnerCount) {
             foreach ($weight as $id => $order) {
                 if ((int)$id > XoopspartnersConstants::DEFAULT_PID) {
                     $order   = ((!empty($order)) && ((int)$order > XoopspartnersConstants::DEFAULT_WEIGHT)) ? (int)$order : XoopspartnersConstants::DEFAULT_WEIGHT;
                     $stat    = (!empty($status[$id]) && ($status[$id] > XoopspartnersConstants::STATUS_INACTIVE)) ? (int)$status[$id] : XoopspartnersConstants::STATUS_INACTIVE;
-                    $thisObj = $xpPartnerHandler->get($id);
+                    $thisObj = $xpPartnersHandler->get($id);
                     if (!empty($thisObj) && ($thisObj instanceof XoopspartnersPartners)) {
                         $thisObj->setVars(array('weight' => $order, 'status' => $stat));
-                        $xpPartnerHandler->insert($thisObj);
+                        $xpPartnersHandler->insert($thisObj);
                         unset($thisObj);
                     }
                 }
@@ -158,15 +156,15 @@ switch ($op) {
         break;
 
     case 'reorderAutoPartners':
-        $xpPartnerHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
-        $partnerObjs      = $xpPartnerHandler->getAll(null, array('weight'));
-        $partnerCount     = count($partnerObjs);
-        $weight           = XoopspartnersConstants::DEFAULT_WEIGHT;
+        $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
+        $partnerObjs       = $xpPartnersHandler->getAll(null, array('weight'));
+        $partnerCount      = count($partnerObjs);
+        $weight            = XoopspartnersConstants::DEFAULT_WEIGHT;
         if ($partnerCount > 1) {
             foreach ($partnerObjs as $thisObj) {
                 ++$weight;
                 $thisObj->setVar('weight', $weight);
-                $xpPartnerHandler->insert($thisObj);
+                $xpPartnersHandler->insert($thisObj);
                 unset($thisObj);
             }
             redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
@@ -204,15 +202,15 @@ switch ($op) {
         break;
 
     case 'addPartner':
-        $xpPartnerHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
-        $newPartner       = $xpPartnerHandler->create();
-        $status           = ((!empty($status)) && ((int)$status > 0)) ? (int)$status : XoopspartnersConstants::STATUS_INACTIVE;
-        $weight           = XoopsRequest::getInt('weight', XoopspartnersConstants::DEFAULT_WEIGHT, 'POST');
-        $title            = isset($title) ? trim($title) : '';
-        $url              = isset($url) ? trim($url) : '';
-        $image            = isset($image) ? trim($image) : '';
-        $image            = $myts->addSlashes(formatURL($image));
-        $description      = isset($description) ? trim($description) : '';
+        $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
+        $newPartner        = $xpPartnersHandler->create();
+        $status            = ((!empty($status)) && ((int)$status > 0)) ? (int)$status : XoopspartnersConstants::STATUS_INACTIVE;
+        $weight            = Request::getInt('weight', XoopspartnersConstants::DEFAULT_WEIGHT, 'POST');
+        $title             = isset($title) ? trim($title) : '';
+        $url               = isset($url) ? trim($url) : '';
+        $image             = isset($image) ? trim($image) : '';
+        $image             = $myts->addSlashes(formatURL($image));
+        $description       = isset($description) ? trim($description) : '';
         if (empty($title) || empty($url) || empty($description)) {
             redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_BESURE);
         }
@@ -225,7 +223,7 @@ switch ($op) {
                                  'weight'      => $weight
                              ));
 
-        if ($GLOBALS['xoopsSecurity']->check() && $xpPartnerHandler->insert($newPartner)) {
+        if ($GLOBALS['xoopsSecurity']->check() && $xpPartnersHandler->insert($newPartner)) {
             redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
         } else {
             redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_NOTUPDATED . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -236,8 +234,8 @@ switch ($op) {
         echo $adminClass->addNavigation('main.php');
         $id = ((int)$id > XoopspartnersConstants::DEFAULT_PID) ? (int)$id : XoopspartnersConstants::DEFAULT_PID;
 
-        $xpPartnerHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
-        $partnerObj       = $xpPartnerHandler->get($id);
+        $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
+        $partnerObj        = $xpPartnersHandler->get($id);
         if (!empty($partnerObj) && ($partnerObj instanceof XoopspartnersPartners)) {
             $partnerVars = $partnerObj->getValues();
             //url, image, title, and description are all txtboxes so they have gone through htmlspecialchars via XoopsObject getVar
@@ -281,7 +279,7 @@ switch ($op) {
         $description = isset($description) ? trim($description) : '';
         $id          = ($id > XoopspartnersConstants::DEFAULT_PID) ? $id : XoopspartnersConstants::DEFAULT_PID;
         $status      = ((!empty($status)) && ($status > XoopspartnersConstants::STATUS_INACTIVE)) ? (int)$status : XoopspartnersConstants::STATUS_INACTIVE;
-        $weight      = XoopsRequest::getInt('weight', XoopspartnersConstants::DEFAULT_WEIGHT, 'POST');
+        $weight      = Request::getInt('weight', XoopspartnersConstants::DEFAULT_WEIGHT, 'POST');
         $weight      = $weight > XoopspartnersConstants::DEFAULT_WEIGHT ? $weight : XoopspartnersConstants::DEFAULT_WEIGHT;
         $hits        = ((!empty($hits)) && ((int)$hits > 0)) ? (int)$hits : 0;
         if ($title == '' || $url == '' || empty($id) || $description == '') {
@@ -295,8 +293,8 @@ switch ($op) {
                 }
             }
         */
-        $xpPartnerHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
-        $partnerObj       = $xpPartnerHandler->get($id);
+        $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
+        $partnerObj        = $xpPartnersHandler->get($id);
         if ($GLOBALS['xoopsSecurity']->check() && ($partnerObj instanceof XoopspartnersPartners)) {
             $partnerObj->setVar('url', $myts->addSlashes(formatURL($url)));
             $partnerObj->setVar('title', $myts->addSlashes($title));
@@ -305,7 +303,7 @@ switch ($op) {
             $partnerObj->setVar('weight', $weight);
             $partnerObj->setVar('status', $status);
             $partnerObj->setVar('image', $image);
-            $success = $xpPartnerHandler->insert($partnerObj);
+            $success = $xpPartnersHandler->insert($partnerObj);
             if ($success) {
                 redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
             }
@@ -315,10 +313,10 @@ switch ($op) {
 
     case 'delPartner':
         if ((XoopspartnersConstants::CONFIRM_OK == $del) && ($id > XoopspartnersConstants::DEFAULT_PID)) {
-            $xpPartnerHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
-            $partnerObj       = $xpPartnerHandler->get($id);
+            $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
+            $partnerObj        = $xpPartnersHandler->get($id);
             if ($partnerObj instanceof XoopspartnersPartners) {
-                if ($xpPartnerHandler->delete($partnerObj)) {
+                if ($xpPartnersHandler->delete($partnerObj)) {
                     redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
                 }
             }

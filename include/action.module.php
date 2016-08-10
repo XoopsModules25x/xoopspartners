@@ -12,8 +12,7 @@
 /**
  * XOOPS XoopsPartners module
  *
- * @category     Module
- * @package      xoopspartners
+ * @package      module\xoopspartners\include
  * @subpackage   include
  * @author       Taiwen Jiang <phppp@users.sourceforge.net>
  * @author       zyspec <owners@zyspec.com>

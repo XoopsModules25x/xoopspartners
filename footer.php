@@ -13,9 +13,7 @@
 /**
  * Xoopspartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   front
+ * @package      module\xoopspartners\frontside
  * @author       zyspec <owners@zyspec.com>
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}

@@ -31,9 +31,7 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   admin
+ * @package      module\xoopspartners\admin
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
@@ -41,25 +39,27 @@
  * @link         http://xoops.org XOOPS
  * @since        1.11
  */
+use Xmf\Module\Admin;
 
 require __DIR__ . '/admin_header.php';
-$adminClass = new ModuleAdmin();
+$moduleAdmin = Admin::getInstance();
 
 //-----------------------
-$xpPartnerHandler = xoops_getModuleHandler('partners', $xoopsModule->getVar('dirname', 'n'));
+$xpPartnersHandler->$xpHelper->getHandler('partners');
+//$xpPartnersHandler = xoops_getModuleHandler('partners', $xoopsModule->getVar('dirname', 'n'));
 
-$totalPartners          = $xpPartnerHandler->getCount();
-$totalNonActivePartners = $xpPartnerHandler->getCount(new Criteria('status', 0, '='));
+$totalPartners          = $xpPartnersHandler->getCount();
+$totalNonActivePartners = $xpPartnersHandler->getCount(new Criteria('status', 0, '='));
 $totalActivePartners    = $totalPartners - $totalNonActivePartners;
 
-$adminClass->addInfoBox(_MD_XPARTNERS_DASHBOARD);
+$moduleAdmin->addInfoBox(_MD_XPARTNERS_DASHBOARD);
 
-$adminClass->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALACTIVE . '</infolabel>', $totalActivePartners, 'Green');
-$adminClass->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALNONACTIVE . '</infolabel>', $totalNonActivePartners, 'Red');
-$adminClass->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALPARTNERS . '</infolabel><infotext>', $totalPartners . '</infotext>');
+$moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALACTIVE . '</infolabel>', $totalActivePartners, 'Green');
+$moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALNONACTIVE . '</infolabel>', $totalNonActivePartners, 'Red');
+$moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALPARTNERS . '</infolabel><infotext>', $totalPartners . '</infotext>');
 //----------------------------
 
-echo $adminClass->addNavigation('index.php');
-echo $adminClass->renderIndex();
+echo $moduleAdmin->addNavigation('index.php');
+echo $moduleAdmin->renderIndex();
 
 include __DIR__ . '/admin_footer.php';

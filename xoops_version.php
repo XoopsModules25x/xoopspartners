@@ -31,9 +31,7 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   init
+ * @package      module\xoopspartners\init
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
@@ -74,7 +72,7 @@ $modversion = array(
     'author_website_name' => 'XOOPS',
     'module_website_url'  => 'http://xoops.org',
     'module_website_name' => 'XOOPS',
-    'release_date'        => '2016/07/10',
+    'release_date'        => '2016/08/11',
     'min_php'             => '5.5',
     'min_xoops'           => '2.5.8',
     'min_db'              => array('mysql' => '5.0.7', 'mysqli' => '5.0.7'),
@@ -83,9 +81,9 @@ $modversion = array(
     'icons16'             => 'Frameworks/moduleclasses/icons/16',
     'icons32'             => 'Frameworks/moduleclasses/icons/32',
 
-    'onInstall'   => 'include/action.module.php',
-    'onUpdate'    => 'include/action.module.php',
-    'onUninstall' => 'include/action.module.php',
+    'onInstall'           => 'include/action.module.php',
+    'onUpdate'            => 'include/action.module.php',
+    'onUninstall'         => 'include/action.module.php',
     /**
      * dB settings
      */

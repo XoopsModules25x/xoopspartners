@@ -12,8 +12,7 @@
 /**
  * Module: xoopsPartners
  *
- * @category        Module
- * @package         xoopspartners
+ * @package         module\xoopspartners
  * @author          ZySpec <owners@zyspec.com>
  * @copyright       {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license         {@link http://www.fsf.org/copyleft/gpl.html GNU public license}

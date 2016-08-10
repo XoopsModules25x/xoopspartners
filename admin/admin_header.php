@@ -12,29 +12,38 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   admin
+ * @package      module\xoopspartners\admin
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         http://xoops.org XOOPS
  * @since        1.11
  */
+use Xmf\Module\Helper;
+use Xmf\Module\Admin;
+
+$moduleDirname = basename(dirname(__DIR__));
 
 require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 include_once $GLOBALS['xoops']->path('/include/cp_functions.php');
 require $GLOBALS['xoops']->path('/include/cp_header.php');
 
-$moduleDirname = basename(dirname(__DIR__));
-xoops_load('constants', $moduleDirname);
+$xpHelper = Helper::getHelper($moduleDirname);
+
+if (!interface_exists('XoopspartnersConstants')) {
+    require_once dirname(__DIR__) . '/class/constants.php';
+//    xoops_load('constants', $moduleDirname);
+}
 
 //Load languages
-$moduleDirname = $GLOBALS['xoopsModule']->getVar('dirname', 'n');
-xoops_loadLanguage('admin', $moduleDirname);
-xoops_loadLanguage('modinfo', $moduleDirname);
-xoops_loadLanguage('main', $moduleDirname);
+$xpHelper->loadLanguage('admin');
+$xpHelper->loadLanguage('modinfo');
+$xpHelper->loadLanguage('main');
 
+$pathIcon16 = $xpHelper->getModule()->getInfo('icons16');
+$pathIcon32 = $xpHelper->getModule()->getInfo('icons32');
+
+/*
 include_once $GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php');
 
 $moduleHandler   = xoops_getHandler('module');
@@ -44,6 +53,7 @@ $pathIcon32      = $GLOBALS['xoopsModule']->getInfo('icons32');
 $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
 //$pathImageIcon  = XOOPS_URL .'/'. $moduleInfo->getInfo('icons16');
 //$pathImageAdmin = XOOPS_URL .'/'. $moduleInfo->getInfo('icons32');
+*/
 
 $myts = MyTextSanitizer::getInstance();
 
