@@ -45,7 +45,7 @@ require __DIR__ . '/admin_header.php';
 $moduleAdmin = Admin::getInstance();
 
 //-----------------------
-$xpPartnersHandler->$xpHelper->getHandler('partners');
+$xpPartnersHandler = $xpHelper->getHandler('partners');
 //$xpPartnersHandler = xoops_getModuleHandler('partners', $xoopsModule->getVar('dirname', 'n'));
 
 $totalPartners          = $xpPartnersHandler->getCount();
@@ -59,7 +59,7 @@ $moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTN
 $moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALPARTNERS . '</infolabel><infotext>', $totalPartners . '</infotext>');
 //----------------------------
 
-echo $moduleAdmin->addNavigation('index.php');
-echo $moduleAdmin->renderIndex();
+$moduleAdmin->displayNavigation('index.php');
+$moduleAdmin->displayIndex();
 
 include __DIR__ . '/admin_footer.php';

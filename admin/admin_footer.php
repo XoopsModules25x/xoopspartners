@@ -22,7 +22,7 @@
 use Xmf\Module\Helper;
 
 $xpHelper   = Helper::getHelper(basename(dirname(__DIR__)));
-$pathIcon32 = $xformsHelper->getModule()->getInfo('icons32');
+$pathIcon32 = $xpHelper->getModule()->getInfo('icons32');
 /*
 if (!isset($moduleInfo) || !($moduleInfo instanceof XoopsModule)) {
     $moduleHandler = xoops_getHandler('module');

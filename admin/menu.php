@@ -39,14 +39,21 @@
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         http://xoops.org XOOPS
  */
+use Xmf\Module\Helper;
 
+$moduleDirname = basename(dirname(__DIR__));
+
+$xpHelper   = Helper::getHelper($moduleDirname);
+$pathIcon32 = '../../' . $xpHelper->getModule()->getInfo('icons32');
+$xpHelper->loadLanguage('modinfo');
+/*
 $moduleHandler = xoops_getHandler('module');
 $moduleObj     = XoopsModule::getByDirname('xoopspartners');
 $moduleInfo    = $moduleHandler->get($moduleObj->getVar('mid'));
 $pathIcon32    = '../../' . $moduleInfo->getInfo('icons32');
 
 xoops_loadLanguage('modinfo', $moduleObj->dirname());
-
+*/
 $adminmenu = array(
     array(
         'title' => _MI_XPARTNERS_ADMIN_HOME,

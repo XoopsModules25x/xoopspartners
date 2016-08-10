@@ -23,13 +23,11 @@
 use Xmf\Module\Admin;
 
 require __DIR__ . '/admin_header.php';
-include __DIR__ . '/../../../class/xoopsformloader.php';
-
-xoops_cp_header();
+include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 $moduleAdmin = Admin::getInstance();
 $moduleAdmin->displayNavigation(basename(__FILE__));
-Admin::setPaypal('6KJ7RW5DR3VTJ');
+$moduleAdmin->setPaypal('6KJ7RW5DR3VTJ');
 $moduleAdmin->displayAbout(false);
 
 include __DIR__ . '/admin_footer.php';

@@ -40,10 +40,12 @@
  * @since        1.11
  */
 use Xmf\Request;
+use Xmf\Module\Admin;
 
 require __DIR__ . '/admin_header.php';
-$adminClass    = new ModuleAdmin();
-$pathImageIcon = $GLOBALS['xoops']->url('www/' . $moduleInfo->getInfo('icons16'));
+$moduleAdmin = Admin::getInstance();
+$pathImageIcon = $GLOBALS['xoops']->url('www/' . $xpHelper->getModule()->getInfo('icons16'));
+//$pathImageIcon = $GLOBALS['xoops']->url('www/' . $xpHelper->getModule()->getInfo('icons16'));
 
 $myts = MyTextSanitizer::getInstance();
 
@@ -64,9 +66,9 @@ switch ($op) {
     default:
         $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
 
-        echo $adminClass->addNavigation('main.php');
-        $adminClass->addItemButton(_AM_XPARTNERS_ADD, 'main.php' . '?op=partnersAdminAdd', $icon = 'add');
-        echo $adminClass->renderButton();
+        $moduleAdmin->displayNavigation('main.php');
+        $moduleAdmin->addItemButton(_AM_XPARTNERS_ADD, 'main.php' . '?op=partnersAdminAdd', $icon = 'add');
+        $moduleAdmin->displayButton();
 
         echo "  <form action='main.php' method='post' name='reorderform'>\n" . "    <table style='margin: 1px; padding: 0px;' class='outer width100 bnone'>\n" . "      <thead>\n" . "      <tr>\n" . "        <th class='txtcenter width20'>" . _AM_XPARTNERS_TITLE . "</th>\n"
              . "        <th style='width: 3%; text-align: center;'>" . _AM_XPARTNERS_IMAGE . "</th>\n" . '        <th>' . _AM_XPARTNERS_DESCRIPTION . "</th>\n" . "        <th class='width3 txtcenter'>" . _AM_XPARTNERS_ACTIVE . "</th>\n" . "        <th class='width3 txtcenter'>"
@@ -174,7 +176,7 @@ switch ($op) {
         break;
 
     case 'partnersAdminAdd':
-        echo $adminClass->addNavigation('main.php?op=partnersAdminAdd');
+        $moduleAdmin->displayNavigation('main.php?op=partnersAdminAdd');
         //echo "<h4>"._AM_XPARTNERS_ADD."</h4>";
 
         include $GLOBALS['xoops']->path('/class/xoopsformloader.php');
@@ -231,7 +233,7 @@ switch ($op) {
         break;
 
     case 'editPartner':
-        echo $adminClass->addNavigation('main.php');
+        $moduleAdmin->displayNavigation('main.php');
         $id = ((int)$id > XoopspartnersConstants::DEFAULT_PID) ? (int)$id : XoopspartnersConstants::DEFAULT_PID;
 
         $xpPartnersHandler = xoops_getModuleHandler('partners', $GLOBALS['xoopsModule']->getVar('dirname'));
@@ -322,7 +324,7 @@ switch ($op) {
             }
             redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_NOTUPDATED);
         } else {
-            echo $adminClass->addNavigation('main.php');
+            $moduleAdmin->displayNavigation('main.php');
             xoops_confirm(array('op' => 'delPartner', 'id' => (int)$id, 'del' => XoopspartnersConstants::CONFIRM_OK), 'main.php', _AM_XPARTNERS_SUREDELETE);
             include __DIR__ . '/admin_footer.php';
         }
