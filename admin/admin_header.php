@@ -32,28 +32,12 @@ $xpHelper = Helper::getHelper($moduleDirname);
 
 if (!interface_exists('XoopspartnersConstants')) {
     require_once dirname(__DIR__) . '/class/constants.php';
-//    xoops_load('constants', $moduleDirname);
 }
 
 //Load languages
 $xpHelper->loadLanguage('admin');
 $xpHelper->loadLanguage('modinfo');
 $xpHelper->loadLanguage('main');
-
-$pathIcon16 = $xpHelper->getModule()->getInfo('icons16');
-$pathIcon32 = $xpHelper->getModule()->getInfo('icons32');
-
-/*
-include_once $GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php');
-
-$moduleHandler   = xoops_getHandler('module');
-$moduleInfo      = $moduleHandler->get($GLOBALS['xoopsModule']->getVar('mid'));
-$pathIcon16      = $GLOBALS['xoopsModule']->getInfo('icons16');
-$pathIcon32      = $GLOBALS['xoopsModule']->getInfo('icons32');
-$pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
-//$pathImageIcon  = XOOPS_URL .'/'. $moduleInfo->getInfo('icons16');
-//$pathImageAdmin = XOOPS_URL .'/'. $moduleInfo->getInfo('icons32');
-*/
 
 $myts = MyTextSanitizer::getInstance();
 

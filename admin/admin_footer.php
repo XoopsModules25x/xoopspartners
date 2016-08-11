@@ -20,24 +20,17 @@
  * @since        1.11
  */
 use Xmf\Module\Helper;
+use Xmf\Module\Admin;
 
-$xpHelper   = Helper::getHelper(basename(dirname(__DIR__)));
-$pathIcon32 = $xpHelper->getModule()->getInfo('icons32');
-/*
-if (!isset($moduleInfo) || !($moduleInfo instanceof XoopsModule)) {
-    $moduleHandler = xoops_getHandler('module');
-    $xoopsModule   = XoopsModule::getByDirname('xoopspartners');
-    $moduleInfo    = $moduleHandler->get($xoopsModule->getVar('mid'));
-    $pathIcon32    = $moduleInfo->getInfo('icons32');
-}
-*/
+$xpHelper = Helper::getHelper(basename(dirname(__DIR__)));
+$xpModule = $xpHelper->getModule();
 
 echo "<div class='adminfooter'>\n"
    . "<div class='txtcenter'>\n"
-   . "<a href='" . $xpHelper->getModule()->getInfo('author_website_url')
-   . "' target='_blank'><img src='" . $GLOBALS['xoops']->url("www/{$pathIcon32}/xoopsmicrobutton.gif")
-   . "' alt='" . $xpHelper->getModule()->getInfo('author_website_name')
-   . "' title='" . $xpHelper->getModule()->getInfo('author_website_name') . "'></a>\n"
+   . "<a href='" . $xpModule->getInfo('author_website_url') . "' "
+     . "target='_blank'><img src='" . Admin::iconUrl('xoopsmicrobutton.gif', 32) . "' "
+     . "alt='" . $xpModule->getInfo('author_website_name') . "' "
+     . "title='" . $xpModule->getInfo('author_website_name') . "'></a>\n"
    . "</div>\n"
    . _AM_XPARTNERS_ADMIN_FOOTER . "\n"
    . "</div>\n";

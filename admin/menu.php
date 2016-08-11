@@ -33,49 +33,38 @@
  *
  * @package      module\xoopspartners\admin
  * @author       Mage, Mamba
- * @author       ::     Raul Recio (aka UNFOR)
+ * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
  */
 use Xmf\Module\Helper;
+use Xmf\Module\Admin;
 
 $moduleDirname = basename(dirname(__DIR__));
 
 $xpHelper   = Helper::getHelper($moduleDirname);
-$pathIcon32 = '../../' . $xpHelper->getModule()->getInfo('icons32');
 $xpHelper->loadLanguage('modinfo');
-/*
-$moduleHandler = xoops_getHandler('module');
-$moduleObj     = XoopsModule::getByDirname('xoopspartners');
-$moduleInfo    = $moduleHandler->get($moduleObj->getVar('mid'));
-$pathIcon32    = '../../' . $moduleInfo->getInfo('icons32');
 
-xoops_loadLanguage('modinfo', $moduleObj->dirname());
-*/
 $adminmenu = array(
     array(
         'title' => _MI_XPARTNERS_ADMIN_HOME,
         'link'  => 'admin/index.php',
-        'icon'  => "{$pathIcon32}/home.png"
+        'icon'  => Admin::iconUrl('home.png', 32)
     ),
-
     array(
         'title' => _MI_XPARTNERS_ADMIN_MANAGE,
         'link'  => 'admin/main.php',
-        'icon'  => "{$pathIcon32}/manage.png"
+        'icon'  => Admin::iconUrl('manage.png', 32)
     ),
-
     array(
         'title' => _MI_XPARTNERS_ADMIN_ADDP,
         'link'  => 'admin/main.php?op=partnersAdminAdd',
-        'icon'  => "{$pathIcon32}/add.png"
+        'icon'  => Admin::iconUrl('add.png', 32)
     ),
-
     array(
         'title' => _MI_XPARTNERS_ADMIN_ABOUT,
         'link'  => 'admin/about.php',
-        'icon'  => "{$pathIcon32}/about.png"
+        'icon'  => Admin::iconUrl('about.png', 32)
     )
 );
