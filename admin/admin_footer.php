@@ -21,8 +21,8 @@
 use Xmf\Module\Helper;
 use Xmf\Module\Admin;
 
-$moduleDirname = basename(dirname(__DIR__));
-$xpHelper = Helper::getHelper($moduleDirname);
+$moduleDirName = basename(dirname(__DIR__));
+$xpHelper = Helper::getHelper($moduleDirName);
 $xpModule = $xpHelper->getModule();
 
 echo "<div class='adminfooter'>\n"
@@ -33,7 +33,7 @@ echo "<div class='adminfooter'>\n"
    .     "title='" . $xpModule->getInfo('author_website_name') . "'></a>\n"
    . "</div>\n"
    . "<div class='center smallsmall italic pad5'>\n"
-   . "  <strong>" . ucfirst($moduleDirname) . "</strong> " . _AM_XPARTNERS_ADMIN_FOOTER_STR1
+   . "  <strong>" . ucfirst($moduleDirName) . "</strong> " . _AM_XPARTNERS_ADMIN_FOOTER_STR1
    . " <a class='tooltip' rel='external' href='" . $xpModule->getInfo('author_website_url') . "' "
    .      "title='" . _AM_XPARTNERS_ADMIN_FOOTER_STR2 . " " . $xpModule->getInfo('author_website_name') . "'>"
    .      $xpModule->getInfo('author_website_name') . "</a>\n"

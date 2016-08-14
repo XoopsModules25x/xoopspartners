@@ -19,7 +19,7 @@
  * @since           1.13
  */
 
-$moduleDirname = basename(dirname(__DIR__));
+$moduleDirName = basename(dirname(__DIR__));
 include_once dirname(__DIR__) . "/language/english/admin.php"; // messages will be in english
 
 session_start();
@@ -58,8 +58,8 @@ function xoopspartnersGetHeaderFromArray($hdr, $hdrArray, $asArray = false) {
     return (bool)$asArray ? array($hdr => trim($val)) : trim($val);
 }
 
-$serviceUrl   = "https://github.com/XoopsModules25x/{$moduleDirname}/issues?state=open";
-$sessPrefix   = "{$moduleDirname}_";
+$serviceUrl   = "https://github.com/XoopsModules25x/{$moduleDirName}/issues?state=open";
+$sessPrefix   = "{$moduleDirName}_";
 $err          = '';
 $sKeyEtag     = "{$sessPrefix}github_etag";
 $sKeyHdrSize  = "{$sessPrefix}github_hdr_size";
@@ -75,7 +75,7 @@ if ($cachedEtag) {
         CURLOPT_VERBOSE     => true,
         CURLOPT_TIMEOUT     => 5,
         CURLOPT_HTTPGET     => true,
-        CURLOPT_USERAGENT   => "XOOPS-{$moduleDirname}",
+        CURLOPT_USERAGENT   => "XOOPS-{$moduleDirName}",
         CURLOPT_HTTPHEADER  => array('Content-type:application/json',
                                      'If-None-Match: ' . $cachedEtag),
         CURLINFO_HEADER_OUT => true,
@@ -105,7 +105,7 @@ if ($cachedEtag) {
             CURLOPT_VERBOSE        => true,
             CURLOPT_TIMEOUT        => 5,
             CURLOPT_HTTPGET        => true,
-            CURLOPT_USERAGENT      => "XOOPS-{$moduleDirname}",
+            CURLOPT_USERAGENT      => "XOOPS-{$moduleDirName}",
             CURLOPT_HTTPHEADER     => array('Content-type:application/json'),
             CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine')
         );
@@ -153,7 +153,7 @@ if ($cachedEtag) {
         CURLOPT_VERBOSE        => true,
         CURLOPT_TIMEOUT        => 5,
         CURLOPT_HTTPGET        => true,
-        CURLOPT_USERAGENT      => "XOOPS-{$moduleDirname}",
+        CURLOPT_USERAGENT      => "XOOPS-{$moduleDirName}",
         CURLOPT_HTTPHEADER     => array('Content-type:application/json'),
         CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine')
     );

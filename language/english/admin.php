@@ -39,7 +39,7 @@
  * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  */
 
-$moduleDirname = basename(dirname(dirname(__DIR__)));
+//$moduleDirName = basename(dirname(dirname(__DIR__)));
 
 define('_AM_XPARTNERS_URL', 'URL');
 define('_AM_XPARTNERS_HITS', 'Hits');
@@ -89,7 +89,7 @@ define('_AM_XPARTNERS_ACTIONS', 'Actions');
 define('_AM_XPARTNERS_INVALIDID', 'No partner exists with this ID');
 
 // text in admin footer
-//define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$moduleDirname}</strong> "
+//define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$moduleDirName}</strong> "
 //    . "is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>"
 //    . "XOOPS Community</a></div>");
 

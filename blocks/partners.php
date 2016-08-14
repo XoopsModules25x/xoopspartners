@@ -60,11 +60,11 @@ function b_xoopspartners_show($options)
 {
     $myts = MyTextSanitizer::getInstance();
 
-    $moduleDirname     = basename(dirname(__DIR__));
-    $xpHelper          = Helper::getHelper($moduleDirname);
+    $moduleDirName     = basename(dirname(__DIR__));
+    $xpHelper          = Helper::getHelper($moduleDirName);
     $xpPartnersHandler = $xpHelper->getHandler('partners');
 
-    $block             = array('xpDir' => $moduleDirname);
+    $block             = array('xpDir' => $moduleDirName);
 
     $pFields           = array('id', 'url', 'image', 'title', 'description');
     $criteria          = new CriteriaCompo();

@@ -40,12 +40,12 @@
  */
 use Xmf\Module\Helper;
 
-$moduleDirname = basename(__DIR__);
+$moduleDirName = basename(__DIR__);
 require __DIR__ . '/../../mainfile.php';
 xoops_load('pagenav');
 if (!interface_exists('XoopspartnersConstants')) {
     require_once __DIR__ . '/class/constants.php';
-//    xoops_load('constants', $moduleDirname);
+//    xoops_load('constants', $moduleDirName);
 }
 
-$xpHelper = Helper::getHelper($moduleDirname);
+$xpHelper = Helper::getHelper($moduleDirName);

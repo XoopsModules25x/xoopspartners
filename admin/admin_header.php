@@ -23,8 +23,8 @@ use Xmf\Module\Helper;
 require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 require $GLOBALS['xoops']->path('/include/cp_header.php');
 
-$moduleDirname = basename(dirname(__DIR__));
-$xpHelper = Helper::getHelper($moduleDirname);
+$moduleDirName = basename(dirname(__DIR__));
+$xpHelper = Helper::getHelper($moduleDirName);
 
 if (!interface_exists('XoopspartnersConstants')) {
     require_once $xpHelper->path('class/constants.php');

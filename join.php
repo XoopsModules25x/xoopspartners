@@ -100,7 +100,7 @@ switch ($op) {
                 if (preg_match('^http[s]?:\/\/[^\s]', $image)) {
                     // image is from external source
                     xoops_load('xoopsmediauploader');
-                    $uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH . "/{$moduleDirname}",
+                    $uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH . "/{$moduleDirName}",
                                                        $allowed_mimetypes,
                                                        $maxFileSize
                     );
@@ -145,7 +145,7 @@ switch ($op) {
                                     'TITLE'       => $title,
                                     'DESCRIPTION' => $description,
                                     'USER'        => $GLOBALS['xoopsUser']->getVar('uname'),
-                                    'MODULENAME'  => $moduleDirname
+                                    'MODULENAME'  => $moduleDirName
                                  )
             );
             $xoopsMailer->setToEmails($GLOBALS['xoopsConfig']['adminmail']);
