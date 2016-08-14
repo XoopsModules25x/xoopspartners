@@ -35,9 +35,8 @@
  * @package      module\xoopspartners\class
  * @author       zyspec <owners@zyspec.com>
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @since        1.12
  */
 
@@ -87,6 +86,14 @@ interface XoopspartnersConstants
      * default module ID
      */
     const DEFAULT_MID = 0;
+    /**
+     *  indicates a partner title should be displayed
+     */
+    const SHOW_TITLE = 2;
+    /**
+     *  indicates a partner image should be displayed
+     */
+    const SHOW_IMAGE = 1;
     /**
      *  indicates a partner listing is inactive
      */

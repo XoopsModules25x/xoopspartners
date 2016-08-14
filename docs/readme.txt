@@ -19,25 +19,25 @@ Install/Uninstall/Upgrade
 See install.txt
 
 Detailed instructions on installing modules are available in the XOOPS
-Operations Manual (http://goo.gl/adT2i)
+Operations Manual (goo.gl/o2gHGl)
 
 Operating instructions
 ----------------------
 To set up this module you need to:
 
-i)   Enter your partners details  including a URL for their website and
-     (optionally) logo plus a short description (see Adding a partner)
+i)   Enter your partner�s details � including a URL for their website and
+     (optionally) a logo plus a short description (see 'Adding a partner')
 
-ii)  Configure your preferences for the module (see Preferences) and
-     optionally the Partners block if you intend to use it (see Blocks)
+ii)  Configure your preferences for the module (see 'Preferences') and
+     optionally the Partners block if you intend to use it (see 'Blocks')
 
 iii) Check that you have given your user groups the necessary module and
      block access rights to use this module. Group permissions are set
      through Administration Menu -> System -> Groups.
 
 Detailed instructions on configuring the access rights for user groups are
-available in the XOOPS Operations Manual (http://goo.gl/adT2i)
+available in the XOOPS Operations Manual (goo.gl/o2gHGl)
 
 Tutorial
 --------
-You can find a more detailed tutorial here: (https://www.gitbook.com/book/xoops/partners-tutorial/)
+You can find a more detailed tutorial here: (https://www.gitbook.com/book/xoops/xoopspartners-tutorial/)

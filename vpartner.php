@@ -34,33 +34,50 @@
  * @package      module\xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  */
 use Xmf\Request;
 
-include __DIR__ . '/header.php';
-$xpPartnersHandler = xoops_getModuleHandler('partners', $moduleDirname);
+require __DIR__ . '/header.php';
+$xpPartnersHandler = $xpHelper->getHandler('partners');
 
 $id = Request::getInt('id', XoopspartnersConstants::DEFAULT_PID, 'GET');
-if (XoopspartnersConstants::DEFAULT_PID == $id) {
+if (XoopspartnersConstants::DEFAULT_PID === $id) {
     redirect_header('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XPARTNERS_NOPART);
 }
 
 $partnerObj = $xpPartnersHandler->get($id);
-if (($partnerObj instanceof XoopspartnersPartners) && $partnerObj->getVar('url') && (XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
-    $modMid = ($GLOBALS['xoopsModule'] instanceof XoopsModule) ? $GLOBALS['xoopsModule']->getVar('mid') : XoopspartnersConstants::DEFAULT_MID;
-    if (!($GLOBALS['xoopsUser'] instanceof XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin($modMid) || !$GLOBALS['xoopsModule']->getInfo('incadmin')) {
+if (($partnerObj instanceof XoopspartnersPartners)
+    && $partnerObj->getVar('url')
+    && (XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status')))
+{
+    if (!isset($GLOBALS['xoopsUser'])        // not a registered user
+        || !$xpHelper->isUserAdmin()         // registered but not an admin
+        || $xpHelper->getConfig('incadmin')) // admin but want to include admin hits
+    {
+/*
+    $modMid = ($GLOBALS['xoopsModule'] instanceof XoopsModule)
+            ? $GLOBALS['xoopsModule']->getVar('mid')
+            : XoopspartnersConstants::DEFAULT_MID;
+    if (!($GLOBALS['xoopsUser'] instanceof XoopsUser)
+        || !$GLOBALS['xoopsUser']->isAdmin($modMid)
+        || !$GLOBALS['xoopsModule']->getInfo('incadmin')) {
+*/
         if (!isset($_COOKIE['partners'][$id])) {
-            setcookie("partners[{$id}]", $id, $GLOBALS['xoopsModuleConfig']['cookietime']);
+            setcookie("partners[{$id}]", $id, time() + $xpHelper->getConfig('cookietime'));
             $hitCount = $partnerObj->getVar('hits');
             ++$hitCount;
             $partnerObj->setVar('hits', $hitCount);
             $xpPartnersHandler->insert($partnerObj);
         }
     }
-    echo "<html>\n" . "  <head>\n" . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url')) . "'>\n" . "  </head>\n" . "  <body></body>\n" . "</html>\n";
+    echo "<html>\n"
+       . "  <head>\n"
+       . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url')) . "'>\n"
+       . "  </head>\n"
+       . "  <body></body>\n"
+       . "</html>\n";
 } else {
     unset($xpPartnersHandler);
     redirect_header('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XPARTNERS_NOPART);

@@ -1,18 +1,21 @@
-<u><b>1.13 RC1 [2016-08-11] </b></u>
-- changed to use Xmf\Request instead of XoopsRequest
-- changed to use Xmf\Module\Admin class
-- changed to use Xmf\Module\Helper class
+<u><b>1.13 RC1 [2016-08-13]</b></u>
+- created GITHUB issues tab in ./admin/help
+- changed to use Xmf for Request, module Admin and Helper
+- changed form input field lengths to match sql variable lengths
 - fix bug in index.php where checking if user is Admin didn't work
-- removed unnecessary instantiation of MyTextSanitizer in block
-- initialized partners array in block
-- fixed bug in XoopsModule definition in ./admin/admin_header.php
+- fix bug where admin hit count wasn't set correctly
+- fix bug in XoopsModule definition in ./admin/admin_header.php
+- fix bug to nitialize partners array in block
+- removed language translations (see Transifex for translations)
+- removed .assets/images/admin files, deprecated (no longer used)
+- removed .assets/images/icons files, deprecated (no longer used)
 - created XoopspartnersUtilities class for install/update routines
 - updated pre-install/pre-update version check routines
-- created GITHUB issues tab in ./admin/help
-- updated changelog.txt for 1.12 Final to indicate change to require new XOOPS/PHP versions
-- updated phpdocumentor comments
+- updated changelog.txt to indicate new XOOPS/PHP versions requirement
+- updated code for PSR-x standards (line lengths <120 chars, naming, etc)
+- updated phpDoc comments
 
-<u><b>1.12 Final [2016-07-10] </b></u>
+<u><b>1.12 Final [2016-07-10]</b></u>
 - require XOOPS 2.5.8+
 - require PHP 5.5+
 - changed "op" request from cmd to string (mamba)

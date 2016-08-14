@@ -16,20 +16,19 @@
  * @package      module\xoopspartners\frontside
  * @author       zyspec <owners@zyspec.com>
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  */
+use Xmf\Module\Helper;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Module specific tpl includes
  */
 if (is_object($xoTheme)) {
-    $xoTheme->addStylesheet($GLOBALS['xoops']->path('/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/assets/css/partners.css'));
-    if (file_exists($GLOBALS['xoops']->path('/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/css/module.css'))) {
-        $xoTheme->addStylesheet($GLOBALS['xoops']->path('/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/css/module.css'));
-    }
+    $xpHelper = Helper::getHelper(basename(__DIR__));
+    $xoTheme->addStylesheet($xpHelper->url('assets/css/partners.css'));
 }
 
 include_once $GLOBALS['xoops']->path('/footer.php');

@@ -12,15 +12,14 @@
 /**
  * Module: xoopsPartners
  *
- * @package         module\xoopspartners
+ * @package         module\xoopspartners\include
  * @author          ZySpec <owners@zyspec.com>
- * @copyright       {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license         {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
- * @link            http://xoops.org XOOPS
+ * @copyright       http://xoops.org 2001-2016 XOOPS Project
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @since           1.13
  */
 
-$moduleDirName = basename(dirname(__DIR__));
+$moduleDirname = basename(dirname(__DIR__));
 include_once dirname(__DIR__) . "/language/english/admin.php"; // messages will be in english
 
 session_start();
@@ -59,8 +58,8 @@ function xoopspartnersGetHeaderFromArray($hdr, $hdrArray, $asArray = false) {
     return (bool)$asArray ? array($hdr => trim($val)) : trim($val);
 }
 
-$serviceUrl   = "https://github.com/XoopsModules25x/{$moduleDirName}/issues?state=open";
-$sessPrefix   = "{$moduleDirName}_";
+$serviceUrl   = "https://github.com/XoopsModules25x/{$moduleDirname}/issues?state=open";
+$sessPrefix   = "{$moduleDirname}_";
 $err          = '';
 $sKeyEtag     = "{$sessPrefix}github_etag";
 $sKeyHdrSize  = "{$sessPrefix}github_hdr_size";
@@ -72,15 +71,15 @@ if ($cachedEtag) {
     // found the session var so check to see if anything's changed since last time we checked
     $curl = curl_init($serviceUrl);
     curl_setopt_array($curl, array(CURLOPT_RETURNTRANSFER => true,
-                                           CURLOPT_HEADER => true,
-                                          CURLOPT_VERBOSE => true,
-                                          CURLOPT_TIMEOUT => 5,
-                                          CURLOPT_HTTPGET => true,
-                                        CURLOPT_USERAGENT => "XOOPS-{$moduleDirName}",
-                                       CURLOPT_HTTPHEADER => array('Content-type:application/json',
-                                                                   'If-None-Match: ' . $cachedEtag),
-                                      CURLINFO_HEADER_OUT => true,
-                                     CURLOPT_HEADERFUNCTION => "xoopspartnersHandleHeaderLine")
+        CURLOPT_HEADER      => true,
+        CURLOPT_VERBOSE     => true,
+        CURLOPT_TIMEOUT     => 5,
+        CURLOPT_HTTPGET     => true,
+        CURLOPT_USERAGENT   => "XOOPS-{$moduleDirname}",
+        CURLOPT_HTTPHEADER  => array('Content-type:application/json',
+                                     'If-None-Match: ' . $cachedEtag),
+        CURLINFO_HEADER_OUT => true,
+        CURLOPT_HEADERFUNCTION => "xoopspartnersHandleHeaderLine")
     );
     // execute the session
     $curl_response = curl_exec($curl);
@@ -91,20 +90,24 @@ if ($cachedEtag) {
     $status = xoopspartnersGetHeaderFromArray('Status: ', $hdrs);
     if (preg_match('/^304 Not Modified/', $status)) {
         // hasn't been modified so get response & header size from session
-        $curl_response = isset($_SESSION[$sKeyResponse]) ? base64_decode(unserialize($_SESSION[$sKeyResponse])) : array();
-        $hdrSize       = isset($_SESSION[$sKeyHdrSize]) ? unserialize($_SESSION[$sKeyHdrSize]) : 0;
+        $curl_response = isset($_SESSION[$sKeyResponse])
+                               ? base64_decode(unserialize($_SESSION[$sKeyResponse]))
+                               : array();
+        $hdrSize       = isset($_SESSION[$sKeyHdrSize])
+                               ? unserialize($_SESSION[$sKeyHdrSize])
+                               : 0;
     } elseif (preg_match('/^200 OK/', $status)) {
         // ok - request new info
         $hdrs = array(); //reset the header array for new curl op
         $curl = curl_init($serviceUrl);
         curl_setopt_array($curl, array(CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER => true,
-            CURLOPT_VERBOSE => true,
-            CURLOPT_TIMEOUT => 5,
-            CURLOPT_HTTPGET => true,
-            CURLOPT_USERAGENT => "XOOPS-{$moduleDirName}",
-            CURLOPT_HTTPHEADER => array('Content-type:application/json'),
-            CURLOPT_HEADERFUNCTION => "xoopspartnersHandleHeaderLine")
+            CURLOPT_HEADER         => true,
+            CURLOPT_VERBOSE        => true,
+            CURLOPT_TIMEOUT        => 5,
+            CURLOPT_HTTPGET        => true,
+            CURLOPT_USERAGENT      => "XOOPS-{$moduleDirname}",
+            CURLOPT_HTTPHEADER     => array('Content-type:application/json'),
+            CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine')
         );
         // execute the session
         $curl_response = curl_exec($curl);
@@ -146,13 +149,13 @@ if ($cachedEtag) {
     $hdrs = array();
     $curl = curl_init($serviceUrl);
     curl_setopt_array($curl, array(CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HEADER => true,
-        CURLOPT_VERBOSE => true,
-        CURLOPT_TIMEOUT => 5,
-        CURLOPT_HTTPGET => true,
-        CURLOPT_USERAGENT => "XOOPS-{$moduleDirName}",
-        CURLOPT_HTTPHEADER => array('Content-type:application/json'),
-        CURLOPT_HEADERFUNCTION => "xoopspartnersHandleHeaderLine")
+        CURLOPT_HEADER         => true,
+        CURLOPT_VERBOSE        => true,
+        CURLOPT_TIMEOUT        => 5,
+        CURLOPT_HTTPGET        => true,
+        CURLOPT_USERAGENT      => "XOOPS-{$moduleDirname}",
+        CURLOPT_HTTPHEADER     => array('Content-type:application/json'),
+        CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine')
     );
     // execute the session
     $curl_response = curl_exec($curl);
@@ -206,19 +209,31 @@ if (!empty($issuesObjs)) {
         ++$i; // issue count
 
         echo "      <tr>\n"
-           . "        <td class=\"{$cssClass} center\"><a href=\"" . $issue->html_url . "\" target=\"_blank\">" . (int)$issue->number . "{$suffix}</a></td>\n"
+           . "        <td class=\"{$cssClass} center\">"
+           .            "<a href=\"" . $issue->html_url . "\" target=\"_blank\">"
+           .               (int)$issue->number . "{$suffix}</a>"
+           .         "</td>\n"
            . "        <td class=\"{$cssClass} center\">{$dispDate}</td>\n"
-           . "        <td class=\"{$cssClass} left\" style=\"padding-left: 2em;\">" . htmlspecialchars($issue->title) . "</td>\n"
-           . "        <td class=\"{$cssClass} center\"><a href=\"" . htmlspecialchars($issue->user->html_url) . "\" target=\"_blank\">" . htmlspecialchars($issue->user->login) . "</a></td>\n"
+           . "        <td class=\"{$cssClass} left\" style=\"padding-left: 2em;\">"
+           .            htmlspecialchars($issue->title)
+           .         "</td>\n"
+           . "        <td class=\"{$cssClass} center\">"
+           .            "<a href=\"" . htmlspecialchars($issue->user->html_url) . "\" "
+           .              "target=\"_blank\">" . htmlspecialchars($issue->user->login) . "</a>"
+           .         "</td>\n"
            . "      </tr>\n";
         $cssClass = ('odd' == $cssClass) ? 'even' : 'odd';
     }
 }
 
 if (!empty($err)) {
-    echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">" . htmlspecialchars($err) . "</td></tr>\n";
+    echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">"
+       .              htmlspecialchars($err)
+       .     "</td></tr>\n";
 } elseif (0 == $i) { // no issues found
-    echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">" . _AM_XPARTNERS_ISSUES_NONE . "</td></tr>\n";
+    echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">"
+       .        _AM_XPARTNERS_ISSUES_NONE
+       .     "</td></tr>\n";
 }
 
 if ($pullReqFound) {

@@ -2,13 +2,18 @@ INSTALL/UNINSTALL
 =================
 
 No special measures necessary, follow the standard installation process -
-extract the xoopspartners folder into the ../modules directory. Install the
+extract the xoopspartners folder into the ./modules directory. Install the
 module through Admin -> System Module -> Modules.
 
-Detailed instructions on installing modules are available in the XOOPS Operations Manual (http://goo.gl/adT2i)
+Detailed instructions on installing modules are available in the XOOPS
+Operations Manual (goo.gl/o2gHGl)
 
 UPGRADE
 =======
+To upgrade from v1.12 to v1.13 complete the following steps:
+1. There are no special measures necessary, follow the standard upgrade
+   process. Detailed instructions on upgrading modules are available in the XOOPS
+   Operations Manual (goo.gl/o2gHGl)
 
 To upgrade from previous versions to v1.12 complete the following steps:
 1. Go to Admin -> System -> Modules and Deactivate the XoopsPartners module

@@ -15,9 +15,8 @@
  * @package         module\xoopspartners\class
  * @author          XOOPS Module Development Team
  * @author          Mamba, ZySpec
- * @copyright       {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license         {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
- * @link            http://xoops.org XOOPS
+ * @copyright       http://xoops.org 2001-2016 XOOPS Project
+ * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @since           1.13
  */
 
@@ -30,8 +29,8 @@
 class XoopspartnersUtilities
 {
     /**
-     *
      * Verifies XOOPS version meets minimum requirements for this module
+     *
      * @static
      * @param XoopsModule
      *
@@ -70,8 +69,8 @@ class XoopspartnersUtilities
         return $success;
     }
     /**
-     *
      * Verifies PHP version meets minimum requirements for this module
+     *
      * @static
      * @param XoopsModule
      *

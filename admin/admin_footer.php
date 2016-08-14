@@ -14,25 +14,30 @@
  *
  * @package      module\xoopspartners\admin
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @since        1.11
  */
 use Xmf\Module\Helper;
 use Xmf\Module\Admin;
 
-$xpHelper = Helper::getHelper(basename(dirname(__DIR__)));
+$moduleDirname = basename(dirname(__DIR__));
+$xpHelper = Helper::getHelper($moduleDirname);
 $xpModule = $xpHelper->getModule();
 
 echo "<div class='adminfooter'>\n"
-   . "<div class='txtcenter'>\n"
-   . "<a href='" . $xpModule->getInfo('author_website_url') . "' "
-     . "target='_blank'><img src='" . Admin::iconUrl('xoopsmicrobutton.gif', 32) . "' "
-     . "alt='" . $xpModule->getInfo('author_website_name') . "' "
-     . "title='" . $xpModule->getInfo('author_website_name') . "'></a>\n"
+   . "<div class='center'>\n"
+   .   "<a href='" . $xpModule->getInfo('author_website_url') . "' "
+   .     "target='_blank'><img src='" . Admin::iconUrl('xoopsmicrobutton.gif', '32') . "' "
+   .     "alt='" . $xpModule->getInfo('author_website_url') . "' "
+   .     "title='" . $xpModule->getInfo('author_website_name') . "'></a>\n"
    . "</div>\n"
-   . _AM_XPARTNERS_ADMIN_FOOTER . "\n"
+   . "<div class='center smallsmall italic pad5'>\n"
+   . "  <strong>" . ucfirst($moduleDirname) . "</strong> " . _AM_XPARTNERS_ADMIN_FOOTER_STR1
+   . " <a class='tooltip' rel='external' href='" . $xpModule->getInfo('author_website_url') . "' "
+   .      "title='" . _AM_XPARTNERS_ADMIN_FOOTER_STR2 . " " . $xpModule->getInfo('author_website_name') . "'>"
+   .      $xpModule->getInfo('author_website_name') . "</a>\n"
+   . "</div>\n"
    . "</div>\n";
 
 xoops_cp_footer();

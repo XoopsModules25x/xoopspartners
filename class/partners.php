@@ -32,9 +32,8 @@
  * @package      module\xoopspartners\class
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  */
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -97,11 +96,12 @@ class XoopspartnersPartners extends XoopsObject
 class XoopspartnersPartnersHandler extends XoopsPersistableObjectHandler
 {
     /**
-     * XoopspartnersPartnersHandler constructor.
+     * XoopspartnersPartnersHandler constructor
+     *
      * @param XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
-        parent::__construct($db, 'partners', 'XoopspartnersPartners', 'id');
+        parent::__construct($db, 'partners', 'XoopspartnersPartners', 'id', 'title');
     }
 }

@@ -14,24 +14,20 @@
  *
  * @package      module\xoopspartners\admin
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @since        1.11
  */
 use Xmf\Module\Helper;
-use Xmf\Module\Admin;
-
-$moduleDirname = basename(dirname(__DIR__));
 
 require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-include_once $GLOBALS['xoops']->path('/include/cp_functions.php');
 require $GLOBALS['xoops']->path('/include/cp_header.php');
 
+$moduleDirname = basename(dirname(__DIR__));
 $xpHelper = Helper::getHelper($moduleDirname);
 
 if (!interface_exists('XoopspartnersConstants')) {
-    require_once dirname(__DIR__) . '/class/constants.php';
+    require_once $xpHelper->path('class/constants.php');
 }
 
 //Load languages

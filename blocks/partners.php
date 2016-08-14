@@ -32,13 +32,13 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\admin
+ * @package      module\xoopspartners\blocks
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  */
+use Xmf\Module\Helper;
 
 /**
  *
@@ -60,13 +60,14 @@ function b_xoopspartners_show($options)
 {
     $myts = MyTextSanitizer::getInstance();
 
-    $block          = array();
-    $moduleDirname  = basename(dirname(__DIR__));
-    $block['xpDir'] = $moduleDirname;
+    $moduleDirname     = basename(dirname(__DIR__));
+    $xpHelper          = Helper::getHelper($moduleDirname);
+    $xpPartnersHandler = $xpHelper->getHandler('partners');
 
-    $xpPartnersHandler = xoops_getModuleHandler('partners', $moduleDirname);
-    $pFields         = array('id', 'url', 'image', 'title', 'description');
-    $criteria        = new CriteriaCompo();
+    $block             = array('xpDir' => $moduleDirname);
+
+    $pFields           = array('id', 'url', 'image', 'title', 'description');
+    $criteria          = new CriteriaCompo();
     $criteria->setLimit($options[3]);
     if ($options[2]) {
         $criteria->setSort('RAND()');
@@ -92,7 +93,8 @@ function b_xoopspartners_show($options)
         $partners['url']         = $url;
         $partners['description'] = $description;
         if (!empty($image) && (1 == $options[4] || 3 == $options[4])) {
-            $partners['image'] = $image;
+            $partners['image']     = $image;
+            $partners['image_ttl'] = $title;
         }
         if (empty($image) || (2 == $options[4]) || (3 == $options[4])) {
             $partners['title'] = $title;
@@ -104,8 +106,10 @@ function b_xoopspartners_show($options)
     $block['insertBr']  = (1 == $options[0]);
     $block['fadeImage'] = (1 == $options[1]) ;
 
-    //now load the stylesheet
-    $GLOBALS['xoTheme']->addStylesheet(XOOPS_URL . "/modules/{$moduleDirname}/assets/css/style.css");
+    //now load the stylesheet & jquery
+    $GLOBALS['xoTheme']->addStylesheet($xpHelper->url('assets/css/style.css'));
+    $GLOBALS['xoTheme']->addScript("browse.php?Frameworks/jquery/jquery.js");
+    $GLOBALS['xoTheme']->renderMetas(null, true);
 
     return $block;
 }
@@ -121,56 +125,107 @@ function b_xoopspartners_show($options)
 function b_xoopspartners_edit($options)
 {
     if (0 == $options[0]) { //put spaces between partners
-        $chk0no  = " checked='checked'";
+        $chk0no  = " checked";
         $chk0yes = '';
     } else {
         $chk0no  = '';
-        $chk0yes = " checked='checked'";
+        $chk0yes = " checked";
     }
     if (0 == $options[1]) { //fade partners in/out
-        $chk1no  = " checked='checked'";
+        $chk1no  = " checked";
         $chk1yes = '';
     } else {
         $chk1no  = '';
-        $chk1yes = " checked='checked'";
+        $chk1yes = " checked";
     }
     if (0 == $options[2]) {  //randomize partners in block
-        $chk2no  = " checked='checked'";
+        $chk2no  = " checked";
         $chk2yes = '';
     } else {
         $chk2no  = '';
-        $chk2yes = " checked='checked'";
+        $chk2yes = " checked";
     }
-    $form =
-        "<table style='border-width: 0px;'>\n" . "  <tr>\n" . '    <td>' . _MB_XPARTNERS_PSPACE . "</td>\n" . '    <td>' . "<input type='radio' name='options[0]' value='0'{$chk0no}>" . _NO . '' . "<input type='radio' name='options[0]' value='1'{$chk0yes}>" . _YES . '' . "    </td>\n" . "  </tr>\n"
-        . "  <tr>\n" . '    <td>' . _MB_XPARTNERS_FADE . "</td>\n" . '    <td>' . "<input type='radio' name='options[1]' value='0'{$chk1no}>" . _NO . '' . "<input type='radio' name='options[1]' value='1'{$chk1yes}>" . _YES . "</td>\n" . "  </tr>\n" . "  <tr>\n" . '    <td>' . _MB_XPARTNERS_BRAND
-        . "</td>\n" . '     <td>' . "<input type='radio' name='options[2]' value='0'{$chk2no}>" . _NO . '' . "<input type='radio' name='options[2]' value='1'{$chk2yes}>" . _YES . "</td>\n" . "  </tr>\n" . "  <tr>\n" . '    <td>' . _MB_XPARTNERS_BLIMIT . "</td>\n"
-        . "    <td><input class='txtright' type='number' name='options[3]' size='5' value='{$options[3]}' min='0'></td>\n" . "  </tr>\n" . "  <tr>\n" . '    <td>' . _MB_XPARTNERS_BSHOW . "</td>\n" . "    <td>\n" . "      <select size='1' name='options[4]'>\n";
-    $sel  = (1 == $options[4]) ? " selected='selected'" : '';
+    $form = "<table class='bnone'>\n"
+        . "  <tr>\n"
+        . "    <td>" . _MB_XPARTNERS_PSPACE . "</td>\n"
+        . "    <td>"
+        .        "<input type='radio' name='options[0]' id ='options0_0' value='0'{$chk0no}>"
+        .        "<label for='options0_0'>" . _NO . "</label>&nbsp;"
+        .        "<input type='radio' name='options[0]' id ='options0_1' value='1'{$chk0yes}>"
+        .        "<label for='options0_1'>" . _YES . "</label>"
+        .      "</td>\n"
+        . "  </tr>\n"
+        . "  <tr>\n"
+        . "    <td>" . _MB_XPARTNERS_FADE . "</td>\n"
+        . "    <td>"
+        .        "<input type='radio' name='options[1]' id='options1_0' value='0'{$chk1no}>" . _NO
+        .        "<label for='options1_0'>" . _NO . "</label>&nbsp;"
+        .        "<input type='radio' name='options[1]' id='options1_1' value='1'{$chk1yes}>" . _YES
+        .        "<label for='options1_1'>" . _YES . "</label>"
+        .      "</td>\n"
+        . "  </tr>\n"
+        . "  <tr>\n"
+        . "    <td>" . _MB_XPARTNERS_BRAND . "</td>\n"
+        . "     <td>"
+        .         "<input type='radio' name='options[2]' id='option2_0' value='0'{$chk2no}>" . _NO
+        .         "<label for='options2_0'>" . _NO . "</label>"
+        .         "<input type='radio' name='options[2]' id='options2_1' value='1'{$chk2yes}>" . _YES
+        .         "<label for='options2_1'>" . _YES . "</label>"
+        .       "</td>\n"
+        . "  </tr>\n"
+        . "  <tr>\n"
+        . "    <td>" . _MB_XPARTNERS_BLIMIT . "</td>\n"
+        . "    <td><input class='right' type='number' name='options[3]' size='5' value='{$options[3]}' min='0'></td>\n"
+        . "  </tr>\n"
+        . "  <tr>\n"
+        . '    <td>' . _MB_XPARTNERS_BSHOW . "</td>\n"
+        . "    <td>\n"
+        . "      <select size='1' name='options[4]'>\n";
+    $sel  = (1 == $options[4]) ? " selected" : '';
     $form .= "        <option value='1'{$sel}>" . _MB_XPARTNERS_IMAGES . "</option>\n";
 
-    $sel = (2 == $options[4]) ? " selected='selected'" : '';
+    $sel = (2 == $options[4]) ? " selected" : '';
     $form .= "        <option value='2'{$sel}>" . _MB_XPARTNERS_TEXT . "</option>\n";
 
-    $sel = (3 == $options[4]) ? " selected='selected'" : '';
-    $form .= "        <option value='3'{$sel}>" . _MB_XPARTNERS_BOTH . "</option>\n" . "      </select>\n" . "    </td>\n" . "  </tr>\n" . "  <tr>\n" . '    <td>' . _MB_XPARTNERS_BSORT . "</td>\n" . "    <td>\n" . "      <select size='1' name='options[5]'>";
-    $sel = ('id' === $options[5]) ? " selected='selected'" : '';
+    $sel = (3 == $options[4]) ? " selected" : '';
+    $form .= "        <option value='3'{$sel}>" . _MB_XPARTNERS_BOTH . "</option>\n"
+           . "      </select>\n"
+           . "    </td>\n"
+           . "  </tr>\n"
+           . "  <tr>\n"
+           . "    <td>" . _MB_XPARTNERS_BSORT . "</td>\n"
+           . "    <td>\n"
+           . "      <select size='1' name='options[5]'>\n";
+
+    $sel = ('id' === $options[5]) ? " selected" : '';
     $form .= "        <option value='id'{$sel}>" . _MB_XPARTNERS_ID . "</option>\n";
 
-    $sel = ('hits' === $options[5]) ? " selected='selected'" : '';
+    $sel = ('hits' === $options[5]) ? " selected" : '';
     $form .= "        <option value='hits'{$sel}>" . _MB_XPARTNERS_HITS . "</option>\n";
 
-    $sel = ('title' === $options[5]) ? " selected='selected'" : '';
+    $sel = ('title' === $options[5]) ? " selected" : '';
     $form .= "        <option value='title'{$sel}>" . _MB_XPARTNERS_TITLE . "</option>\n";
 
-    $sel = ('weight' === $options[5]) ? " selected='selected'" : '';
-    $form .= "        <option value='weight'{$sel}>" . _MB_XPARTNERS_WEIGHT . "</option>\n" . "      </select>\n" . "      <select size='1' name='options[6]'>\n";
+    $sel = ('weight' === $options[5]) ? " selected" : '';
+    $form .= "        <option value='weight'{$sel}>" . _MB_XPARTNERS_WEIGHT . "</option>\n"
+           . "      </select>\n"
+           . "      <select size='1' name='options[6]'>\n";
 
-    $sel = ('ASC' === $options[6]) ? " selected='selected'" : '';
+    $sel = ('ASC' === $options[6]) ? " selected" : '';
     $form .= "        <option value='ASC'{$sel}>" . _MB_XPARTNERS_ASC . "</option>\n";
 
-    $sel = ('DESC' === $options[6]) ? " selected='selected'" : '';
-    $form .= "        <option value='DESC'{$sel}>" . _MB_XPARTNERS_DESC . "</option>\n" . "      </select>\n" . "    </td>\n" . "  </tr>\n" . "  <tr>\n" . '    <td>' . _MB_XPARTNERS_TTL_LENGTH . "</td>\n"
-             . "    <td><input type='number' class='txtright' name='options[7]' size='5' value='{$options[7]}' min='0'></td>\n" . "  </tr>\n" . "  <tr>\n" . "</table>\n";
+    $sel = ('DESC' === $options[6]) ? " selected" : '';
+    $form .= "        <option value='DESC'{$sel}>" . _MB_XPARTNERS_DESC . "</option>\n"
+           . "      </select>\n"
+           . "    </td>\n"
+           . "  </tr>\n"
+           . "  <tr>\n"
+           . '    <td>' . _MB_XPARTNERS_TTL_LENGTH . "</td>\n"
+           . "    <td>"
+           .        "<input type='number' class='right' name='options[7]' size='5' value='{$options[7]}' min='0'>"
+           .      "</td>\n"
+           . "  </tr>\n"
+           . "  <tr>\n"
+           . "</table>\n";
     return $form;
 }

@@ -34,9 +34,8 @@
  * @package      module\xoopspartners\admin
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @since        1.11
  */
 use Xmf\Module\Admin;
@@ -46,20 +45,23 @@ $moduleAdmin = Admin::getInstance();
 
 //-----------------------
 $xpPartnersHandler = $xpHelper->getHandler('partners');
-//$xpPartnersHandler = xoops_getModuleHandler('partners', $xoopsModule->getVar('dirname', 'n'));
 
 $totalPartners          = $xpPartnersHandler->getCount();
 $totalNonActivePartners = $xpPartnersHandler->getCount(new Criteria('status', 0, '='));
 $totalActivePartners    = $totalPartners - $totalNonActivePartners;
 
 $moduleAdmin->addInfoBox(_MD_XPARTNERS_DASHBOARD);
-
-$moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALACTIVE . '</infolabel>', $totalActivePartners, 'Green');
-$moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALNONACTIVE . '</infolabel>', $totalNonActivePartners, 'Red');
+/*
+$moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALACTIVE . '</infolabel>', $totalActivePartners, 'green');
+$moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALNONACTIVE . '</infolabel>', $totalNonActivePartners, 'red');
 $moduleAdmin->addInfoBoxLine(_MD_XPARTNERS_DASHBOARD, '<infolabel>' . _MD_XPARTNERS_TOTALPARTNERS . '</infolabel><infotext>', $totalPartners . '</infotext>');
+*/
+$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XPARTNERS_TOTALACTIVE . '</infolabel>', $totalActivePartners));
+$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XPARTNERS_TOTALNONACTIVE . '</infolabel>', $totalNonActivePartners));
+$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XPARTNERS_TOTALPARTNERS . '</infolabel><infotext>', $totalPartners . '</infotext>'));
 //----------------------------
 
 $moduleAdmin->displayNavigation('index.php');
 $moduleAdmin->displayIndex();
 
-include __DIR__ . '/admin_footer.php';
+require __DIR__ . '/admin_footer.php';

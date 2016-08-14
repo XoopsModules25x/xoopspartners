@@ -35,9 +35,8 @@
  * @package      module\xoopspartners\language
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    http://xoops.org 2001-2016 &copy; XOOPS Project
+ * @license      http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  */
 
 $moduleDirname = basename(dirname(dirname(__DIR__)));
@@ -55,7 +54,7 @@ define('_AM_XPARTNERS_REORDER', 'Sort');
 define('_AM_XPARTNERS_UPDATED', 'Settings Updated!');
 define('_AM_XPARTNERS_NOTUPDATED', 'Could not update settings!');
 define('_AM_XPARTNERS_BESURE', 'Be sure to enter at least a title, a URL and a description.');
-define('_AM_XPARTNERS_NOEXIST', "File is not a valid image file or it doesn't exist");
+define('_AM_XPARTNERS_NOEXIST', 'File is not a valid image file or it doesn\'t exist');
 define('_AM_XPARTNERS_ADDPARTNER', 'Add');
 define('_AM_XPARTNERS_EDITPARTNER', 'Edit');
 define('_AM_XPARTNERS_SUREDELETE', 'Are you sure you want to delete this site?');
@@ -90,7 +89,9 @@ define('_AM_XPARTNERS_ACTIONS', 'Actions');
 define('_AM_XPARTNERS_INVALIDID', 'No partner exists with this ID');
 
 // text in admin footer
-define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$moduleDirname}</strong> is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
+//define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$moduleDirname}</strong> "
+//    . "is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>"
+//    . "XOOPS Community</a></div>");
 
 //1.12
 define('_AM_XPARTNERS_NOPARTNERS', 'No Partners in the database.');
@@ -98,6 +99,9 @@ define('_AM_XPARTNERS_NOPARTNERS', 'No Partners in the database.');
 //1.13
 define('_AM_XPARTNERS_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
 define('_AM_XPARTNERS_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
+
+define('_AM_XPARTNERS_ADMIN_FOOTER_STR1', 'is maintainted by the');
+define('_AM_XPARTNERS_ADMIN_FOOTER_STR2', 'Visit');
 
 // Help Issues page defines
 define('_AM_XPARTNERS_ISSUES_ERR_UNKNOWN', "Unknown Error");
