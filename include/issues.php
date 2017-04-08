@@ -20,7 +20,9 @@
  */
 
 $moduleDirName = basename(dirname(__DIR__));
-include_once dirname(__DIR__) . "/language/english/admin.php"; // messages will be in english
+$xpHelper = \Xmf\Module\Helper::getHelper($modueDirName);
+$xpHelper->loadLanguage('admin');
+//include_once dirname(__DIR__) . "/language/english/admin.php"; // messages will be in english
 
 session_start();
 

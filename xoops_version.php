@@ -71,7 +71,7 @@ $modversion = array(
     'author_website_name' => 'XOOPS',
     'module_website_url'  => 'http://xoops.org',
     'module_website_name' => 'XOOPS Community',
-    'release_date'        => '2016/08/14',
+    'release_date'        => '2017/04/08',
     'min_php'             => '5.5',
     'min_xoops'           => '2.5.8',
     'min_db'              => array('mysql' => '5.0.7', 'mysqli' => '5.0.7'),

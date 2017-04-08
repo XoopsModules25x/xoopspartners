@@ -1,33 +1,19 @@
 <?php
 /*
- ------------------------------------------------------------------------
-               XOOPS - PHP Content Management System
-                   Copyright (c) 2000 XOOPS.org
-                      <http://www.xoops.org/>
- ------------------------------------------------------------------------
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting
- source code which is considered copyrighted (c) material of the
- original comment or credit authors.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
- ------------------------------------------------------------------------
- Author: Raul Recio (AKA UNFOR)
- Project: The XOOPS Project
- -------------------------------------------------------------------------
-*/
+ * You may not change or alter any portion of this comment or credits of
+ * supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit
+ * authors.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * -----------------------------------
+ * Author: Raul Recio (AKA UNFOR)
+ * Project: The XOOPS Project
+ * -----------------------------------
+ */
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
@@ -42,32 +28,30 @@ use Xmf\Request;
 use Xmf\Module\Admin;
 
 require __DIR__ . '/admin_header.php';
-$moduleAdmin = Admin::getInstance();
-$imageIconUrl =
+$moduleAdmin   = Admin::getInstance();
 $pathImageIcon = $GLOBALS['xoops']->url('www/' . $xpHelper->getModule()->getInfo('icons16'));
-//$pathImageIcon = $GLOBALS['xoops']->url('www/' . $xpHelper->getModule()->getInfo('icons16'));
 
-$myts = MyTextSanitizer::getInstance();
+$myts          = MyTextSanitizer::getInstance();
 
-$op          = Request::getString('op', '');
-$id          = Request::getInt('id', 0);
-$del         = Request::getInt('del', XoopspartnersConstants::CONFIRM_NOT_OK, 'POST');
-$hits        = Request::getInt('hits', 0, 'POST');
-$url         = Request::getString('url', '', 'POST');
-$image       = Request::getText('image', '', 'POST');
-$title       = Request::getString('title', '', 'POST');
-$description = Request::getText('description', '', 'POST');
-//$status      = isset($_POST['status']) ? Request::getInt('status', array(), 'POST') : null;
-$status      = isset($_POST['status'])
-                   ? is_array($_POST['status'])
-                       ? Request::getArray('status', array(), 'POST')
-                       : Request::getInt('status', XoopspartnersConstants::STATUS_INACTIVE, 'POST')
-                   : null;
-$weight      = isset($_POST['weight'])
-                   ? is_array($_POST['weight'])
-                   ? Request::getArray('weight', array(), 'POST')
-                   : Request::getInt('weight', XoopspartnersConstants::DEFAULT_WEIGHT, 'POST')
-                   : null;
+$op            = Request::getString('op', '');
+$id            = Request::getInt('id', 0);
+$del           = Request::getInt('del', XoopspartnersConstants::CONFIRM_NOT_OK, 'POST');
+$hits          = Request::getInt('hits', 0, 'POST');
+$url           = Request::getString('url', '', 'POST');
+$image         = Request::getText('image', '', 'POST');
+$title         = Request::getString('title', '', 'POST');
+$description   = Request::getText('description', '', 'POST');
+//$status        = isset($_POST['status']) ? Request::getInt('status', array(), 'POST') : null;
+$status        = isset($_POST['status'])
+                     ? is_array($_POST['status'])
+                         ? Request::getArray('status', array(), 'POST')
+                         : Request::getInt('status', XoopspartnersConstants::STATUS_INACTIVE, 'POST')
+                     : null;
+$weight        = isset($_POST['weight'])
+                     ? is_array($_POST['weight'])
+                         ? Request::getArray('weight', array(), 'POST')
+                         : Request::getInt('weight', XoopspartnersConstants::DEFAULT_WEIGHT, 'POST')
+                     : null;
 
 switch ($op) {
 
@@ -185,10 +169,6 @@ switch ($op) {
         echo "      <tr>\n"
            . "        <td class='foot right' colspan='7'>\n"
            . "        <input type='hidden' name='op' value='reorderPartners'>\n"
-/*           . "          <input type='button' "
-                        . "name='button' "
-                        . "onclick=\"location='main.php?op=partnersAdminAdd'\" "
-                        . "value='" . _AM_XPARTNERS_ADD . "'>\n" */
            . "{$adminButtons}\n"
            . "        </td>\n"
            . "      </tr>\n"
@@ -202,12 +182,10 @@ switch ($op) {
 
     case 'reorderPartners':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header($_SERVER['PHP_SELF'],
+            $xpHelper->url('admin/main.php',
                             XoopsPartnersConstants::REDIRECT_DELAY_MEDIUM,
                             implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-//        $weight = isset($_POST['weight']) ? Request::getArray('weight', array(), 'POST') : null;
-//        $status = isset($_POST['status']) ? Request::getArray('status', array(), 'POST') : null;
         $xpPartnersHandler = $xpHelper->getHandler('partners');
         $partnerCount      = $xpPartnersHandler->getCount();
         if ($partnerCount) {
@@ -227,9 +205,9 @@ switch ($op) {
                     }
                 }
             }
-            redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
+            $xpHelper->url('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
         } else {
-            redirect_header('main.php?op=partnersAdminAdd',
+            $xpHelper->url('admin/main.php?op=partnersAdminAdd',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _AM_XPARTNERS_EMPTYDATABASE, false
             );
@@ -248,9 +226,9 @@ switch ($op) {
                 $xpPartnersHandler->insert($thisObj);
                 unset($thisObj);
             }
-            redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
+            $xpHelper->url('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
         } else {
-            redirect_header('main.php?op=partnersAdminAdd',
+            $xpHelper->url('admin/main.php?op=partnersAdminAdd',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _AM_XPARTNERS_EMPTYDATABASE, false
             );
@@ -259,7 +237,6 @@ switch ($op) {
 
     case 'partnersAdminAdd':
         $moduleAdmin->displayNavigation('main.php?op=partnersAdminAdd');
-        //echo "<h4>"._AM_XPARTNERS_ADD."</h4>";
 
         include $GLOBALS['xoops']->path('/class/xoopsformloader.php');
         $form         = new XoopsThemeForm(_AM_XPARTNERS_ADDPARTNER, 'addform', 'main.php', 'post', true);
@@ -314,7 +291,7 @@ switch ($op) {
         $image             = $myts->addSlashes(formatURL($image));
         $description       = trim($description);
         if (empty($title) || empty($url) || empty($description)) {
-            redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_BESURE);
+            $xpHelper->url('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_BESURE);
         }
         $newPartner->setVars(array(
                                  'url'         => $myts->addSlashes(formatURL($url)),
@@ -326,9 +303,9 @@ switch ($op) {
                              ));
 
         if ($GLOBALS['xoopsSecurity']->check() && $xpPartnersHandler->insert($newPartner)) {
-            redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
+            $xpHelper->url('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
         } else {
-            redirect_header('main.php',
+            $xpHelper->url('admin/main.php',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _AM_XPARTNERS_NOTUPDATED . '<br>'
                             . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors())
@@ -389,7 +366,7 @@ switch ($op) {
             $form->display();
             include __DIR__ . '/admin_footer.php';
         } else {
-            redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_INVALIDID);
+            $xpHelper->url('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_INVALIDID);
         }
         break;
 
@@ -409,19 +386,12 @@ switch ($op) {
                        : XoopspartnersConstants::DEFAULT_WEIGHT;
         $hits        = $hits > 0 ? $hits : 0;
         if (empty($title) || empty($url) || empty($id) || empty($description)) {
-            redirect_header("main.php?op=edit_partner&amp;id={$id}",
+            $xpHelper->url("admin/main.php?op=edit_partner&amp;id={$id}",
                             XoopspartnersConstants::REDIRECT_DELAY_SHORT,
                             _AM_XPARTNERS_BESURE
             );
         }
-        /*
-            if (!empty($image)) {
-                $image_info   = exif_imagetype($image);;
-                if (false === $image_info) {
-                    redirect_header("main.php?op=edit_partner&amp;id={$id}", 1, _AM_XPARTNERS_NOEXIST);
-                }
-            }
-        */
+
         $xpPartnersHandler = $xpHelper->getHandler('partners');
         $partnerObj        = $xpPartnersHandler->get($id);
         if ($GLOBALS['xoopsSecurity']->check() && ($partnerObj instanceof XoopspartnersPartners)) {
@@ -434,10 +404,10 @@ switch ($op) {
             $partnerObj->setVar('image', $image);
             $success = $xpPartnersHandler->insert($partnerObj);
             if ($success) {
-                redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
+                $xpHelper->url('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
             }
         }
-        redirect_header('main.php',
+        $xpHelper->url('admin/main.php',
                         XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                         _AM_XPARTNERS_NOTUPDATED . '<br>' . implode('<br>',
                         $GLOBALS['xoopsSecurity']->getErrors())
@@ -450,10 +420,10 @@ switch ($op) {
             $partnerObj        = $xpPartnersHandler->get($id);
             if ($partnerObj instanceof XoopspartnersPartners) {
                 if ($xpPartnersHandler->delete($partnerObj)) {
-                    redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
+                    $xpHelper->url('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XPARTNERS_UPDATED);
                 }
             }
-            redirect_header('main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_NOTUPDATED);
+            $xpHelper->url('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XPARTNERS_NOTUPDATED);
         } else {
             $moduleAdmin->displayNavigation('main.php');
             xoops_confirm(array('op'  => 'delPartner',

@@ -1,32 +1,16 @@
 <?php
 /*
- ------------------------------------------------------------------------
-               XOOPS - PHP Content Management System
-                   Copyright (c) 2000 XOOPS.org
-                      <http://www.xoops.org/>
- ------------------------------------------------------------------------
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting
- source code which is considered copyrighted (c) material of the
- original comment or credit authors.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
- ------------------------------------------------------------------------
- Author: Raul Recio (AKA UNFOR)
- Project: The XOOPS Project
- ------------------------------------------------------------------------
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *--------------------------------------
+ * Author: Raul Recio (AKA UNFOR)
+ * Project: The XOOPS Project
+ *--------------------------------------
  */
 /**
  * XoopsPartners - a partner affiliation links module
@@ -99,35 +83,7 @@ foreach ($partnersArray as $thisPartner) {
         $sep = $modShow ? '' : '<br>';
         $thisPartner['image'] = $thisPartner['image'] . $sep . $thisPartner['title'];
     }
-/* this code's easier to read - but lots of duplication
-    switch ($modShow) {
-        case 3: //both image and text
-            if (empty($thisPartner['image'])) {
-                $thisPartner['image'] = $thisPartner['title'];
-            } else {
-                $thisPartner['image'] =
-                    "<img src='{$thisPartner['image']}' "
-                  .   "alt='{$thisPartner['url']}' "
-                  .   "title='{$thisPartner['title']}'>"
-                  . "<br>{$thisPartner['title']}";
-            }
-            break;
-        case 2: // text
-            $thisPartner['image'] = $thisPartner['title'];
-            break;
-        case 1: // images
-        default:
-            if (empty($thisPartner['image'])) {
-                $thisPartner['image'] = $thisPartner['title'];
-            } else {
-                $thisPartner['image'] =
-                    "<img src='{$thisPartner['image']}' "
-                  .   "alt='{$thisPartner['url']}' "
-                  .   "title='{$thisPartner['title']}'>";
-            }
-            break;
-    }
-*/
+
     if (isset($GLOBALS['xoopsUser']) && $xpHelper->isUserAdmin()) {
         $thisPartner['admin_option'] =
             "<a href='admin/main.php?op=editPartner&amp;id={$thisPartner['id']}'>"

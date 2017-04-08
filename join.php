@@ -1,32 +1,16 @@
 <?php
 /*
- *  ------------------------------------------------------------------------
- *                XOOPS - PHP Content Management System
- *                    Copyright (c) 2000 XOOPS.org
- *                       <http://www.xoops.org/>
- *  ------------------------------------------------------------------------
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- *  You may not change or alter any portion of this comment or credits
- *  of supporting developers from this source code or any supporting
- *  source code which is considered copyrighted (c) material of the
- *  original comment or credit authors.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
- * -------------------------------------------------------------------------
+ *--------------------------------------
  * Author: Raul Recio (AKA UNFOR)
  * Project: The XOOPS Project
- * -------------------------------------------------------------------------
+ *--------------------------------------
  */
 /**
  * XoopsPartners - a partner affiliation links module
@@ -42,7 +26,7 @@ use Xmf\Module\Helper;
 
 require __DIR__ . '/header.php';
 if (!isset($GLOBALS['xoopsUser']) || !$GLOBALS['xoopsUser'] instanceof XoopsUser) {
-    redirect_header('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);
+    $xpHelper->url('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);
 }
 
 /** @var string $xoopsOption */
@@ -56,7 +40,7 @@ $xpInfo = $xpHelper->getModule()->getInfo();
 switch ($op) {
     case 'sendMail':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('index.php',
+            $xpHelper->url('index.php',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _MD_XPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors())
             );
@@ -70,7 +54,6 @@ switch ($op) {
                                          )
             );
         } else {
-            //include $GLOBALS['xoops']->path('/class/xoopsmailer.php');
             $url         = formatURL($myts->htmlSpecialChars($unsafe_url));
             $title       = $myts->htmlSpecialChars($unsafe_title);
             $description = $myts->htmlSpecialChars($unsafe_description);
@@ -107,8 +90,6 @@ switch ($op) {
                     if ($uploader->fetchMedia($image)) {
                         if ($uploader->upload()) {
                             $image = $uploader->getSavedFileName();  // get file name to save in db
-                            //echo "<h4>File uploaded successfully!</h4>\n";
-                            //echo 'Full path: ' . $uploader->getSavedDestination();
                         }
                     }
                 }
@@ -188,6 +169,8 @@ switch ($op) {
         $form->addElement($imagePartner);
         $form->addElement($urlPartner, true);
         $form->addElement($descrPartner, true);
+        /* @todo add captcha to join form */
+//        $form->addElement(new XoopsFormCaptcha());
         $form->addElement($opHidden);
         $form->addElement($submitButton);
         $content = $form->render();

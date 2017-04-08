@@ -1,7 +1,5 @@
 <?php
 /*
- * XoopsPartners module
- *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
@@ -24,7 +22,7 @@ require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 require $GLOBALS['xoops']->path('/include/cp_header.php');
 
 $moduleDirName = basename(dirname(__DIR__));
-$xpHelper = Helper::getHelper($moduleDirName);
+$xpHelper      = Helper::getHelper($moduleDirName);
 
 if (!interface_exists('XoopspartnersConstants')) {
     require_once $xpHelper->path('class/constants.php');

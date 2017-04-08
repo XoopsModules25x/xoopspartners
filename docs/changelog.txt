@@ -1,11 +1,12 @@
-<u><b>1.13 RC1 [2016-08-13]</b></u>
+<u><b>1.13 RC1 [2017-04-08]</b></u>
 - created GITHUB issues tab in ./admin/help
 - changed to use Xmf for Request, module Admin and Helper
+- changed to use Xmf\Helper instead of redirect_header()
 - changed form input field lengths to match sql variable lengths
 - fix bug in index.php where checking if user is Admin didn't work
 - fix bug where admin hit count wasn't set correctly
 - fix bug in XoopsModule definition in ./admin/admin_header.php
-- fix bug to nitialize partners array in block
+- fix bug to initialize partners array in block
 - removed language translations (see Transifex for translations)
 - removed .assets/images/admin files, deprecated (no longer used)
 - removed .assets/images/icons files, deprecated (no longer used)
