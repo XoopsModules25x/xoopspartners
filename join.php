@@ -26,7 +26,7 @@ use Xmf\Module\Helper;
 
 require __DIR__ . '/header.php';
 if (!isset($GLOBALS['xoopsUser']) || !$GLOBALS['xoopsUser'] instanceof XoopsUser) {
-    $xpHelper->url('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);
+    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);
 }
 
 /** @var string $xoopsOption */
@@ -40,7 +40,7 @@ $xpInfo = $xpHelper->getModule()->getInfo();
 switch ($op) {
     case 'sendMail':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            $xpHelper->url('index.php',
+            $xpHelper->redirect('index.php',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _MD_XPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors())
             );
