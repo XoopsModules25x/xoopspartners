@@ -29,6 +29,6 @@ include __DIR__ . '/../../../class/xoopsformloader.php';
 $aboutAdmin = new ModuleAdmin();
 
 echo $aboutAdmin->addNavigation('about.php');
-echo $aboutAdmin->renderAbout('6KJ7RW5DR3VTJ', false);
+echo $aboutAdmin->renderAbout('xoopsfoundation@gmail.com', false);
 
 include __DIR__ . '/admin_footer.php';
