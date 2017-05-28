@@ -117,7 +117,7 @@ if ('sendMail' === $op) {
             exit();
         }
     }
-    $xoopsMailer =& xoops_getMailer();
+    $xoopsMailer = xoops_getMailer();
     $xoopsMailer->useMail();
     $xoopsMailer->setTemplateDir($GLOBALS['xoops']->path('/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . "/language/{$GLOBALS['xoopsConfig']['language']}/mail_template/"));
     $xoopsMailer->setTemplate('join.tpl');
