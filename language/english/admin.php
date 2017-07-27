@@ -37,9 +37,9 @@
  * @subpackage   language
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
+ * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @link         https://xoops.org XOOPS
  */
 
 $moduleDirname = basename(dirname(dirname(__DIR__)));
@@ -92,7 +92,7 @@ define('_AM_XPARTNERS_ACTIONS', 'Actions');
 define('_AM_XPARTNERS_INVALIDID', 'No partner exists with this ID');
 
 // text in admin footer
-define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$moduleDirname}</strong> is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
+define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$moduleDirname}</strong> is maintained by the <a class='tooltip' rel='external' href='https://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
 
 //1.12
 define('_AM_XPARTNERS_NOPARTNERS', 'No Partners in the database.');

@@ -81,4 +81,4 @@ define('_AM_XPARTNERS_ACTIONS', 'Actions');
 define('_AM_XPARTNERS_INVALIDID', 'No partner exists with this ID');
 
 // text in admin footer
-define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$adminMyDirName}</strong> is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
+define('_AM_XPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$adminMyDirName}</strong> is maintained by the <a class='tooltip' rel='external' href='https://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");

@@ -16,9 +16,9 @@
  * @package      xoopspartners
  * @subpackage   admin
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
+ * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @link         https://xoops.org XOOPS
  * @since        1.11
  */
 

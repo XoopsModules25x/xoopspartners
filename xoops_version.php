@@ -36,9 +36,9 @@
  * @subpackage   init
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
+ * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @link         https://xoops.org XOOPS
  */
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -61,9 +61,9 @@ $modversion = array(
     /**
      * About
      */
-    'author_website_url'  => 'http://xoops.org',
+    'author_website_url'  => 'https://xoops.org',
     'author_website_name' => 'XOOPS',
-    'module_website_url'  => 'http://xoops.org',
+    'module_website_url'  => 'https://xoops.org',
     'module_website_name' => 'XOOPS',
     'release_date'        => '2016/07/10',
     'min_php'             => '5.5',
