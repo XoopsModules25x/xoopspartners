@@ -23,19 +23,19 @@
  * @link         https://xoops.org XOOPS
  */
 
-define('_MB_XPARTNERS_PSPACE', 'Put breaks between partners?');
-define('_MB_XPARTNERS_BRAND', 'Randomize partners in blocks?');
-define('_MB_XPARTNERS_BLIMIT', 'Limit blocks to xx entries: (0 = no limit)');
-define('_MB_XPARTNERS_BSHOW', 'In blocks show:');
-define('_MB_XPARTNERS_BSORT', 'Sort block content by:');
-define('_MB_XPARTNERS_ID', 'ID');
-define('_MB_XPARTNERS_HITS', 'Hits');
-define('_MB_XPARTNERS_TITLE', 'Title');
-define('_MB_XPARTNERS_WEIGHT', 'Weight');
-define('_MB_XPARTNERS_ASC', 'Ascending');
-define('_MB_XPARTNERS_DESC', 'Descending');
-define('_MB_XPARTNERS_TTL_LENGTH', 'Num chars to show in title (0 = no limit)');
-define('_MB_XPARTNERS_IMAGES', 'Images');
-define('_MB_XPARTNERS_TEXT', 'Text Links');
-define('_MB_XPARTNERS_BOTH', 'Both');
-define('_MB_XPARTNERS_FADE', 'Fade Image');
+define('_MB_XOOPSPARTNERS_PSPACE', 'Put breaks between partners?');
+define('_MB_XOOPSPARTNERS_BRAND', 'Randomize partners in blocks?');
+define('_MB_XOOPSPARTNERS_BLIMIT', 'Limit blocks to xx entries: (0 = no limit)');
+define('_MB_XOOPSPARTNERS_BSHOW', 'In blocks show:');
+define('_MB_XOOPSPARTNERS_BSORT', 'Sort block content by:');
+define('_MB_XOOPSPARTNERS_ID', 'ID');
+define('_MB_XOOPSPARTNERS_HITS', 'Hits');
+define('_MB_XOOPSPARTNERS_TITLE', 'Title');
+define('_MB_XOOPSPARTNERS_WEIGHT', 'Weight');
+define('_MB_XOOPSPARTNERS_ASC', 'Ascending');
+define('_MB_XOOPSPARTNERS_DESC', 'Descending');
+define('_MB_XOOPSPARTNERS_TTL_LENGTH', 'Num chars to show in title (0 = no limit)');
+define('_MB_XOOPSPARTNERS_IMAGES', 'Images');
+define('_MB_XOOPSPARTNERS_TEXT', 'Text Links');
+define('_MB_XOOPSPARTNERS_BOTH', 'Both');
+define('_MB_XOOPSPARTNERS_FADE', 'Fade Image');

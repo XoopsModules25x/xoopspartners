@@ -44,8 +44,8 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 $moduleDirName = basename(__DIR__);
 
 $modversion = array(
-    'name'                => _MI_XPARTNERS_NAME,
-    'description'         => _MI_XPARTNERS_DESC,
+    'name'                => _MI_XOOPSPARTNERS_NAME,
+    'description'         => _MI_XOOPSPARTNERS_DESC,
     'version'             => 1.13,
     'module_status'       => 'RC1',
     'official'            => 0,  // 1 if maintained by XOOPS CORE Development Team
@@ -58,9 +58,9 @@ $modversion = array(
     'dirname'             => $moduleDirName,
 
     //help files
-    'helpsection'         =>(array(array('name' => _MI_XPARTNERS_HELP_OVERVIEW,
+    'helpsection'         =>(array(array('name' => _MI_XOOPSPARTNERS_HELP_OVERVIEW,
                                          'link' => "page=help"),
-                                   array('name' => _MI_XPARTNERS_HELP_ISSUES,
+                                   array('name' => _MI_XOOPSPARTNERS_HELP_ISSUES,
                                          'link' => "page=issues")
                                    )
     ),
@@ -108,8 +108,8 @@ $modversion = array(
     'blocks'      => array(
         array(
             'file'        => 'partners.php',
-            'name'        => _MI_XPARTNERS_NAME,
-            'description' => _MI_XPARTNERS_DESC,
+            'name'        => _MI_XOOPSPARTNERS_NAME,
+            'description' => _MI_XOOPSPARTNERS_DESC,
             'show_func'   => 'b_xoopspartners_show',
             'edit_func'   => 'b_xoopspartners_edit',
             'options'     => '1|1|1|1|1|hits|DESC|0',
@@ -126,12 +126,12 @@ $modversion = array(
     'templates'   => array(
         array(
             'file'        => 'xoopspartners_index.tpl',
-            'description' => _MI_XPARTNERS_TMPLT1_DESC
+            'description' => _MI_XOOPSPARTNERS_TMPLT1_DESC
         ),
 
         array(
             'file'        => 'xoopspartners_join.tpl',
-            'description' => _MI_XPARTNERS_TMPLT2_DESC
+            'description' => _MI_XOOPSPARTNERS_TMPLT2_DESC
         )
     ),
 
@@ -143,7 +143,7 @@ $modversion = array(
             'name'        => 'cookietime',
 
             // title of this config option displayed in config settings form
-            'title'       => '_MI_XPARTNERS_RECLICK',
+            'title'       => '_MI_XOOPSPARTNERS_RECLICK',
             'description' => '',
 
             // Form element type used in config form for this option. C
@@ -161,18 +161,18 @@ $modversion = array(
             // 'yesno' formtype must be either 0(no) or 1(yes)
             'default'     => 86400,
             'options'     => array(
-                '_MI_XPARTNERS_HOUR'    => '3600',
-                '_MI_XPARTNERS_3HOURS'  => '10800',
-                '_MI_XPARTNERS_5HOURS'  => '18000',
-                '_MI_XPARTNERS_10HOURS' => '36000',
-                '_MI_XPARTNERS_DAY'     => '86400'
+                '_MI_XOOPSPARTNERS_HOUR'    => '3600',
+                '_MI_XOOPSPARTNERS_3HOURS'  => '10800',
+                '_MI_XOOPSPARTNERS_5HOURS'  => '18000',
+                '_MI_XOOPSPARTNERS_10HOURS' => '36000',
+                '_MI_XOOPSPARTNERS_DAY'     => '86400'
             )
         ),
 
         array(
             'name'        => 'modlimit',
-            'title'       => '_MI_XPARTNERS_MLIMIT',
-            'description' => '_MI_XPARTNERS_MLIMITDSC',
+            'title'       => '_MI_XOOPSPARTNERS_MLIMIT',
+            'description' => '_MI_XOOPSPARTNERS_MLIMITDSC',
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 5
@@ -180,37 +180,37 @@ $modversion = array(
 
         array(
             'name'        => 'modshow',
-            'title'       => '_MI_XPARTNERS_MSHOW',
-            'description' => '_MI_XPARTNERS_MSHOWDSC',
+            'title'       => '_MI_XOOPSPARTNERS_MSHOW',
+            'description' => '_MI_XOOPSPARTNERS_MSHOWDSC',
             'formtype'    => 'select',
             'valuetype'   => 'int',
             'default'     => 1,
             'options'     => array(
-                '_MI_XPARTNERS_IMAGES' => 1,
-                '_MI_XPARTNERS_TEXT'   => 2,
-                '_MI_XPARTNERS_BOTH'   => 3
+                '_MI_XOOPSPARTNERS_IMAGES' => 1,
+                '_MI_XOOPSPARTNERS_TEXT'   => 2,
+                '_MI_XOOPSPARTNERS_BOTH'   => 3
             )
         ),
 
         array(
             'name'        => 'modsort',
-            'title'       => '_MI_XPARTNERS_MSORT',
-            'description' => '_MI_XPARTNERS_MSORTDSC',
+            'title'       => '_MI_XOOPSPARTNERS_MSORT',
+            'description' => '_MI_XOOPSPARTNERS_MSORTDSC',
             'formtype'    => 'select',
             'valuetype'   => 'text',
             'default'     => 'hits',
             'options'     => array(
-                '_MI_XPARTNERS_ID'     => 'id',
-                '_MI_XPARTNERS_HITS'   => 'hits',
-                '_MI_XPARTNERS_TITLE'  => 'title',
-                '_MI_XPARTNERS_WEIGHT' => 'weight'
+                '_MI_XOOPSPARTNERS_ID'     => 'id',
+                '_MI_XOOPSPARTNERS_HITS'   => 'hits',
+                '_MI_XOOPSPARTNERS_TITLE'  => 'title',
+                '_MI_XOOPSPARTNERS_WEIGHT' => 'weight'
             )
         ),
 
         array(
             'name'        => 'modorder',
-            'title'       => '_MI_XPARTNERS_MORDER',
-            'description' => '_MI_XPARTNERS_MORDERDSC',
+            'title'       => '_MI_XOOPSPARTNERS_MORDER',
+            'description' => '_MI_XOOPSPARTNERS_MORDERDSC',
             'formtype'    => 'select',
             'valuetype'   => 'text',
             'default'     => 'DESC',
@@ -222,8 +222,8 @@ $modversion = array(
 
         array(
             'name'        => 'incadmin',
-            'title'       => '_MI_XPARTNERS_INCADMIN',
-            'description' => '_MI_XPARTNERS_INCADMINDSC',
+            'title'       => '_MI_XOOPSPARTNERS_INCADMIN',
+            'description' => '_MI_XOOPSPARTNERS_INCADMINDSC',
             'formtype'    => 'yesno',
             'valuetype'   => 'int',
             'default'     => 1
@@ -232,8 +232,8 @@ $modversion = array(
         // Max Filesize Upload in kilo bytes
         array(
             'name'        => 'maxuploadsize',
-            'title'       => '_MI_XPARTNERS_UPLOADFILESIZE',
-            'description' => '_MI_XPARTNERS_UPLOADFILESIZE_DESC',
+            'title'       => '_MI_XOOPSPARTNERS_UPLOADFILESIZE',
+            'description' => '_MI_XOOPSPARTNERS_UPLOADFILESIZE_DESC',
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 1048576
@@ -242,8 +242,8 @@ $modversion = array(
         // Max width
         array(
             'name'        => 'maxwidth',
-            'title'       => '_MI_XPARTNERS_IMAGE_MAX_WIDTH',
-            'description' => '_MI_XPARTNERS_IMAGE_MAX_WIDTH_DESC',
+            'title'       => '_MI_XOOPSPARTNERS_IMAGE_MAX_WIDTH',
+            'description' => '_MI_XOOPSPARTNERS_IMAGE_MAX_WIDTH_DESC',
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 150
@@ -252,8 +252,8 @@ $modversion = array(
         // Max height
         array(
             'name'        => 'maxheight',
-            'title'       => '_MI_XPARTNERS_IMAGE_MAX_HEIGHT',
-            'description' => '_MI_XPARTNERS_IMAGE_MAX_WIDTH_DESC',
+            'title'       => '_MI_XOOPSPARTNERS_IMAGE_MAX_HEIGHT',
+            'description' => '_MI_XOOPSPARTNERS_IMAGE_MAX_WIDTH_DESC',
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 110

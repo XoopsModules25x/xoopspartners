@@ -34,10 +34,10 @@ $totalPartners          = $xpPartnersHandler->getCount();
 $totalNonActivePartners = $xpPartnersHandler->getCount(new Criteria('status', 0, '='));
 $totalActivePartners    = $totalPartners - $totalNonActivePartners;
 
-$moduleAdmin->addInfoBox(_MD_XPARTNERS_DASHBOARD);
-$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XPARTNERS_TOTALACTIVE . '</infolabel>', $totalActivePartners));
-$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XPARTNERS_TOTALNONACTIVE . '</infolabel>', $totalNonActivePartners));
-$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XPARTNERS_TOTALPARTNERS . '</infolabel><infotext>', $totalPartners . '</infotext>'));
+$moduleAdmin->addInfoBox(_MD_XOOPSPARTNERS_DASHBOARD);
+$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XOOPSPARTNERS_TOTALACTIVE . '</infolabel>', $totalActivePartners));
+$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XOOPSPARTNERS_TOTALNONACTIVE . '</infolabel>', $totalNonActivePartners));
+$moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XOOPSPARTNERS_TOTALPARTNERS . '</infolabel><infotext>', $totalPartners . '</infotext>'));
 //----------------------------
 
 $moduleAdmin->displayNavigation('index.php');

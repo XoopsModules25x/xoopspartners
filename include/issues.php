@@ -135,7 +135,7 @@ if ($cachedEtag) {
                 $_SESSION[$key] = null;
                 unset($_SESSION[$key]);
             }
-            $err = _AM_XPARTNERS_ISSUES_ERR_UNKNOWN;
+            $err = _AM_XOOPSPARTNERS_ISSUES_ERR_UNKNOWN;
         }
     } else {
         // unknown error condition - display message
@@ -144,7 +144,7 @@ if ($cachedEtag) {
             $_SESSION[$key] = null;
             unset($_SESSION[$key]);
         }
-        $err = _AM_XPARTNERS_ISSUES_STATUS_UNKNOWN;
+        $err = _AM_XOOPSPARTNERS_ISSUES_STATUS_UNKNOWN;
     }
 } else {
     // nothing in session so request new info
@@ -177,15 +177,15 @@ $response   = substr($curl_response, - $rspSize);
 $issuesObjs = json_decode($response); //get as objects
 
 echo "    <br>\n"
-   . "    <h4 class=\"odd\">" . _AM_XPARTNERS_ISSUES_OPEN . "</h4>\n"
+   . "    <h4 class=\"odd\">" . _AM_XOOPSPARTNERS_ISSUES_OPEN . "</h4>\n"
    . "    <p class=\"even\">\n"
    . "    <table>\n"
    . "      <thead>\n"
    . "      <tr>\n"
-   . "        <th class=\"center width10\">" . _AM_XPARTNERS_HELP_ISSUE . "</th>\n"
-   . "        <th class=\"center width10\">" . _AM_XPARTNERS_HELP_DATE . "</th>\n"
-   . "        <th class=\"center\">" . _AM_XPARTNERS_HELP_TITLE . "</th>\n"
-   . "        <th class=\"center width10\">" . _AM_XPARTNERS_HELP_SUBMITTER . "</th>\n"
+   . "        <th class=\"center width10\">" . _AM_XOOPSPARTNERS_HELP_ISSUE . "</th>\n"
+   . "        <th class=\"center width10\">" . _AM_XOOPSPARTNERS_HELP_DATE . "</th>\n"
+   . "        <th class=\"center\">" . _AM_XOOPSPARTNERS_HELP_TITLE . "</th>\n"
+   . "        <th class=\"center width10\">" . _AM_XOOPSPARTNERS_HELP_SUBMITTER . "</th>\n"
    . "      </tr>\n"
    . "      </thead>\n"
    . "      <tbody>\n";
@@ -234,13 +234,13 @@ if (!empty($err)) {
        .     "</td></tr>\n";
 } elseif (0 == $i) { // no issues found
     echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">"
-       .        _AM_XPARTNERS_ISSUES_NONE
+       .        _AM_XOOPSPARTNERS_ISSUES_NONE
        .     "</td></tr>\n";
 }
 
 if ($pullReqFound) {
     echo "    <tfoot>\n"
-        . "      <tr><td colspan=\"4\" class=\"left italic marg3 foot\">" . _AM_XPARTNERS_ISSUES_NOTE . "</td></tr>\n"
+        . "      <tr><td colspan=\"4\" class=\"left italic marg3 foot\">" . _AM_XOOPSPARTNERS_ISSUES_NOTE . "</td></tr>\n"
         . "    </tfoot>\n";
 }
 echo "    </tbody></table></p>\n";

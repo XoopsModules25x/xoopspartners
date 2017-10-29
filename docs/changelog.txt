@@ -42,7 +42,7 @@
 - load stylesheet in block
 - added XoopspartnersConstants class for constant definitions
 - added block config to be able to trim title length
-- added _MI_XPARTNERS_INCADMIN define, missing in previous BETA
+- added _MI_XOOPSPARTNERS_INCADMIN define, missing in previous BETA
 - refactored /admin/main.php from functions to switch statement
 - moved install/uninstall/upgrade functions to ./include/action.module.php
 
@@ -56,7 +56,7 @@
 - fixed bug in ./join.php template assign
 - added ./footer.php, allows incorporation of language specific CSS
 - changed defines naming to be more standardized with XOOPS norms
-- added _AM_XPARTNERS_ADMIN_FOOTER & deleted _AM_MYLINKS_ADMIN_FOOTER in ./language/xxx/admin.php
+- added _AM_XOOPSPARTNERS_ADMIN_FOOTER & deleted _AM_MYLINKS_ADMIN_FOOTER in ./language/xxx/admin.php
 - created ./language/xxx/mail_template directory and moved join.tpl, make consistent with other modules
 - fixed inconsistent height/width maximums for images between admin and front side (now 150 width x 110 height)
 - updated module version to 1.12 to be consistent with previously checked in 'changelog.txt'

@@ -32,9 +32,9 @@ echo "<div class='adminfooter'>\n"
    .     "title='" . $xpModule->getInfo('author_website_name') . "'></a>\n"
    . "</div>\n"
    . "<div class='center smallsmall italic pad5'>\n"
-   . "  <strong>" . ucfirst($moduleDirName) . "</strong> " . _AM_XPARTNERS_ADMIN_FOOTER_STR1
+   . "  <strong>" . ucfirst($moduleDirName) . "</strong> " . _AM_XOOPSPARTNERS_ADMIN_FOOTER_STR1
    . " <a class='tooltip' rel='external' href='" . $xpModule->getInfo('author_website_url') . "' "
-   .      "title='" . _AM_XPARTNERS_ADMIN_FOOTER_STR2 . " " . $xpModule->getInfo('author_website_name') . "'>"
+   .      "title='" . _AM_XOOPSPARTNERS_ADMIN_FOOTER_STR2 . " " . $xpModule->getInfo('author_website_name') . "'>"
    .      $xpModule->getInfo('author_website_name') . "</a>\n"
    . "</div>\n"
    . "</div>\n";

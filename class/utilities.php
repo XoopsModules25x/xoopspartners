@@ -63,7 +63,7 @@ class XoopspartnersUtilities
         }
 
         if (!$success) {
-            $module->setErrors(sprintf(_AM_XPARTNERS_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
+            $module->setErrors(sprintf(_AM_XOOPSPARTNERS_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
         }
 
         return $success;
@@ -85,7 +85,7 @@ class XoopspartnersUtilities
         $reqVer  = $module->getInfo('min_php');
         if ((false !== $reqVer) && ('' !== $reqVer)) {
             if (version_compare($verNum, (string)$reqVer, '<')) {
-                $module->setErrors(sprintf(_AM_XPARTNERS_ERROR_BAD_PHP, $reqVer, $verNum));
+                $module->setErrors(sprintf(_AM_XOOPSPARTNERS_ERROR_BAD_PHP, $reqVer, $verNum));
                 $success = false;
             }
         }

@@ -27,22 +27,22 @@ use Xmf\Module\Admin;
 
 $adminmenu = array(
     array(
-        'title' => _MI_XPARTNERS_ADMIN_HOME,
+        'title' => _MI_XOOPSPARTNERS_ADMIN_HOME,
         'link'  => 'admin/index.php',
         'icon'  => Admin::menuIconPath('home.png')
     ),
     array(
-        'title' => _MI_XPARTNERS_ADMIN_MANAGE,
+        'title' => _MI_XOOPSPARTNERS_ADMIN_MANAGE,
         'link'  => 'admin/main.php',
         'icon'  => Admin::menuIconPath('manage.png')
     ),
     array(
-        'title' => _MI_XPARTNERS_ADMIN_ADDP,
+        'title' => _MI_XOOPSPARTNERS_ADMIN_ADDP,
         'link'  => 'admin/main.php?op=partnersAdminAdd',
         'icon'  => Admin::menuIconPath('add.png')
     ),
     array(
-        'title' => _MI_XPARTNERS_ADMIN_ABOUT,
+        'title' => _MI_XOOPSPARTNERS_ADMIN_ABOUT,
         'link'  => 'admin/about.php',
         'icon'  => Admin::menuIconPath('about.png')
     )

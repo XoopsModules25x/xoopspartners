@@ -132,7 +132,7 @@ function b_xoopspartners_edit($options)
     }
     $form = "<table class='bnone'>\n"
         . "  <tr>\n"
-        . "    <td>" . _MB_XPARTNERS_PSPACE . "</td>\n"
+        . "    <td>" . _MB_XOOPSPARTNERS_PSPACE . "</td>\n"
         . "    <td>"
         .        "<input type='radio' name='options[0]' id ='options0_0' value='0'{$chk0no}>"
         .        "<label for='options0_0'>" . _NO . "</label>&nbsp;"
@@ -141,7 +141,7 @@ function b_xoopspartners_edit($options)
         .      "</td>\n"
         . "  </tr>\n"
         . "  <tr>\n"
-        . "    <td>" . _MB_XPARTNERS_FADE . "</td>\n"
+        . "    <td>" . _MB_XOOPSPARTNERS_FADE . "</td>\n"
         . "    <td>"
         .        "<input type='radio' name='options[1]' id='options1_0' value='0'{$chk1no}>" . _NO
         .        "<label for='options1_0'>" . _NO . "</label>&nbsp;"
@@ -150,7 +150,7 @@ function b_xoopspartners_edit($options)
         .      "</td>\n"
         . "  </tr>\n"
         . "  <tr>\n"
-        . "    <td>" . _MB_XPARTNERS_BRAND . "</td>\n"
+        . "    <td>" . _MB_XOOPSPARTNERS_BRAND . "</td>\n"
         . "     <td>"
         .         "<input type='radio' name='options[2]' id='option2_0' value='0'{$chk2no}>" . _NO
         .         "<label for='options2_0'>" . _NO . "</label>"
@@ -159,53 +159,53 @@ function b_xoopspartners_edit($options)
         .       "</td>\n"
         . "  </tr>\n"
         . "  <tr>\n"
-        . "    <td>" . _MB_XPARTNERS_BLIMIT . "</td>\n"
+        . "    <td>" . _MB_XOOPSPARTNERS_BLIMIT . "</td>\n"
         . "    <td><input class='right' type='number' name='options[3]' size='5' value='{$options[3]}' min='0'></td>\n"
         . "  </tr>\n"
         . "  <tr>\n"
-        . '    <td>' . _MB_XPARTNERS_BSHOW . "</td>\n"
+        . '    <td>' . _MB_XOOPSPARTNERS_BSHOW . "</td>\n"
         . "    <td>\n"
         . "      <select size='1' name='options[4]'>\n";
     $sel  = (1 == $options[4]) ? " selected" : '';
-    $form .= "        <option value='1'{$sel}>" . _MB_XPARTNERS_IMAGES . "</option>\n";
+    $form .= "        <option value='1'{$sel}>" . _MB_XOOPSPARTNERS_IMAGES . "</option>\n";
 
     $sel = (2 == $options[4]) ? " selected" : '';
-    $form .= "        <option value='2'{$sel}>" . _MB_XPARTNERS_TEXT . "</option>\n";
+    $form .= "        <option value='2'{$sel}>" . _MB_XOOPSPARTNERS_TEXT . "</option>\n";
 
     $sel = (3 == $options[4]) ? " selected" : '';
-    $form .= "        <option value='3'{$sel}>" . _MB_XPARTNERS_BOTH . "</option>\n"
+    $form .= "        <option value='3'{$sel}>" . _MB_XOOPSPARTNERS_BOTH . "</option>\n"
            . "      </select>\n"
            . "    </td>\n"
            . "  </tr>\n"
            . "  <tr>\n"
-           . "    <td>" . _MB_XPARTNERS_BSORT . "</td>\n"
+           . "    <td>" . _MB_XOOPSPARTNERS_BSORT . "</td>\n"
            . "    <td>\n"
            . "      <select size='1' name='options[5]'>\n";
 
     $sel = ('id' === $options[5]) ? " selected" : '';
-    $form .= "        <option value='id'{$sel}>" . _MB_XPARTNERS_ID . "</option>\n";
+    $form .= "        <option value='id'{$sel}>" . _MB_XOOPSPARTNERS_ID . "</option>\n";
 
     $sel = ('hits' === $options[5]) ? " selected" : '';
-    $form .= "        <option value='hits'{$sel}>" . _MB_XPARTNERS_HITS . "</option>\n";
+    $form .= "        <option value='hits'{$sel}>" . _MB_XOOPSPARTNERS_HITS . "</option>\n";
 
     $sel = ('title' === $options[5]) ? " selected" : '';
-    $form .= "        <option value='title'{$sel}>" . _MB_XPARTNERS_TITLE . "</option>\n";
+    $form .= "        <option value='title'{$sel}>" . _MB_XOOPSPARTNERS_TITLE . "</option>\n";
 
     $sel = ('weight' === $options[5]) ? " selected" : '';
-    $form .= "        <option value='weight'{$sel}>" . _MB_XPARTNERS_WEIGHT . "</option>\n"
+    $form .= "        <option value='weight'{$sel}>" . _MB_XOOPSPARTNERS_WEIGHT . "</option>\n"
            . "      </select>\n"
            . "      <select size='1' name='options[6]'>\n";
 
     $sel = ('ASC' === $options[6]) ? " selected" : '';
-    $form .= "        <option value='ASC'{$sel}>" . _MB_XPARTNERS_ASC . "</option>\n";
+    $form .= "        <option value='ASC'{$sel}>" . _MB_XOOPSPARTNERS_ASC . "</option>\n";
 
     $sel = ('DESC' === $options[6]) ? " selected" : '';
-    $form .= "        <option value='DESC'{$sel}>" . _MB_XPARTNERS_DESC . "</option>\n"
+    $form .= "        <option value='DESC'{$sel}>" . _MB_XOOPSPARTNERS_DESC . "</option>\n"
            . "      </select>\n"
            . "    </td>\n"
            . "  </tr>\n"
            . "  <tr>\n"
-           . '    <td>' . _MB_XPARTNERS_TTL_LENGTH . "</td>\n"
+           . '    <td>' . _MB_XOOPSPARTNERS_TTL_LENGTH . "</td>\n"
            . "    <td>"
            .        "<input type='number' class='right' name='options[7]' size='5' value='{$options[7]}' min='0'>"
            .      "</td>\n"

@@ -43,14 +43,14 @@ switch ($op) {
     if (!$GLOBALS['xoopsSecurity']->check()) {
             $xpHelper->redirect('index.php',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
-                            _MD_XPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors())
+                            _MD_XOOPSPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors())
             );
     }
     extract($_POST, EXTR_PREFIX_ALL, 'unsafe');
     if (empty($unsafe_title) || empty($unsafe_description) || empty($unsafe_url) || $unsafe_url === 'http://') {
         $GLOBALS['xoopsTpl']->assign(array(
-                                         'content4join'      => _MD_XPARTNERS_ERROR1,
-                                         'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
+                                         'content4join'      => _MD_XOOPSPARTNERS_ERROR1,
+                                         'lang_main_partner' => _MD_XOOPSPARTNERS_PARTNERS,
                                          'sitename'          => $GLOBALS['xoopsConfig']['sitename']
                                          )
             );
@@ -99,9 +99,9 @@ switch ($op) {
         $uploadErrs = ($uploader instanceof XoopsMediaUploader) ? $uploader->getErrors() : '';
                 if (false === $imageInfo || !empty($uploadErrs)) { // could not find image
             $GLOBALS['xoopsTpl']->assign(array(
-                                                     'content4join'      => sprintf(_MD_XPARTNERS_ERROR3, $image)
+                                                     'content4join'      => sprintf(_MD_XOOPSPARTNERS_ERROR3, $image)
                                                                             . '<br>' . $uploader->getErrors(),
-                                             'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
+                                             'lang_main_partner' => _MD_XOOPSPARTNERS_PARTNERS,
                                              'sitename'          => $GLOBALS['xoopsConfig']['sitename']
                                                  )
                     );
@@ -133,23 +133,23 @@ switch ($op) {
     $xoopsMailer->setToEmails($GLOBALS['xoopsConfig']['adminmail']);
     $xoopsMailer->setFromEmail($GLOBALS['xoopsUser']->getVar('email'));
     $xoopsMailer->setFromName($GLOBALS['xoopsUser']->getVar('uname'));
-    $xoopsMailer->setSubject(sprintf(_MD_XPARTNERS_NEWPARTNER, $GLOBALS['xoopsConfig']['sitename']));
+    $xoopsMailer->setSubject(sprintf(_MD_XOOPSPARTNERS_NEWPARTNER, $GLOBALS['xoopsConfig']['sitename']));
     if (!$xoopsMailer->send()) {
         $GLOBALS['xoopsTpl']->assign(array(
                                                  'content4join'      => '<br>'
                                                                         . $xoopsMailer->getErrors()
-                                                                        . _MD_XPARTNERS_GOBACK,
-                                         'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
-                                         'lang_join'         => _MD_XPARTNERS_JOIN,
+                                                                        . _MD_XOOPSPARTNERS_GOBACK,
+                                         'lang_main_partner' => _MD_XOOPSPARTNERS_PARTNERS,
+                                         'lang_join'         => _MD_XOOPSPARTNERS_JOIN,
                                          'sitename'          => $GLOBALS['xoopsConfig']['sitename']
                                              )
                 );
     } else {
         $GLOBALS['xoopsTpl']->assign(array(
                                                  'content4join'      => '<br>'
-                                                                        . _MD_XPARTNERS_SENDMAIL,
-                                         'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
-                                         'lang_join'         => _MD_XPARTNERS_JOIN,
+                                                                        . _MD_XOOPSPARTNERS_SENDMAIL,
+                                         'lang_main_partner' => _MD_XOOPSPARTNERS_PARTNERS,
+                                         'lang_join'         => _MD_XOOPSPARTNERS_JOIN,
                                          'sitename'          => $GLOBALS['xoopsConfig']['sitename']
                                              )
                 );
@@ -160,12 +160,12 @@ switch ($op) {
     include $GLOBALS['xoops']->path('/class/xoopsformloader.php');
     $form = new XoopsThemeForm('', 'joinform', 'join.php', 'post', true);
     $form->setExtra('enctype="multipart/form-data"');
-        $titlePartner = new XoopsFormText(_MD_XPARTNERS_TITLE, 'title', 50, 50);
-        $imagePartner = new XoopsFormText(_MD_XPARTNERS_IMAGE, 'image', 50, 150, 'http://');
-        $urlPartner   = new XoopsFormText(_MD_XPARTNERS_URL, 'url', 50, 150, 'http://');
-        $descrPartner = new XoopsFormTextArea(_MD_XPARTNERS_DESCRIPTION, 'description', '', 5, 51);
+        $titlePartner = new XoopsFormText(_MD_XOOPSPARTNERS_TITLE, 'title', 50, 50);
+        $imagePartner = new XoopsFormText(_MD_XOOPSPARTNERS_IMAGE, 'image', 50, 150, 'http://');
+        $urlPartner   = new XoopsFormText(_MD_XOOPSPARTNERS_URL, 'url', 50, 150, 'http://');
+        $descrPartner = new XoopsFormTextArea(_MD_XOOPSPARTNERS_DESCRIPTION, 'description', '', 5, 51);
         $opHidden     = new XoopsFormHidden('op', 'sendMail');
-    $submitButton       = new XoopsFormButton('', 'dbsubmit', _MD_XPARTNERS_SEND, 'submit');
+    $submitButton       = new XoopsFormButton('', 'dbsubmit', _MD_XOOPSPARTNERS_SEND, 'submit');
     $form->addElement($titlePartner, true);
     $form->addElement($imagePartner);
     $form->addElement($urlPartner, true);
@@ -177,8 +177,8 @@ switch ($op) {
     $content = $form->render();
     $GLOBALS['xoopsTpl']->assign(array(
                                      'content4join'      => $content,
-                                     'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
-                                     'lang_join'         => _MD_XPARTNERS_JOIN,
+                                     'lang_main_partner' => _MD_XOOPSPARTNERS_PARTNERS,
+                                     'lang_join'         => _MD_XOOPSPARTNERS_JOIN,
                                      'sitename'          => $GLOBALS['xoopsConfig']['sitename']
                                      )
         );

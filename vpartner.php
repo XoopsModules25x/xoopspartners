@@ -29,7 +29,7 @@ $xpPartnersHandler = $xpHelper->getHandler('partners');
 
 $id = Request::getInt('id', XoopspartnersConstants::DEFAULT_PID, 'GET');
 if (XoopspartnersConstants::DEFAULT_PID === $id) {
-    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XPARTNERS_NOPART);
+    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }
 
 $partnerObj = $xpPartnersHandler->get($id);
@@ -57,5 +57,5 @@ if (($partnerObj instanceof XoopspartnersPartners)
        . "</html>\n";
 } else {
     unset($xpPartnersHandler);
-    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XPARTNERS_NOPART);
+    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }

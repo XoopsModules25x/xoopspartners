@@ -102,11 +102,11 @@ if (0 !== $modLimit) {
     $pageNav = $nav->renderImageNav();
 }
 $GLOBALS['xoopsTpl']->assign(array(
-                                 'lang_partner'      => _MD_XPARTNERS_PARTNER,
-                                 'lang_desc'         => _MD_XPARTNERS_DESCRIPTION,
-                                 'lang_hits'         => _MD_XPARTNERS_HITS,
-                                 'lang_no_partners'  => _MD_XPARTNERS_NOPART,
-                                 'lang_main_partner' => _MD_XPARTNERS_PARTNERS,
+                                 'lang_partner'      => _MD_XOOPSPARTNERS_PARTNER,
+                                 'lang_desc'         => _MD_XOOPSPARTNERS_DESCRIPTION,
+                                 'lang_hits'         => _MD_XOOPSPARTNERS_HITS,
+                                 'lang_no_partners'  => _MD_XOOPSPARTNERS_NOPART,
+                                 'lang_main_partner' => _MD_XOOPSPARTNERS_PARTNERS,
                                 //'sitename'          => $GLOBALS['xoopsConfig']['sitename'],
                                 'pagenav'           => $pageNav
                              )

@@ -3,7 +3,7 @@
 <table class='bnone width100' style='margin: 0px;'>
     <tr>
         <{*        <td class='left width50'><{$partner_join}></td> *}>
-        <td class='right width50 bold'><{if ($partner_join)}><a href='join.php' title='<{$smarty.const._MD_XPARTNERS_JOIN}>'><{$smarty.const._MD_XPARTNERS_JOIN}></a><{else}>&nbsp;<{/if}></td>
+        <td class='right width50 bold'><{if ($partner_join)}><a href='join.php' title='<{$smarty.const._MD_XOOPSPARTNERS_JOIN}>'><{$smarty.const._MD_XOOPSPARTNERS_JOIN}></a><{else}>&nbsp;<{/if}></td>
         <td class='right'><{$pagenav}></td>
     </tr>
 </table>
@@ -33,7 +33,7 @@
 <table class='bnone width100' style='margin: 0px;'>
     <tr>
         <{*        <td class='left width50'><{$partner_join}></td> *}>
-        <td class='right width50 bold'><{if ($partner_join)}><a href='join.php' title='<{$smarty.const._MD_XPARTNERS_JOIN}>'><{$smarty.const._MD_XPARTNERS_JOIN}></a><{else}>&nbsp;<{/if}></td>
+        <td class='right width50 bold'><{if ($partner_join)}><a href='join.php' title='<{$smarty.const._MD_XOOPSPARTNERS_JOIN}>'><{$smarty.const._MD_XOOPSPARTNERS_JOIN}></a><{else}>&nbsp;<{/if}></td>
         <td class='right'><{$pagenav}></td>
     </tr>
 </table>
