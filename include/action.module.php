@@ -12,9 +12,7 @@
 /**
  * XOOPS XoopsPartners module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   include
+ * @package      module\xoopspartners\include
  * @author       Taiwen Jiang <phppp@users.sourceforge.net>
  * @author       zyspec <owners@zyspec.com>
  * @author       XOOPS Module Development Team
@@ -28,75 +26,11 @@
  */
 
 if ((!defined('XOOPS_ROOT_PATH'))
+    || !isset($GLOBALS['xoopsUser'])
     || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()
 ) {
     exit('Restricted access' . PHP_EOL);
-}
-
-/**
- *
- * Verifies XOOPS version meets minimum requirements for this module
- * @param XoopsModule $module {@link XoopsModule}
- *
- * @return bool true if meets requirements, false if not
- */
-function xoopspartnersCheckXoopsVer(XoopsModule $module)
-{
-    xoops_loadLanguage('admin', $module->dirname());
-    //check for minimum XOOPS version
-    $currentVer  = substr(XOOPS_VERSION, 6); // get the numeric part of string
-    $currArray   = explode('.', $currentVer);
-    $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
-    $reqArray    = explode('.', $requiredVer);
-    $success     = true;
-    foreach ($reqArray as $k => $v) {
-        if (isset($currArray[$k])) {
-            if ($currArray[$k] > $v) {
-                break;
-            } elseif ($currArray[$k] == $v) {
-                continue;
-            } else {
-                $success = false;
-                break;
-            }
-        } else {
-            if ((int)$v > 0) { // handles things like x.x.x.0_RC2
-                $success = false;
-                break;
-            }
-        }
-    }
-
-    if (!$success) {
-        $module->setErrors(sprintf(_AM_XPARTNERS_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
-    }
-
-    return $success;
-}
-
-/**
- *
- * Verifies PHP version meets minimum requirements for this module
- * @param XoopsModule $module {@link XoopsModule}
- *
- * @return bool true if meets requirements, false if not
- */
-function xoopspartnersCheckPHPVer(XoopsModule $module)
-{
-    xoops_loadLanguage('admin', $module->dirname());
-    // check for minimum PHP version
-    $success = true;
-    $verNum  = phpversion();
-    $reqVer  =& $module->getInfo('min_php');
-    if (false !== $reqVer && '' !== $reqVer) {
-        if (version_compare($verNum, $reqVer, '<')) {
-            $module->setErrors(sprintf(_AM_XPARTNERS_ERROR_BAD_XOOPS, $reqVer, $verNum));
-            $success = false;
-        }
-    }
-
-    return $success;
 }
 
 /**
@@ -106,17 +40,21 @@ function xoopspartnersCheckPHPVer(XoopsModule $module)
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_install_xoopspartners(XoopsModule $module)
+function xoops_module_pre_install_xoopspartners(XoopsModule $xoopsModule)
 {
+    if (!class_exists('XoopspartnersUtilities')) {
+        xoops_load('utilities', 'xoopspartners');
+    }
+
     //check for minimum XOOPS version
-    if (!xoopspartnersCheckXoopsVer($module)) {
+    if (!XoopspartnersUtilities::checkXoopsVer($xoopsModule)) {
+        return false;
+    }
+    // check for minimum PHP version
+    if (!XoopspartnersUtilities::checkPHPVer($xoopsModule)) {
         return false;
     }
 
-    // check for minimum PHP version
-    if (!xoopspartnersCheckPHPVer($module)) {
-        return false;
-    }
     return true;
 }
 
@@ -153,15 +91,19 @@ function xoops_module_install_xoopspartners(XoopsModule $module)
  */
 function xoops_module_pre_update_xoopspartners(XoopsModule $module)
 {
+    if (!class_exists('XoopspartnersUtilities')) {
+        xoops_load('utilities', 'xoopspartners');
+    }
+
     //check for minimum XOOPS version
-    if (!xoopspartnersCheckXoopsVer($module)) {
+    if (!XoopspartnersUtilities::checkXoopsVer($xoopsModule)) {
+        return false;
+    }
+    // check for minimum PHP version
+    if (!XoopspartnersUtilities::checkPHPVer($xoopsModule)) {
         return false;
     }
 
-    // check for minimum PHP version
-    if (!xoopspartnersCheckPHPVer($module)) {
-        return false;
-    }
     return true;
 }
 

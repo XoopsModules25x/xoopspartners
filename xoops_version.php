@@ -31,25 +31,23 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   init
+ * @package      module\xoopspartners\init
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
+ * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         https://xoops.org XOOPS
+ * @link         http://xoops.org XOOPS
  */
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-$moduleDirname = basename(__DIR__);
+$moduleDirName = basename(__DIR__);
 
 $modversion = array(
     'name'                => _MI_XPARTNERS_NAME,
     'description'         => _MI_XPARTNERS_DESC,
-    'version'             => 1.12,
-    'module_status'       => 'Final',
+    'version'             => 1.13,
+    'module_status'       => 'RC1',
     'official'            => 0,  // 1 if maintained by XOOPS CORE Development Team
     'author'              => 'Raul Recio (unfor)',
     'credits'             => 'Mage, Mamba, ZySpec',
@@ -57,15 +55,24 @@ $modversion = array(
     'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
     'help'                => 'page=help',
     'image'               => 'assets/images/logoModule.png',
-    'dirname'             => $moduleDirname,
+    'dirname'             => $moduleDirName,
+
+    //help files
+    'helpsection'         =>(array(array('name' => _MI_XPARTNERS_HELP_OVERVIEW,
+                                         'link' => "page=help"),
+                                   array('name' => _MI_XPARTNERS_HELP_ISSUES,
+                                         'link' => "page=issues")
+                                   )
+    ),
+
     /**
      * About
      */
     'author_website_url'  => 'https://xoops.org',
     'author_website_name' => 'XOOPS',
     'module_website_url'  => 'https://xoops.org',
-    'module_website_name' => 'XOOPS',
-    'release_date'        => '2016/07/10',
+    'module_website_name' => 'XOOPS Community',
+    'release_date'        => '2017/04/08',
     'min_php'             => '5.5',
     'min_xoops'           => '2.5.8',
     'min_db'              => array('mysql' => '5.0.7', 'mysqli' => '5.0.7'),
