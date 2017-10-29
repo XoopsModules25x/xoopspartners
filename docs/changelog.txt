@@ -1,5 +1,24 @@
-<u><b>1.12 Final [2016-07-10] </b></u>
+<u><b>1.13 RC1 [2017-04-08]</b></u>
+- created GITHUB issues tab in ./admin/help
+- changed to use Xmf for Request, module Admin and Helper
+- changed to use Xmf\Helper instead of redirect_header()
+- changed form input field lengths to match sql variable lengths
+- fix bug in index.php where checking if user is Admin didn't work
+- fix bug where admin hit count wasn't set correctly
+- fix bug in XoopsModule definition in ./admin/admin_header.php
+- fix bug to initialize partners array in block
+- removed language translations (see Transifex for translations)
+- removed .assets/images/admin files, deprecated (no longer used)
+- removed .assets/images/icons files, deprecated (no longer used)
+- created XoopspartnersUtilities class for install/update routines
+- updated pre-install/pre-update version check routines
+- updated changelog.txt to indicate new XOOPS/PHP versions requirement
+- updated code for PSR-x standards (line lengths <120 chars, naming, etc)
+- updated phpDoc comments
 
+<u><b>1.12 Final [2016-07-10]</b></u>
+- require XOOPS 2.5.8+
+- require PHP 5.5+
 - changed "op" request from cmd to string (mamba)
 - updated Help (mamba)
 - addNavigation(basename(__FILE__))  (mamba)
@@ -7,7 +26,6 @@
 - Unnecessary double quotes (mamba)
 - reference mismatch (mamba)
 - Hardening to type safe (mamba)
-- update Help (mamba)
 - replaced intval with (int) (mamba)
 
 <u>1.12 BETA 3 [2016-05-29] (ZySpec)</u>
@@ -24,7 +42,7 @@
 - load stylesheet in block
 - added XoopspartnersConstants class for constant definitions
 - added block config to be able to trim title length
-- added _MI_XPARTNERS_INCADMIN define, missing in previous BETA
+- added _MI_XOOPSPARTNERS_INCADMIN define, missing in previous BETA
 - refactored /admin/main.php from functions to switch statement
 - moved install/uninstall/upgrade functions to ./include/action.module.php
 
@@ -38,7 +56,7 @@
 - fixed bug in ./join.php template assign
 - added ./footer.php, allows incorporation of language specific CSS
 - changed defines naming to be more standardized with XOOPS norms
-- added _AM_XPARTNERS_ADMIN_FOOTER & deleted _AM_MYLINKS_ADMIN_FOOTER in ./language/xxx/admin.php
+- added _AM_XOOPSPARTNERS_ADMIN_FOOTER & deleted _AM_MYLINKS_ADMIN_FOOTER in ./language/xxx/admin.php
 - created ./language/xxx/mail_template directory and moved join.tpl, make consistent with other modules
 - fixed inconsistent height/width maximums for images between admin and front side (now 150 width x 110 height)
 - updated module version to 1.12 to be consistent with previously checked in 'changelog.txt'

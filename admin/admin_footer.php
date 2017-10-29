@@ -1,7 +1,5 @@
 <?php
 /*
- * XoopsPartner module
- *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
@@ -12,24 +10,33 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   admin
+ * @package      module\xoopspartners\admin
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         http://xoops.org XOOPS
  * @since        1.11
  */
+use Xmf\Module\Helper;
+use Xmf\Module\Admin;
 
-if (!isset($moduleInfo) || !is_a($moduleInfo, 'XoopsModule')) {
-    $moduleHandler = xoops_getHandler('module');
-    $xoopsModule    = XoopsModule::getByDirname('mylinks');
-    $moduleInfo     = $moduleHandler->get($xoopsModule->getVar('mid'));
-    $pathIcon32     = $moduleInfo->getInfo('icons32');
-}
+$moduleDirName = basename(dirname(__DIR__));
+$xpHelper = Helper::getHelper($moduleDirName);
+$xpModule = $xpHelper->getModule();
 
-echo "<div class='adminfooter'>\n" . "  <div class='txtcenter'>\n" . "    <a href='" . $moduleInfo->getInfo('author_website_url') . "' target='_blank'><img src='" . $GLOBALS['xoops']->url("www/{$pathIcon32}/xoopsmicrobutton.gif") . "' alt='" . $xoopsModule->getInfo('author_website_name')
-     . "' title='" . $moduleInfo->getInfo('author_website_name') . "'></a>\n" . "  </div>\n" . '  ' . _AM_XPARTNERS_ADMIN_FOOTER . "\n" . "</div>\n";
+echo "<div class='adminfooter'>\n"
+   . "<div class='center'>\n"
+   .   "<a href='" . $xpModule->getInfo('author_website_url') . "' "
+   .     "target='_blank'><img src='" . Admin::iconUrl('xoopsmicrobutton.gif', '32') . "' "
+   .     "alt='" . $xpModule->getInfo('author_website_url') . "' "
+   .     "title='" . $xpModule->getInfo('author_website_name') . "'></a>\n"
+   . "</div>\n"
+   . "<div class='center smallsmall italic pad5'>\n"
+   . "  <strong>" . ucfirst($moduleDirName) . "</strong> " . _AM_XOOPSPARTNERS_ADMIN_FOOTER_STR1
+   . " <a class='tooltip' rel='external' href='" . $xpModule->getInfo('author_website_url') . "' "
+   .      "title='" . _AM_XOOPSPARTNERS_ADMIN_FOOTER_STR2 . " " . $xpModule->getInfo('author_website_name') . "'>"
+   .      $xpModule->getInfo('author_website_name') . "</a>\n"
+   . "</div>\n"
+   . "</div>\n";
 
 xoops_cp_footer();

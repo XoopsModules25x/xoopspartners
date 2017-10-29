@@ -1,7 +1,5 @@
 <?php
 /*
- * XoopsPartners module
- *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
@@ -12,9 +10,7 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @category     Module
- * @package      xoopspartners
- * @subpackage   admin
+ * @package      module\xoopspartners\admin
  * @author       Mage, Mamba
  * @author       XOOPS Module Development Team
  * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
@@ -22,13 +18,14 @@
  * @link         http://xoops.org XOOPS
  * @since        1.11
  */
+use Xmf\Module\Admin;
 
 require __DIR__ . '/admin_header.php';
-include __DIR__ . '/../../../class/xoopsformloader.php';
+xoops_load('xoopsformloader');
 
-$aboutAdmin = new ModuleAdmin();
-
-echo $aboutAdmin->addNavigation('about.php');
-echo $aboutAdmin->renderAbout('xoopsfoundation@gmail.com', false);
+$moduleAdmin = Admin::getInstance();
+$moduleAdmin->displayNavigation(basename(__FILE__));
+$moduleAdmin->setPaypal('6KJ7RW5DR3VTJ');
+$moduleAdmin->displayAbout(false);
 
 include __DIR__ . '/admin_footer.php';

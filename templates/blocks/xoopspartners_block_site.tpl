@@ -1,10 +1,12 @@
 <{if $block.fadeImage}>
+<{*
     <{  php}>
     /** add JQuery if not already loaded **/
     global $xoTheme;
     $xoTheme->addScript("browse.php?Frameworks/jquery/jquery.js");
     $this->assign('xoops_module_header', $xoTheme->renderMetas(null, true));
     <{  /php}>
+*}>
     <{  literal}>
     <script type="text/javascript">
         <!--
@@ -23,17 +25,17 @@
 
 <div id="xo-partners-block" class="thumbs txtcenter">
     <div class="floatleft inline" style="margin: 1em;">
-        <{ foreach item=partner from=$block.partners}>
-        <{ if '' != $partner.image}>
+        <{foreach item=partner from=$block.partners}>
+        <{if '' != $partner.image}>
         <a href="<{$xoops_url}>/modules/<{$block.xpDir}>/vpartner.php?id=<{$partner.id}>" rel="external">
-            <img src="<{$partner.image}>" alt="<{$partner.url}>"<{if !empty($partner.title)}> title="<{$partner.title}>"<{/if}>></a><br>
-        <{ /if}>
-        <{ if !empty($partner.title)}>
+            <img src="<{$partner.image}>" alt="<{$partner.url}>"<{if !empty($partner.image_ttl)}> title="<{$partner.image_ttl}>"<{/if}>></a><br>
+        <{/if}>
+        <{if !empty($partner.title)}>
         <a href="<{$xoops_url}>/modules/<{$block.xpDir}>/vpartner.php?id=<{$partner.id}>" rel="external">
             <span id="xo-partnerstitlelink"><{$partner.title}></span></a>
-        <{ /if}>
-        <{ if true == $block.insertBr}><br><{/if}>
-        <{ /foreach}>
+        <{/if}>
+        <{if true == $block.insertBr}><br><{/if}>
+        <{/foreach}>
     </div>
 </div>
 <div class='clear'></div>
