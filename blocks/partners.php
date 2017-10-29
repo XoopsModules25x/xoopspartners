@@ -68,7 +68,7 @@ function b_xoopspartners_show($options)
 
     $partnerHandler = xoops_getModuleHandler('partners', $moduleDirname);
     $pFields         = array('id', 'url', 'image', 'title', 'description');
-    $criteria        = new CriteriaCompo();
+    $criteria        = new CriteriaCompo(new Criteria('status', 1, '='));
     $criteria->setLimit($options[3]);
     if ($options[2]) {
         $criteria->setSort('RAND()');
