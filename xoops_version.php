@@ -31,19 +31,21 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\init
+ * @package      module\Xoopspartners\init
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
+ * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @link         https://xoops.org XOOPS
  */
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
+require_once __DIR__ . '/preloads/autoloader.php';
+
 $moduleDirName = basename(__DIR__);
 
-$modversion = array(
+$modversion = [
     'name'                => _MI_XOOPSPARTNERS_NAME,
     'description'         => _MI_XOOPSPARTNERS_DESC,
     'version'             => 1.13,
@@ -58,11 +60,17 @@ $modversion = array(
     'dirname'             => $moduleDirName,
 
     //help files
-    'helpsection'         =>(array(array('name' => _MI_XOOPSPARTNERS_HELP_OVERVIEW,
-                                         'link' => "page=help"),
-                                   array('name' => _MI_XOOPSPARTNERS_HELP_ISSUES,
-                                         'link' => "page=issues")
-                                   )
+    'helpsection'         =>(
+        [
+            [
+                'name' => _MI_XOOPSPARTNERS_HELP_OVERVIEW,
+                'link' => 'page=help'
+            ],
+            [
+                'name' => _MI_XOOPSPARTNERS_HELP_ISSUES,
+                'link' => 'page=issues'
+            ]
+        ]
     ),
 
     /**
@@ -75,7 +83,7 @@ $modversion = array(
     'release_date'        => '2017/04/08',
     'min_php'             => '5.5',
     'min_xoops'           => '2.5.8',
-    'min_db'              => array('mysql' => '5.0.7', 'mysqli' => '5.0.7'),
+    'min_db'              => ['mysql' => '5.0.7', 'mysqli' => '5.0.7'],
     'min_admin'           => '1.1',
     'dirmoduleadmin'      => 'Frameworks/moduleclasses',
     'icons16'             => 'Frameworks/moduleclasses/icons/16',
@@ -88,9 +96,9 @@ $modversion = array(
      * dB settings
      */
     // All tables should not have any prefix!
-    'sqlfile'     => array('mysql' => 'sql/mysql.sql'),
+    'sqlfile'     => ['mysql' => 'sql/mysql.sql'],
     // Tables created by sql file (without prefix!)
-    'tables'      => array('partners'),
+    'tables'      => ['partners'],
 
     /**
      * Admin things
@@ -105,8 +113,8 @@ $modversion = array(
     /**
      * Blocks
      */
-    'blocks'      => array(
-        array(
+    'blocks'      => [
+        [
             'file'        => 'partners.php',
             'name'        => _MI_XOOPSPARTNERS_NAME,
             'description' => _MI_XOOPSPARTNERS_DESC,
@@ -114,8 +122,8 @@ $modversion = array(
             'edit_func'   => 'b_xoopspartners_edit',
             'options'     => '1|1|1|1|1|hits|DESC|0',
             'template'    => 'xoopspartners_block_site.tpl'
-        )
-    ),
+        ]
+    ],
 
     // Menu
     'hasMain'     => 1,
@@ -123,23 +131,23 @@ $modversion = array(
     /**
      * Templates
      */
-    'templates'   => array(
-        array(
+    'templates'   => [
+        [
             'file'        => 'xoopspartners_index.tpl',
             'description' => _MI_XOOPSPARTNERS_TMPLT1_DESC
-        ),
+        ],
 
-        array(
+        [
             'file'        => 'xoopspartners_join.tpl',
             'description' => _MI_XOOPSPARTNERS_TMPLT2_DESC
-        )
-    ),
+        ]
+    ],
 
     // Config Settings (only for modules that need config settings generated automatically)
 
     // name of config option for accessing its specified value. i.e. $xoopsModuleConfig['storyhome']
-    'config'      => array(
-        array(
+    'config'      => [
+        [
             'name'        => 'cookietime',
 
             // title of this config option displayed in config settings form
@@ -160,103 +168,103 @@ $modversion = array(
             // ignore it if no default
             // 'yesno' formtype must be either 0(no) or 1(yes)
             'default'     => 86400,
-            'options'     => array(
+            'options'     => [
                 '_MI_XOOPSPARTNERS_HOUR'    => '3600',
                 '_MI_XOOPSPARTNERS_3HOURS'  => '10800',
                 '_MI_XOOPSPARTNERS_5HOURS'  => '18000',
                 '_MI_XOOPSPARTNERS_10HOURS' => '36000',
                 '_MI_XOOPSPARTNERS_DAY'     => '86400'
-            )
-        ),
+            ]
+        ],
 
-        array(
+        [
             'name'        => 'modlimit',
             'title'       => '_MI_XOOPSPARTNERS_MLIMIT',
             'description' => '_MI_XOOPSPARTNERS_MLIMITDSC',
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 5
-        ),
+        ],
 
-        array(
+        [
             'name'        => 'modshow',
             'title'       => '_MI_XOOPSPARTNERS_MSHOW',
             'description' => '_MI_XOOPSPARTNERS_MSHOWDSC',
             'formtype'    => 'select',
             'valuetype'   => 'int',
             'default'     => 1,
-            'options'     => array(
+            'options'     => [
                 '_MI_XOOPSPARTNERS_IMAGES' => 1,
                 '_MI_XOOPSPARTNERS_TEXT'   => 2,
                 '_MI_XOOPSPARTNERS_BOTH'   => 3
-            )
-        ),
+            ]
+        ],
 
-        array(
+        [
             'name'        => 'modsort',
             'title'       => '_MI_XOOPSPARTNERS_MSORT',
             'description' => '_MI_XOOPSPARTNERS_MSORTDSC',
             'formtype'    => 'select',
             'valuetype'   => 'text',
             'default'     => 'hits',
-            'options'     => array(
+            'options'     => [
                 '_MI_XOOPSPARTNERS_ID'     => 'id',
                 '_MI_XOOPSPARTNERS_HITS'   => 'hits',
                 '_MI_XOOPSPARTNERS_TITLE'  => 'title',
                 '_MI_XOOPSPARTNERS_WEIGHT' => 'weight'
-            )
-        ),
+            ]
+        ],
 
-        array(
+        [
             'name'        => 'modorder',
             'title'       => '_MI_XOOPSPARTNERS_MORDER',
             'description' => '_MI_XOOPSPARTNERS_MORDERDSC',
             'formtype'    => 'select',
             'valuetype'   => 'text',
             'default'     => 'DESC',
-            'options'     => array(
+            'options'     => [
                 '_ASCENDING'  => 'ASC',
                 '_DESCENDING' => 'DESC'
-            )
-        ),
+            ]
+        ],
 
-        array(
+        [
             'name'        => 'incadmin',
             'title'       => '_MI_XOOPSPARTNERS_INCADMIN',
             'description' => '_MI_XOOPSPARTNERS_INCADMINDSC',
             'formtype'    => 'yesno',
             'valuetype'   => 'int',
             'default'     => 1
-        ),
+        ],
 
         // Max Filesize Upload in kilo bytes
-        array(
+        [
             'name'        => 'maxuploadsize',
             'title'       => '_MI_XOOPSPARTNERS_UPLOADFILESIZE',
             'description' => '_MI_XOOPSPARTNERS_UPLOADFILESIZE_DESC',
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 1048576
-        ),
+        ],
 
         // Max width
-        array(
+        [
             'name'        => 'maxwidth',
             'title'       => '_MI_XOOPSPARTNERS_IMAGE_MAX_WIDTH',
             'description' => '_MI_XOOPSPARTNERS_IMAGE_MAX_WIDTH_DESC',
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 150
-        ),
+        ],
 
         // Max height
-        array(
+        [
             'name'        => 'maxheight',
             'title'       => '_MI_XOOPSPARTNERS_IMAGE_MAX_HEIGHT',
             'description' => '_MI_XOOPSPARTNERS_IMAGE_MAX_WIDTH_DESC',
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 110
-        )
-    )
-);
+        ]
+    ]
+];

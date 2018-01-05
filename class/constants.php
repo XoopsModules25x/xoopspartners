@@ -17,7 +17,7 @@
  * the value(s) before module installation. Additionally the module may not
  * work correctly if trying to upgrade if these values have been changed.
  *
- * @package      module\xoopspartners\class
+ * @package      module\Xoopspartners\class
  * @author       zyspec <owners@zyspec.com>
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}

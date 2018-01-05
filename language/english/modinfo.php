@@ -15,7 +15,7 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\language
+ * @package      module\Xoopspartners\language
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
@@ -50,8 +50,8 @@ define('_MI_XOOPSPARTNERS_10HOURS', '10 hours');
 define('_MI_XOOPSPARTNERS_DAY', '1 day');
 
 //1.13
-define('_MI_XOOPSPARTNERS_HELP_OVERVIEW', "Overview");
-define('_MI_XOOPSPARTNERS_HELP_ISSUES', "Issues");
+define('_MI_XOOPSPARTNERS_HELP_OVERVIEW', 'Overview');
+define('_MI_XOOPSPARTNERS_HELP_ISSUES', 'Issues');
 
 //1.11-1.12
 // index.php

@@ -12,7 +12,7 @@
 /**
  * XOOPS XoopsPartners module
  *
- * @package      module\xoopspartners\include
+ * @package      module\Xoopspartners\include
  * @author       Taiwen Jiang <phppp@users.sourceforge.net>
  * @author       zyspec <owners@zyspec.com>
  * @author       XOOPS Module Development Team
@@ -40,18 +40,18 @@ if ((!defined('XOOPS_ROOT_PATH'))
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_install_xoopspartners(XoopsModule $xoopsModule)
+function xoops_module_pre_install_xoopspartners(XoopsModule $module)
 {
     if (!class_exists('XoopspartnersUtilities')) {
         xoops_load('utilities', 'xoopspartners');
     }
 
     //check for minimum XOOPS version
-    if (!XoopspartnersUtilities::checkXoopsVer($xoopsModule)) {
+    if (!XoopspartnersUtilities::checkXoopsVer($module)) {
         return false;
     }
     // check for minimum PHP version
-    if (!XoopspartnersUtilities::checkPHPVer($xoopsModule)) {
+    if (!XoopspartnersUtilities::checkPHPVer($module)) {
         return false;
     }
 
@@ -67,7 +67,6 @@ function xoops_module_pre_install_xoopspartners(XoopsModule $xoopsModule)
  */
 function xoops_module_install_xoopspartners(XoopsModule $module)
 {
-
     $indexFile = $GLOBALS['xoops']->path('/modules/' . $module->dirname() . '/include/index.html');
 
     //Create the "uploads" directory for the module
@@ -91,20 +90,15 @@ function xoops_module_install_xoopspartners(XoopsModule $module)
  */
 function xoops_module_pre_update_xoopspartners(XoopsModule $module)
 {
-    if (!class_exists('XoopspartnersUtilities')) {
-        xoops_load('utilities', 'xoopspartners');
-    }
+    /** @var xxxx\Helper $helper */
+    /** @var xxxx\Utility $utility */
+    $moduleDirName = basename(dirname(__DIR__));
+    $helper       = xxxx\Helper::getInstance();
+    $utility      = new xxxx\Utility();
 
-    //check for minimum XOOPS version
-    if (!XoopspartnersUtilities::checkXoopsVer($xoopsModule)) {
-        return false;
-    }
-    // check for minimum PHP version
-    if (!XoopspartnersUtilities::checkPHPVer($xoopsModule)) {
-        return false;
-    }
-
-    return true;
+    $xoopsSuccess = $utility::checkVerXoops($module);
+    $phpSuccess   = $utility::checkVerPhp($module);
+    return $xoopsSuccess && $phpSuccess;
 }
 
 /**

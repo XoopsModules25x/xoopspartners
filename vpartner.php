@@ -15,7 +15,7 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\frontside
+ * @package      module\Xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
@@ -35,12 +35,10 @@ if (XoopspartnersConstants::DEFAULT_PID === $id) {
 $partnerObj = $xpPartnersHandler->get($id);
 if (($partnerObj instanceof XoopspartnersPartners)
     && $partnerObj->getVar('url')
-    && (XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status')))
-{
+    && (XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
     if (!isset($GLOBALS['xoopsUser'])        // not a registered user
         || !$xpHelper->isUserAdmin()         // registered but not an admin
-        || $xpHelper->getConfig('incadmin')) // admin but want to include admin hits
-    {
+        || $xpHelper->getConfig('incadmin')) { // admin but want to include admin hits
         if (!isset($_COOKIE['partners'][$id])) {
             setcookie("partners[{$id}]", $id, time() + $xpHelper->getConfig('cookietime'));
             $hitCount = $partnerObj->getVar('hits');

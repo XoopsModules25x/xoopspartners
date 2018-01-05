@@ -10,7 +10,7 @@
 /**
  * Xoopspartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\frontside
+ * @package      module\Xoopspartners\frontside
  * @author       zyspec <owners@zyspec.com>
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}

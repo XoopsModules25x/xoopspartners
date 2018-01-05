@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Xoopspartners;
 /*
  You may not change or alter any portion of this comment or credits of
  supporting developers from this source code or any supporting source code
@@ -12,10 +12,10 @@
 /**
  * Module: Partners
  *
- * @package         module\xoopspartners\class
+ * @package         module\Xoopspartners\class
  * @author          XOOPS Module Development Team
  * @author          Mamba, ZySpec
- * @copyright       http://xoops.org 2001-2016 XOOPS Project
+ * @copyright       https://xoops.org 2001-2016 XOOPS Project
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @since           1.13
  */
@@ -26,7 +26,7 @@
   * Static utilities class to provide common functionality
   *
   */
-class XoopspartnersUtilities
+class Utilities
 {
     /**
      * Verifies XOOPS version meets minimum requirements for this module
@@ -36,19 +36,20 @@ class XoopspartnersUtilities
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkXoopsVer(&$module) {
+    public static function checkXoopsVer(&$module)
+    {
         xoops_loadLanguage('admin', $module->dirname());
         //check for minimum XOOPS version
         $currentVer  = substr(XOOPS_VERSION, 6); // get the numeric part of string
         $currArray   = explode('.', $currentVer);
-        $requiredVer = "" . $module->getInfo('min_xoops'); //making sure it's a string
+        $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
         $reqArray    = explode('.', $requiredVer);
         $success     = true;
         foreach ($reqArray as $k=>$v) {
             if (isset($currArray[$k])) {
                 if ($currArray[$k] > $v) {
                     break;
-                } elseif ($currArray[$k] == $v ) {
+                } elseif ($currArray[$k] == $v) {
                     continue;
                 } else {
                     $success = false;

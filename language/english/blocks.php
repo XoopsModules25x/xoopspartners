@@ -15,7 +15,7 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\language
+ * @package      module\Xoopspartners\language
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}

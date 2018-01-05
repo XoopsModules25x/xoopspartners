@@ -15,7 +15,7 @@
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\frontside
+ * @package      module\Xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
@@ -47,11 +47,12 @@ if (!empty($modConfigs['modlimit']) && ($start > 0)) {
     $criteria->setStart($start);
 }
 
-$partnerFields = array('id', 'hits', 'url', 'image', 'title', 'description');
+$partnerFields = ['id', 'hits', 'url', 'image', 'title', 'description'];
 $partnersArray = $xpPartnersHandler->getAll($criteria, $partnerFields, false, false);
 $numPartners   = is_array($partnersArray) ? count($partnersArray) : 0;
 
-$GLOBALS['xoopsTpl']->assign('partner_join',
+$GLOBALS['xoopsTpl']->assign(
+    'partner_join',
                         ($GLOBALS['xoopsUser'] instanceof XoopsUser)
                         ? XoopspartnersConstants::JOIN_OK
                         : XoopspartnersConstants::JOIN_NOT_OK
@@ -68,19 +69,18 @@ foreach ($partnersArray as $thisPartner) {
     if ($modShow & XoopspartnersConstants::SHOW_IMAGE) { // want image
         if (empty($thisPartner['image'])) { //but there isn't one
                 $thisPartner['image'] = $thisPartner['title'];
-            } else {
+        } else {
             $thisPartner['image'] =
             "<img src='{$thisPartner['image']}' "
             .   "alt='{$thisPartner['url']}' "
             .   "title='{$thisPartner['title']}'>";
-            }
-            } else {
+        }
+    } else {
         $thisPartner['image'] = '';
-            }
+    }
     if ((($modShow & XoopspartnersConstants::SHOW_TITLE) // want text or invalid setting
         || (0 === ($modShow & (XoopspartnersConstants::SHOW_TITLE && XoopspartnersConstants::SHOW_IMAGE))))
-        && ($thisPartner['image'] !== $thisPartner['title'])) // and valid image saved
-    {
+        && ($thisPartner['image'] !== $thisPartner['title'])) { // and valid image saved
         $sep = $modShow ? '' : '<br>';
         $thisPartner['image'] = $thisPartner['image'] . $sep . $thisPartner['title'];
     }
@@ -101,7 +101,8 @@ if (0 !== $modLimit) {
     $nav     = new XoopsPageNav($numPartners, $modLimit, $start);
     $pageNav = $nav->renderImageNav();
 }
-$GLOBALS['xoopsTpl']->assign(array(
+$GLOBALS['xoopsTpl']->assign(
+    [
                                  'lang_partner'      => _MD_XOOPSPARTNERS_PARTNER,
                                  'lang_desc'         => _MD_XOOPSPARTNERS_DESCRIPTION,
                                  'lang_hits'         => _MD_XOOPSPARTNERS_HITS,
@@ -109,6 +110,6 @@ $GLOBALS['xoopsTpl']->assign(array(
                                  'lang_main_partner' => _MD_XOOPSPARTNERS_PARTNERS,
                                 //'sitename'          => $GLOBALS['xoopsConfig']['sitename'],
                                 'pagenav'           => $pageNav
-                             )
+    ]
 );
 include_once __DIR__ . '/footer.php';

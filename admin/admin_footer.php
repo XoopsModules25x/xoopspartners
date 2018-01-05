@@ -10,11 +10,11 @@
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\admin
+ * @package      module\Xoopspartners\admin
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
+ * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @link         https://xoops.org XOOPS
  * @since        1.11
  */
 use Xmf\Module\Helper;
@@ -32,9 +32,9 @@ echo "<div class='adminfooter'>\n"
    .     "title='" . $xpModule->getInfo('author_website_name') . "'></a>\n"
    . "</div>\n"
    . "<div class='center smallsmall italic pad5'>\n"
-   . "  <strong>" . ucfirst($moduleDirName) . "</strong> " . _AM_XOOPSPARTNERS_ADMIN_FOOTER_STR1
+     . '  <strong>' . ucfirst($moduleDirName) . '</strong> ' . _AM_XOOPSPARTNERS_ADMIN_FOOTER_STR1
    . " <a class='tooltip' rel='external' href='" . $xpModule->getInfo('author_website_url') . "' "
-   .      "title='" . _AM_XOOPSPARTNERS_ADMIN_FOOTER_STR2 . " " . $xpModule->getInfo('author_website_name') . "'>"
+   .      "title='" . _AM_XOOPSPARTNERS_ADMIN_FOOTER_STR2 . ' ' . $xpModule->getInfo('author_website_name') . "'>"
    .      $xpModule->getInfo('author_website_name') . "</a>\n"
    . "</div>\n"
    . "</div>\n";
