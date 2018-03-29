@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Xoopspartners;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -26,12 +27,12 @@
  * @since        1.12
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Interface XoopspartnersConstants
+ * class Constants
  */
-interface XoopspartnersConstants
+class Constants
 {
     /**#@+
      * Constant definition

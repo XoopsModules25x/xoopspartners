@@ -37,8 +37,8 @@ $xpHelper->loadLanguage('main');
 $myts = \MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
-    include_once $GLOBALS['xoops']->path('/class/template.php');
-    $GLOBALS['xoopsTpl'] = new XoopsTpl();
+    require_once $GLOBALS['xoops']->path('/class/template.php');
+    $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
 
 xoops_cp_header();

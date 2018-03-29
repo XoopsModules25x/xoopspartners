@@ -37,8 +37,8 @@ include $GLOBALS['xoops']->path('/header.php');
 $xpPartnersHandler = $xpHelper->getHandler('partners');
 $modConfigs        = $xpHelper->getConfig();
 
-$criteria = new CriteriaCompo();
-$criteria->add(new Criteria('status', XoopspartnersConstants::STATUS_ACTIVE, '='));
+$criteria = new \CriteriaCompo();
+$criteria->add(new \Criteria('status', XoopspartnersConstants::STATUS_ACTIVE, '='));
 $criteria->setSort($modConfigs['modsort']);
 $criteria->setOrder($modConfigs['modorder']);
 $criteria->setLimit($modConfigs['modlimit']);
@@ -53,7 +53,7 @@ $numPartners   = is_array($partnersArray) ? count($partnersArray) : 0;
 
 $GLOBALS['xoopsTpl']->assign(
     'partner_join',
-                        ($GLOBALS['xoopsUser'] instanceof XoopsUser)
+                        ($GLOBALS['xoopsUser'] instanceof \XoopsUser)
                         ? XoopspartnersConstants::JOIN_OK
                         : XoopspartnersConstants::JOIN_NOT_OK
 );
@@ -79,7 +79,7 @@ foreach ($partnersArray as $thisPartner) {
         $thisPartner['image'] = '';
     }
     if ((($modShow & XoopspartnersConstants::SHOW_TITLE) // want text or invalid setting
-        || (0 === ($modShow & (XoopspartnersConstants::SHOW_TITLE && XoopspartnersConstants::SHOW_IMAGE))))
+        || (0 === ($modShow & (\XoopspartnersConstants::SHOW_TITLE && XoopspartnersConstants::SHOW_IMAGE))))
         && ($thisPartner['image'] !== $thisPartner['title'])) { // and valid image saved
         $sep = $modShow ? '' : '<br>';
         $thisPartner['image'] = $thisPartner['image'] . $sep . $thisPartner['title'];
@@ -98,7 +98,7 @@ foreach ($partnersArray as $thisPartner) {
 $modLimit = (int)$modConfigs['modlimit'];
 $pageNav  = null;
 if (0 !== $modLimit) {
-    $nav     = new XoopsPageNav($numPartners, $modLimit, $start);
+    $nav     = new \XoopsPageNav($numPartners, $modLimit, $start);
     $pageNav = $nav->renderImageNav();
 }
 $GLOBALS['xoopsTpl']->assign(
@@ -112,4 +112,4 @@ $GLOBALS['xoopsTpl']->assign(
                                 'pagenav'           => $pageNav
     ]
 );
-include_once __DIR__ . '/footer.php';
+require_once __DIR__ . '/footer.php';

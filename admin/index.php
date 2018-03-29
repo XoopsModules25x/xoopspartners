@@ -31,7 +31,7 @@ $moduleAdmin = Admin::getInstance();
 $xpPartnersHandler = $xpHelper->getHandler('partners');
 
 $totalPartners          = $xpPartnersHandler->getCount();
-$totalNonActivePartners = $xpPartnersHandler->getCount(new Criteria('status', 0, '='));
+$totalNonActivePartners = $xpPartnersHandler->getCount(new \Criteria('status', 0, '='));
 $totalActivePartners    = $totalPartners - $totalNonActivePartners;
 
 $moduleAdmin->addInfoBox(_MD_XOOPSPARTNERS_DASHBOARD);

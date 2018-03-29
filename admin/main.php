@@ -79,7 +79,7 @@ switch ($op) {
            . "      </thead>\n"
            . "      <tbody\n";
 
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort('status DESC, weight ASC, title');
         $criteria->setOrder('DESC');
         $partnerObjs = $xpPartnersHandler->getAll($criteria);
@@ -152,7 +152,7 @@ switch ($op) {
                          . '           ' . $GLOBALS['xoopsSecurity']->getTokenHTML() . "\n"
                . "        </td>\n"
                . "      </tr>\n";
-            $class = ('odd' == $class) ? 'even' : 'odd';
+            $class = ('odd' === $class) ? 'even' : 'odd';
         }
         if (empty($partnerObjs)) {
             echo "      <tr>\n"
@@ -245,18 +245,18 @@ switch ($op) {
         $moduleAdmin->displayNavigation('main.php?op=partnersAdminAdd');
 
         include $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-        $form         = new XoopsThemeForm(_AM_XOOPSPARTNERS_ADDPARTNER, 'addform', 'main.php', 'post', true);
-        $formWeight   = new XoopsFormText(
+        $form         = new \XoopsThemeForm(_AM_XOOPSPARTNERS_ADDPARTNER, 'addform', 'main.php', 'post', true);
+        $formWeight   = new \XoopsFormText(
             _AM_XOOPSPARTNERS_WEIGHT,
                                           'weight',
                                           3,
                                           10,
                                           XoopspartnersConstants::DEFAULT_WEIGHT
         );
-        $formImage    = new XoopsFormText(_AM_XOOPSPARTNERS_IMAGE, 'image', 50, 150, 'http://');
-        $formUrl      = new XoopsFormText(_AM_XOOPSPARTNERS_URL, 'url', 50, 150, 'http://');
-        $formTitle    = new XoopsFormText(_AM_XOOPSPARTNERS_TITLE, 'title', 50, 50);
-        $formDesc     = new XoopsFormTextArea(_AM_XOOPSPARTNERS_DESCRIPTION, 'description', '', 5, 51);
+        $formImage    = new \XoopsFormText(_AM_XOOPSPARTNERS_IMAGE, 'image', 50, 150, 'http://');
+        $formUrl      = new \XoopsFormText(_AM_XOOPSPARTNERS_URL, 'url', 50, 150, 'http://');
+        $formTitle    = new \XoopsFormText(_AM_XOOPSPARTNERS_TITLE, 'title', 50, 50);
+        $formDesc     = new \XoopsFormTextArea(_AM_XOOPSPARTNERS_DESCRIPTION, 'description', '', 5, 51);
         $statOnTxt    = "<img src='" . Admin::iconUrl('on.png', '16') . "' "
                       .   "class='tooltip floatcenter1' "
                       .   "alt='" . _AM_XOOPSPARTNERS_ACTIVE . "'>"
@@ -265,15 +265,15 @@ switch ($op) {
                       .   "class='tooltip floatcenter1' "
                       .   "alt='" . _AM_XOOPSPARTNERS_INACTIVE . "'>"
                         . '&nbsp;' . _AM_XOOPSPARTNERS_INACTIVE;
-        $formStat     = new XoopsFormRadioYN(
+        $formStat     = new \XoopsFormRadioYN(
             _AM_XOOPSPARTNERS_STATUS,
                                              'status',
                                              XoopspartnersConstants::STATUS_ACTIVE,
                                              $statOnTxt,
                                              $statOffTxt
         );
-        $opHidden     = new XoopsFormHidden('op', 'addPartner');
-        $submitButton = new XoopsFormButton('', 'submit', _AM_XOOPSPARTNERS_ADDPARTNER, 'submit');
+        $opHidden     = new \XoopsFormHidden('op', 'addPartner');
+        $submitButton = new \XoopsFormButton('', 'submit', _AM_XOOPSPARTNERS_ADDPARTNER, 'submit');
         $form->addElement($formTitle, true);
         $form->addElement($formImage);
         $form->addElement($formUrl, true);
@@ -334,13 +334,13 @@ switch ($op) {
              * htmlspecialchars via XoopsObject getVar
              */
             include $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-            $form       = new XoopsThemeForm(_AM_XOOPSPARTNERS_EDITPARTNER, 'editform', 'main.php', 'post', true);
-            $formWeight = new XoopsFormText(_AM_XOOPSPARTNERS_WEIGHT, 'weight', 3, 10, $partnerVars['weight']);
-            $formHits   = new XoopsFormText(_AM_XOOPSPARTNERS_HITS, 'hits', 3, 10, $partnerVars['hits']);
-            $formImage  = new XoopsFormText(_AM_XOOPSPARTNERS_IMAGE, 'image', 50, 150, $partnerVars['image']);
-            $formUrl    = new XoopsFormText(_AM_XOOPSPARTNERS_URL, 'url', 50, 150, $partnerVars['url']);
-            $formTitle  = new XoopsFormText(_AM_XOOPSPARTNERS_TITLE, 'title', 50, 50, $partnerVars['title']);
-            $formDesc   = new XoopsFormTextArea(
+            $form       = new \XoopsThemeForm(_AM_XOOPSPARTNERS_EDITPARTNER, 'editform', 'main.php', 'post', true);
+            $formWeight = new \XoopsFormText(_AM_XOOPSPARTNERS_WEIGHT, 'weight', 3, 10, $partnerVars['weight']);
+            $formHits   = new \XoopsFormText(_AM_XOOPSPARTNERS_HITS, 'hits', 3, 10, $partnerVars['hits']);
+            $formImage  = new \XoopsFormText(_AM_XOOPSPARTNERS_IMAGE, 'image', 50, 150, $partnerVars['image']);
+            $formUrl    = new \XoopsFormText(_AM_XOOPSPARTNERS_URL, 'url', 50, 150, $partnerVars['url']);
+            $formTitle  = new \XoopsFormText(_AM_XOOPSPARTNERS_TITLE, 'title', 50, 50, $partnerVars['title']);
+            $formDesc   = new \XoopsFormTextArea(
                 _AM_XOOPSPARTNERS_DESCRIPTION,
                                                 'description',
                                                 $partnerVars['description'],
@@ -355,7 +355,7 @@ switch ($op) {
                         .   "class='tooltip floatcenter1' "
                         .   "alt='" . _AM_XOOPSPARTNERS_INACTIVE . "'>"
                         .  _AM_XOOPSPARTNERS_INACTIVE;
-            $formStat   = new XoopsFormRadioYN(
+            $formStat   = new \XoopsFormRadioYN(
                 _AM_XOOPSPARTNERS_STATUS,
                                                'status',
                                                $partnerVars['status'],
@@ -363,7 +363,7 @@ switch ($op) {
                                                $statOffTxt
             );
 
-            $submitButton = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
+            $submitButton = new \XoopsFormButton('', 'submit', _SUBMIT, 'submit');
             $form->addElement($formTitle, true);
             $form->addElement($formImage);
             $form->addElement($formUrl, true);
@@ -371,8 +371,8 @@ switch ($op) {
             $form->addElement($formDesc, true);
             $form->addElement($formHits);
             $form->addElement($formStat);
-            $form->addElement(new XoopsFormHidden('id', $id));
-            $form->addElement(new XoopsFormHidden('op', 'updatePartner'));
+            $form->addElement(new \XoopsFormHidden('id', $id));
+            $form->addElement(new \XoopsFormHidden('op', 'updatePartner'));
             $form->addElement($submitButton);
             $form->display();
             include __DIR__ . '/admin_footer.php';
@@ -430,7 +430,7 @@ switch ($op) {
         break;
 
     case 'delPartner':
-        if ((XoopspartnersConstants::CONFIRM_OK === $del) && ($id > XoopspartnersConstants::DEFAULT_PID)) {
+        if ((\XoopspartnersConstants::CONFIRM_OK === $del) && ($id > XoopspartnersConstants::DEFAULT_PID)) {
             $xpPartnersHandler = $xpHelper->getHandler('partners');
             $partnerObj        = $xpPartnersHandler->get($id);
             if ($partnerObj instanceof XoopspartnersPartners) {

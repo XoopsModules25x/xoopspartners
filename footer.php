@@ -19,7 +19,7 @@
  */
 use Xmf\Module\Helper;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Module specific tpl includes
@@ -29,4 +29,4 @@ if (is_object($xoTheme)) {
     $xoTheme->addStylesheet($xpHelper->url('assets/css/partners.css'));
 }
 
-include_once $GLOBALS['xoops']->path('/footer.php');
+require_once $GLOBALS['xoops']->path('/footer.php');

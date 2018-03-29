@@ -26,7 +26,7 @@ use Xmf\Request;
 use Xmf\Module\Helper;
 
 require __DIR__ . '/header.php';
-if (!isset($GLOBALS['xoopsUser']) || !$GLOBALS['xoopsUser'] instanceof XoopsUser) {
+if (!isset($GLOBALS['xoopsUser']) || !$GLOBALS['xoopsUser'] instanceof \XoopsUser) {
     $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);
 }
 
@@ -86,7 +86,7 @@ switch ($op) {
             if (preg_match('^http[s]?:\/\/[^\s]', $image)) {
                 // image is from external source
                 xoops_load('xoopsmediauploader');
-                $uploader = new XoopsMediaUploader(
+                $uploader = new \XoopsMediaUploader(
                         XOOPS_UPLOAD_PATH . "/{$moduleDirName}",
                                                        $allowed_mimetypes,
                                                        $maxFileSize
@@ -109,7 +109,7 @@ switch ($op) {
                                              'sitename'          => $GLOBALS['xoopsConfig']['sitename']
                     ]
                     );
-                include_once __DIR__ . '/footer.php';
+                require_once __DIR__ . '/footer.php';
                 exit();
             }
         }
@@ -165,20 +165,20 @@ switch ($op) {
         break;
     default:
     include $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-    $form = new XoopsThemeForm('', 'joinform', 'join.php', 'post', true);
+    $form = new \XoopsThemeForm('', 'joinform', 'join.php', 'post', true);
     $form->setExtra('enctype="multipart/form-data"');
-        $titlePartner = new XoopsFormText(_MD_XOOPSPARTNERS_TITLE, 'title', 50, 50);
-        $imagePartner = new XoopsFormText(_MD_XOOPSPARTNERS_IMAGE, 'image', 50, 150, 'http://');
-        $urlPartner   = new XoopsFormText(_MD_XOOPSPARTNERS_URL, 'url', 50, 150, 'http://');
-        $descrPartner = new XoopsFormTextArea(_MD_XOOPSPARTNERS_DESCRIPTION, 'description', '', 5, 51);
-        $opHidden     = new XoopsFormHidden('op', 'sendMail');
-    $submitButton       = new XoopsFormButton('', 'dbsubmit', _MD_XOOPSPARTNERS_SEND, 'submit');
+        $titlePartner = new \XoopsFormText(_MD_XOOPSPARTNERS_TITLE, 'title', 50, 50);
+        $imagePartner = new \XoopsFormText(_MD_XOOPSPARTNERS_IMAGE, 'image', 50, 150, 'http://');
+        $urlPartner   = new \XoopsFormText(_MD_XOOPSPARTNERS_URL, 'url', 50, 150, 'http://');
+        $descrPartner = new \XoopsFormTextArea(_MD_XOOPSPARTNERS_DESCRIPTION, 'description', '', 5, 51);
+        $opHidden     = new \XoopsFormHidden('op', 'sendMail');
+    $submitButton       = new \XoopsFormButton('', 'dbsubmit', _MD_XOOPSPARTNERS_SEND, 'submit');
     $form->addElement($titlePartner, true);
     $form->addElement($imagePartner);
     $form->addElement($urlPartner, true);
         $form->addElement($descrPartner, true);
         /* @todo add captcha to join form */
-//        $form->addElement(new XoopsFormCaptcha());
+//        $form->addElement(new \XoopsFormCaptcha());
         $form->addElement($opHidden);
     $form->addElement($submitButton);
     $content = $form->render();
@@ -192,4 +192,4 @@ switch ($op) {
         );
 }
 
-include_once __DIR__ . '/footer.php';
+require_once __DIR__ . '/footer.php';

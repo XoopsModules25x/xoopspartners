@@ -22,7 +22,7 @@
 $moduleDirName = basename(dirname(__DIR__));
 $xpHelper = \Xmf\Module\Helper::getHelper($modueDirName);
 $xpHelper->loadLanguage('admin');
-//include_once dirname(__DIR__) . "/language/english/admin.php"; // messages will be in english
+//require_once dirname(__DIR__) . "/language/english/admin.php"; // messages will be in english
 
 session_start();
 
@@ -232,20 +232,20 @@ if (!empty($issuesObjs)) {
            .         "</td>\n"
            . "        <td class=\"{$cssClass} center\">{$dispDate}</td>\n"
            . "        <td class=\"{$cssClass} left\" style=\"padding-left: 2em;\">"
-           .            htmlspecialchars($issue->title)
+             . htmlspecialchars($issue->title, ENT_QUOTES | ENT_HTML5)
            .         "</td>\n"
            . "        <td class=\"{$cssClass} center\">"
-             . '<a href="' . htmlspecialchars($issue->user->html_url) . '" '
-             . 'target="_blank">' . htmlspecialchars($issue->user->login) . '</a>'
+             . '<a href="' . htmlspecialchars($issue->user->html_url, ENT_QUOTES | ENT_HTML5) . '" '
+             . 'target="_blank">' . htmlspecialchars($issue->user->login, ENT_QUOTES | ENT_HTML5) . '</a>'
            .         "</td>\n"
            . "      </tr>\n";
-        $cssClass = ('odd' == $cssClass) ? 'even' : 'odd';
+        $cssClass = ('odd' === $cssClass) ? 'even' : 'odd';
     }
 }
 
 if (!empty($err)) {
     echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">"
-       .              htmlspecialchars($err)
+         . htmlspecialchars($err, ENT_QUOTES | ENT_HTML5)
        .     "</td></tr>\n";
 } elseif (0 == $i) { // no issues found
     echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">"

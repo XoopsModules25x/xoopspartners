@@ -23,7 +23,7 @@
  * @link         https://xoops.org XOOPS
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class XoopspartnersPartners
@@ -43,7 +43,7 @@ class XoopspartnersPartners extends XoopsObject
      */
     public function __construct($id = null)
     {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
 
         $this->initVar('id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('weight', XOBJ_DTYPE_INT, null, false, 10);
@@ -87,7 +87,7 @@ class XoopspartnersPartnersHandler extends XoopsPersistableObjectHandler
      *
      * @param XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'partners', 'XoopspartnersPartners', 'id', 'title');
     }

@@ -28,14 +28,14 @@ require __DIR__ . '/header.php';
 $xpPartnersHandler = $xpHelper->getHandler('partners');
 
 $id = Request::getInt('id', XoopspartnersConstants::DEFAULT_PID, 'GET');
-if (XoopspartnersConstants::DEFAULT_PID === $id) {
+if (\XoopspartnersConstants::DEFAULT_PID === $id) {
     $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }
 
 $partnerObj = $xpPartnersHandler->get($id);
 if (($partnerObj instanceof XoopspartnersPartners)
     && $partnerObj->getVar('url')
-    && (XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
+    && (\XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
     if (!isset($GLOBALS['xoopsUser'])        // not a registered user
         || !$xpHelper->isUserAdmin()         // registered but not an admin
         || $xpHelper->getConfig('incadmin')) { // admin but want to include admin hits
@@ -49,7 +49,7 @@ if (($partnerObj instanceof XoopspartnersPartners)
     }
     echo "<html>\n"
        . "  <head>\n"
-       . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url')) . "'>\n"
+       . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url'), ENT_QUOTES | ENT_HTML5) . "'>\n"
        . "  </head>\n"
        . "  <body></body>\n"
        . "</html>\n";

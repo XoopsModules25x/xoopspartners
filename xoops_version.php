@@ -39,7 +39,7 @@
  * @link         https://xoops.org XOOPS
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
@@ -145,7 +145,7 @@ $modversion = [
 
     // Config Settings (only for modules that need config settings generated automatically)
 
-    // name of config option for accessing its specified value. i.e. $xoopsModuleConfig['storyhome']
+    // name of config option for accessing its specified value. i.e. $helper->getConfig('storyhome')
     'config'      => [
         [
             'name'        => 'cookietime',

@@ -51,7 +51,7 @@ function b_xoopspartners_show($options)
     $block             = ['xpDir' => $moduleDirName];
 
     $pFields         = ['id', 'url', 'image', 'title', 'description'];
-    $criteria        = new CriteriaCompo(new Criteria('status', 1, '='));
+    $criteria        = new \CriteriaCompo(new \Criteria('status', 1, '='));
     $criteria->setLimit($options[3]);
     if ($options[2]) {
         $criteria->setSort('RAND()');

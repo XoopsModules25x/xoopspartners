@@ -27,7 +27,7 @@
 
 if ((!defined('XOOPS_ROOT_PATH'))
     || !isset($GLOBALS['xoopsUser'])
-    || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
+    || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()
 ) {
     exit('Restricted access' . PHP_EOL);
@@ -40,7 +40,7 @@ if ((!defined('XOOPS_ROOT_PATH'))
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_install_xoopspartners(XoopsModule $module)
+function xoops_module_pre_install_xoopspartners(\XoopsModule $module)
 {
     if (!class_exists('XoopspartnersUtilities')) {
         xoops_load('utilities', 'xoopspartners');
@@ -65,7 +65,7 @@ function xoops_module_pre_install_xoopspartners(XoopsModule $module)
  *
  * @return bool true if installation successful, false if not
  */
-function xoops_module_install_xoopspartners(XoopsModule $module)
+function xoops_module_install_xoopspartners(\XoopsModule $module)
 {
     $indexFile = $GLOBALS['xoops']->path('/modules/' . $module->dirname() . '/include/index.html');
 
@@ -88,7 +88,7 @@ function xoops_module_install_xoopspartners(XoopsModule $module)
  *
  * @return bool true if successfully ready to update module, false if not
  */
-function xoops_module_pre_update_xoopspartners(XoopsModule $module)
+function xoops_module_pre_update_xoopspartners(\XoopsModule $module)
 {
     /** @var xxxx\Helper $helper */
     /** @var xxxx\Utility $utility */
@@ -110,7 +110,7 @@ function xoops_module_pre_update_xoopspartners(XoopsModule $module)
  *
  * @return bool true if successfully updated module, false if not
  */
-function xoops_module_update_xoopspartners(XoopsModule $module, $curr_version = null)
+function xoops_module_update_xoopspartners(\XoopsModule $module, $curr_version = null)
 {
     return true;
 }
@@ -122,7 +122,7 @@ function xoops_module_update_xoopspartners(XoopsModule $module, $curr_version = 
  *
  * @return bool true if successfully executed, false if not
  */
-function xoops_module_pre_uninstall_xoopspartners(XoopsModule $module)
+function xoops_module_pre_uninstall_xoopspartners(\XoopsModule $module)
 {
     return true;
 }
@@ -134,7 +134,7 @@ function xoops_module_pre_uninstall_xoopspartners(XoopsModule $module)
  *
  * @return bool true if successfully executed uninstall of module, false if not
  */
-function xoops_module_uninstall_xoopspartners(XoopsModule $module)
+function xoops_module_uninstall_xoopspartners(\XoopsModule $module)
 {
     return true;
 }
