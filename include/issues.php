@@ -46,8 +46,8 @@ function xoopspartnersHandleHeaderLine($curl, $hdrLine)
 /**
  *
  * @param string $hdr
- * @param array $hdrs
- *
+ * @param        $hdrArray
+ * @param bool   $asArray
  * @return array|false array($hdr=>value) or false if not found
  */
 function xoopspartnersGetHeaderFromArray($hdr, $hdrArray, $asArray = false)
