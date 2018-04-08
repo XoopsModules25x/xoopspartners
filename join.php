@@ -31,7 +31,7 @@ if (!isset($GLOBALS['xoopsUser']) || !$GLOBALS['xoopsUser'] instanceof \XoopsUse
 }
 
 /** @var string $xoopsOption */
-$xoopsOption['template_main'] = 'xoopspartners_join.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'xoopspartners_join.tpl';
 include $GLOBALS['xoops']->path('/header.php');
 
 $op     = Request::getCmd('op', '', 'POST');
@@ -172,7 +172,7 @@ switch ($op) {
         $urlPartner   = new \XoopsFormText(_MD_XOOPSPARTNERS_URL, 'url', 50, 150, 'http://');
         $descrPartner = new \XoopsFormTextArea(_MD_XOOPSPARTNERS_DESCRIPTION, 'description', '', 5, 51);
         $opHidden     = new \XoopsFormHidden('op', 'sendMail');
-    $submitButton       = new \XoopsFormButton('', 'dbsubmit', _MD_XOOPSPARTNERS_SEND, 'submit');
+    $submitButton       = new \XoopsFormButton('', 'dbsubmit', _MD_XOOPSPARTNERS_SUBMIT, 'submit');
     $form->addElement($titlePartner, true);
     $form->addElement($imagePartner);
     $form->addElement($urlPartner, true);

@@ -31,7 +31,7 @@ require __DIR__ . '/header.php';
 $start = Request::getInt('start', 0, 'GET');
 
 /** @var string $xoopsOption */
-$xoopsOption['template_main'] = 'xoopspartners_index.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'xoopspartners_index.tpl';
 include $GLOBALS['xoops']->path('/header.php');
 
 $xpPartnersHandler = $xpHelper->getHandler('partners');
