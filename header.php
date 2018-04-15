@@ -22,13 +22,13 @@
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-use Xmf\Module\Helper;
 
 $moduleDirName = basename(__DIR__);
-require __DIR__ . '/../../mainfile.php';
+require  dirname(dirname(__DIR__)) . '/mainfile.php';
 xoops_load('pagenav');
 if (!interface_exists('XoopspartnersConstants')) {
     require_once __DIR__ . '/class/constants.php';
 }
 
-$xpHelper = Helper::getHelper($moduleDirName);
+//$helper = Helper::getHelper($moduleDirName);
+$helper  = \XoopsModules\Rating\Helper::getInstance();

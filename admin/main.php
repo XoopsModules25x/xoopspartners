@@ -30,7 +30,7 @@ use Xmf\Module\Admin;
 
 require __DIR__ . '/admin_header.php';
 $moduleAdmin   = Admin::getInstance();
-$pathImageIcon = $GLOBALS['xoops']->url('www/' . $xpHelper->getModule()->getInfo('icons16'));
+$pathImageIcon = $GLOBALS['xoops']->url('www/' . $helper->getModule()->getInfo('icons16'));
 
 $myts = \MyTextSanitizer::getInstance();
 
@@ -58,7 +58,7 @@ switch ($op) {
 
     case 'partnersAdmin':
     default:
-        $xpPartnersHandler = $xpHelper->getHandler('partners');
+        $xpPartnersHandler = $helper->getHandler('partners');
 
         $moduleAdmin->displayNavigation('main.php');
         $moduleAdmin->addItemButton(_AM_XOOPSPARTNERS_ADD, 'main.php' . '?op=partnersAdminAdd', $icon = 'add');
@@ -182,13 +182,13 @@ switch ($op) {
 
     case 'reorderPartners':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            $xpHelper->redirect(
+            $helper->redirect(
                 'admin/main.php',
                             XoopsPartnersConstants::REDIRECT_DELAY_MEDIUM,
                             implode('<br>', $GLOBALS['xoopsSecurity']->getErrors())
             );
         }
-        $xpPartnersHandler = $xpHelper->getHandler('partners');
+        $xpPartnersHandler = $helper->getHandler('partners');
         $partnerCount      = $xpPartnersHandler->getCount();
         if ($partnerCount) {
             foreach ($weight as $id => $order) {
@@ -207,9 +207,9 @@ switch ($op) {
                     }
                 }
             }
-            $xpHelper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
+            $helper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
         } else {
-            $xpHelper->redirect(
+            $helper->redirect(
                 'admin/main.php?op=partnersAdminAdd',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _AM_XOOPSPARTNERS_EMPTYDATABASE,
@@ -219,7 +219,7 @@ switch ($op) {
         break;
 
     case 'reorderAutoPartners':
-        $xpPartnersHandler = $xpHelper->getHandler('partners');
+        $xpPartnersHandler = $helper->getHandler('partners');
         $partnerObjs       = $xpPartnersHandler->getAll(null, ['weight']);
         $partnerCount     = count($partnerObjs);
         $weight           = XoopspartnersConstants::DEFAULT_WEIGHT;
@@ -230,9 +230,9 @@ switch ($op) {
                 $xpPartnersHandler->insert($thisObj);
                 unset($thisObj);
             }
-            $xpHelper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
+            $helper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
         } else {
-            $xpHelper->redirect(
+            $helper->redirect(
                 'admin/main.php?op=partnersAdminAdd',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _AM_XOOPSPARTNERS_EMPTYDATABASE,
@@ -287,7 +287,7 @@ switch ($op) {
         break;
 
     case 'addPartner':
-        $xpPartnersHandler = $xpHelper->getHandler('partners');
+        $xpPartnersHandler = $helper->getHandler('partners');
         $newPartner        = $xpPartnersHandler->create();
         $status            = ((!empty($status)) && ((int)$status > 0))
                              ? (int)$status
@@ -299,7 +299,7 @@ switch ($op) {
         $image            = $myts->addSlashes(formatURL($image));
         $description       = trim($description);
         if (empty($title) || empty($url) || empty($description)) {
-            $xpHelper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XOOPSPARTNERS_BESURE);
+            $helper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XOOPSPARTNERS_BESURE);
         }
         $newPartner->setVars([
                                  'url'         => $myts->addSlashes(formatURL($url)),
@@ -311,9 +311,9 @@ switch ($op) {
                              ]);
 
         if ($GLOBALS['xoopsSecurity']->check() && $xpPartnersHandler->insert($newPartner)) {
-            $xpHelper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
+            $helper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
         } else {
-            $xpHelper->redirect(
+            $helper->redirect(
                 'admin/main.php',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _AM_XOOPSPARTNERS_NOTUPDATED . '<br>'
@@ -326,7 +326,7 @@ switch ($op) {
         $moduleAdmin->displayNavigation('main.php');
         $id = $id > XoopspartnersConstants::DEFAULT_PID ? $id : XoopspartnersConstants::DEFAULT_PID;
 
-        $xpPartnersHandler = $xpHelper->getHandler('partners');
+        $xpPartnersHandler = $helper->getHandler('partners');
         $partnerObj        = $xpPartnersHandler->get($id);
         if (!empty($partnerObj) && ($partnerObj instanceof XoopspartnersPartners)) {
             $partnerVars = $partnerObj->getValues();
@@ -377,7 +377,7 @@ switch ($op) {
             $form->display();
             include __DIR__ . '/admin_footer.php';
         } else {
-            $xpHelper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XOOPSPARTNERS_INVALIDID);
+            $helper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XOOPSPARTNERS_INVALIDID);
         }
         break;
 
@@ -397,14 +397,14 @@ switch ($op) {
                        : XoopspartnersConstants::DEFAULT_WEIGHT;
         $hits        = $hits > 0 ? $hits : 0;
         if (empty($title) || empty($url) || empty($id) || empty($description)) {
-            $xpHelper->redirect(
+            $helper->redirect(
                 "admin/main.php?op=edit_partner&amp;id={$id}",
                             XoopspartnersConstants::REDIRECT_DELAY_SHORT,
                             _AM_XOOPSPARTNERS_BESURE
             );
         }
 
-        $xpPartnersHandler = $xpHelper->getHandler('partners');
+        $xpPartnersHandler = $helper->getHandler('partners');
         $partnerObj        = $xpPartnersHandler->get($id);
         if ($GLOBALS['xoopsSecurity']->check() && ($partnerObj instanceof XoopspartnersPartners)) {
             $partnerObj->setVar('url', $myts->addSlashes(formatURL($url)));
@@ -416,10 +416,10 @@ switch ($op) {
             $partnerObj->setVar('image', $image);
             $success = $xpPartnersHandler->insert($partnerObj);
             if ($success) {
-                $xpHelper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
+                $helper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
             }
         }
-        $xpHelper->redirect(
+        $helper->redirect(
             'admin/main.php',
                         XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                         _AM_XOOPSPARTNERS_NOTUPDATED . '<br>' . implode(
@@ -431,14 +431,14 @@ switch ($op) {
 
     case 'delPartner':
         if ((\XoopspartnersConstants::CONFIRM_OK === $del) && ($id > XoopspartnersConstants::DEFAULT_PID)) {
-            $xpPartnersHandler = $xpHelper->getHandler('partners');
+            $xpPartnersHandler = $helper->getHandler('partners');
             $partnerObj        = $xpPartnersHandler->get($id);
             if ($partnerObj instanceof XoopspartnersPartners) {
                 if ($xpPartnersHandler->delete($partnerObj)) {
-                    $xpHelper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
+                    $helper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
                 }
             }
-            $xpHelper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XOOPSPARTNERS_NOTUPDATED);
+            $helper->redirect('admin/main.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _AM_XOOPSPARTNERS_NOTUPDATED);
         } else {
             $moduleAdmin->displayNavigation('main.php');
             xoops_confirm(

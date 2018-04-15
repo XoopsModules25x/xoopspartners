@@ -9,6 +9,8 @@
  */
 
 
+use XoopsModules\Xoopspartners;
+
 /**
  * Prepares system prior to attempting to uninstall module
  * @param XoopsModule $module {@link XoopsModule}
@@ -16,7 +18,7 @@
  * @return bool true if ready to uninstall, false if not
  */
 
-function xoops_module_pre_uninstall_xxxx(\XoopsModule $module)
+function xoops_module_pre_uninstall_xoopspartners(\XoopsModule $module)
 {
     // Do some synchronization
     return true;
@@ -29,18 +31,15 @@ function xoops_module_pre_uninstall_xxxx(\XoopsModule $module)
  *
  * @return bool true if uninstallation successful, false if not
  */
-function xoops_module_uninstall_xxxx(\XoopsModule $module)
+function xoops_module_uninstall_xoopspartners(\XoopsModule $module)
 {
 //    return true;
 
     $moduleDirName = basename(dirname(__DIR__));
-     $helper      =XXX\Helper::getInstance();
+     $helper      =Xoopspartners\Helper::getInstance();
 
-    /** @var XXXXXXUtility $utility */
-    $utility     = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utility)) {
-        xoops_load('utility', $moduleDirName);
-    }
+    /** @var \XoopsModules\Xoopspartners\Utility $utility */
+    $utility = new \XoopsModules\Xoopspartners\Utility();
 
     $success = true;
     $helper->loadLanguage('admin');

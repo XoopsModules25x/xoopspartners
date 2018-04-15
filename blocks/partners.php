@@ -22,7 +22,7 @@
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-use Xmf\Module\Helper;
+
 
 /**
  *
@@ -45,8 +45,8 @@ function b_xoopspartners_show($options)
     $myts = \MyTextSanitizer::getInstance();
 
     $moduleDirName     = basename(dirname(__DIR__));
-    $xpHelper          = Helper::getHelper($moduleDirName);
-    $xpPartnersHandler = $xpHelper->getHandler('partners');
+    $helper      = \XoopsModules\Xoopspartners\Helper::getInstance();
+    $xpPartnersHandler = $helper->getHandler('partners');
 
     $block             = ['xpDir' => $moduleDirName];
 
@@ -92,7 +92,7 @@ function b_xoopspartners_show($options)
     $block['fadeImage'] = (1 == $options[1]) ;
 
     //now load the stylesheet & jquery
-    $GLOBALS['xoTheme']->addStylesheet($xpHelper->url('assets/css/style.css'));
+    $GLOBALS['xoTheme']->addStylesheet($helper->url('assets/css/style.css'));
     $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
     $GLOBALS['xoTheme']->renderMetas(null, true);
 

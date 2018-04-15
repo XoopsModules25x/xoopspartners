@@ -31,7 +31,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * {@inheritDoc}
  * @see XoopsObject
  */
-class XoopspartnersPartners extends XoopsObject
+class XoopspartnersPartners extends \XoopsObject
 {
     protected $db;
 
@@ -80,7 +80,7 @@ class XoopspartnersPartners extends XoopsObject
  * @copyright copyright &copy; 2000 XOOPS.org
  *
  */
-class XoopspartnersPartnersHandler extends XoopsPersistableObjectHandler
+class XoopspartnersPartnersHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * XoopspartnersPartnersHandler constructor

@@ -28,7 +28,7 @@ require __DIR__ . '/admin_header.php';
 $moduleAdmin = Admin::getInstance();
 
 //-----------------------
-$xpPartnersHandler = $xpHelper->getHandler('partners');
+$xpPartnersHandler = $helper->getHandler('partners');
 
 $totalPartners          = $xpPartnersHandler->getCount();
 $totalNonActivePartners = $xpPartnersHandler->getCount(new \Criteria('status', 0, '='));

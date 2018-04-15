@@ -17,7 +17,6 @@
  * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-use Xmf\Module\Helper;
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -25,8 +24,9 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * Module specific tpl includes
  */
 if (is_object($xoTheme)) {
-    $xpHelper = Helper::getHelper(basename(__DIR__));
-    $xoTheme->addStylesheet($xpHelper->url('assets/css/partners.css'));
+//    $helper = Helper::getHelper(basename(__DIR__));
+    $helper  = \XoopsModules\Rating\Helper::getInstance();
+    $xoTheme->addStylesheet($helper->url('assets/css/partners.css'));
 }
 
 require_once $GLOBALS['xoops']->path('/footer.php');

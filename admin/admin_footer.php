@@ -17,12 +17,12 @@
  * @link         https://xoops.org XOOPS
  * @since        1.11
  */
-use Xmf\Module\Helper;
+
 use Xmf\Module\Admin;
 
 $moduleDirName = basename(dirname(__DIR__));
-$xpHelper = Helper::getHelper($moduleDirName);
-$xpModule = $xpHelper->getModule();
+$helper = \XoopsModules\Xoopspartners\Helper::getInstance();
+$xpModule = $helper->getModule();
 
 echo "<div class='adminfooter'>\n"
    . "<div class='center'>\n"

@@ -42,16 +42,13 @@ if ((!defined('XOOPS_ROOT_PATH'))
  */
 function xoops_module_pre_install_xoopspartners(\XoopsModule $module)
 {
-    if (!class_exists('XoopspartnersUtilities')) {
-        xoops_load('utilities', 'xoopspartners');
-    }
 
     //check for minimum XOOPS version
-    if (!XoopspartnersUtilities::checkXoopsVer($module)) {
+    if (!Xoopspartners\Utilities::checkXoopsVer($module)) {
         return false;
     }
     // check for minimum PHP version
-    if (!XoopspartnersUtilities::checkPHPVer($module)) {
+    if (!Xoopspartners\Utilities::checkPHPVer($module)) {
         return false;
     }
 

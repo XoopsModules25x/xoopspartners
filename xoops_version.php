@@ -89,9 +89,12 @@ $modversion = [
     'icons16'             => 'Frameworks/moduleclasses/icons/16',
     'icons32'             => 'Frameworks/moduleclasses/icons/32',
 
-    'onInstall'   => 'include/action.module.php',
-    'onUpdate'    => 'include/action.module.php',
-    'onUninstall' => 'include/action.module.php',
+//    'onInstall'   => 'include/action.module.php',
+//    'onUpdate'    => 'include/action.module.php',
+//    'onUninstall' => 'include/action.module.php',
+    'onInstall'   => 'include/uninstall.php',
+    'onUpdate'    => 'include/onupdate.php',
+    'onUninstall' => 'include/onuninstall.php',
     /**
      * dB settings
      */

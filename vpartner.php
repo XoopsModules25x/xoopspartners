@@ -25,11 +25,11 @@
 use Xmf\Request;
 
 require __DIR__ . '/header.php';
-$xpPartnersHandler = $xpHelper->getHandler('partners');
+$xpPartnersHandler = $helper->getHandler('partners');
 
 $id = Request::getInt('id', XoopspartnersConstants::DEFAULT_PID, 'GET');
 if (\XoopspartnersConstants::DEFAULT_PID === $id) {
-    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
+    $helper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }
 
 $partnerObj = $xpPartnersHandler->get($id);
@@ -37,10 +37,10 @@ if (($partnerObj instanceof XoopspartnersPartners)
     && $partnerObj->getVar('url')
     && (\XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
     if (!isset($GLOBALS['xoopsUser'])        // not a registered user
-        || !$xpHelper->isUserAdmin()         // registered but not an admin
-        || $xpHelper->getConfig('incadmin')) { // admin but want to include admin hits
+        || !$helper->isUserAdmin()         // registered but not an admin
+        || $helper->getConfig('incadmin')) { // admin but want to include admin hits
         if (!isset($_COOKIE['partners'][$id])) {
-            setcookie("partners[{$id}]", $id, time() + $xpHelper->getConfig('cookietime'));
+            setcookie("partners[{$id}]", $id, time() + $helper->getConfig('cookietime'));
             $hitCount = $partnerObj->getVar('hits');
             ++$hitCount;
             $partnerObj->setVar('hits', $hitCount);
@@ -55,5 +55,5 @@ if (($partnerObj instanceof XoopspartnersPartners)
        . "</html>\n";
 } else {
     unset($xpPartnersHandler);
-    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
+    $helper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }

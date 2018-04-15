@@ -23,11 +23,10 @@
  * @link         https://xoops.org XOOPS
  */
 use Xmf\Request;
-use Xmf\Module\Helper;
 
 require __DIR__ . '/header.php';
 if (!isset($GLOBALS['xoopsUser']) || !$GLOBALS['xoopsUser'] instanceof \XoopsUser) {
-    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);
+    $helper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _NOPERM);
 }
 
 /** @var string $xoopsOption */
@@ -36,12 +35,12 @@ include $GLOBALS['xoops']->path('/header.php');
 
 $op     = Request::getCmd('op', '', 'POST');
 $myts   = \MyTextSanitizer::getInstance();
-$xpInfo = $xpHelper->getModule()->getInfo();
+$xpInfo = $helper->getModule()->getInfo();
 
 switch ($op) {
     case 'sendMail':
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $xpHelper->redirect(
+        $helper->redirect(
                 'index.php',
                             XoopspartnersConstants::REDIRECT_DELAY_MEDIUM,
                             _MD_XOOPSPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors())
@@ -116,10 +115,10 @@ switch ($op) {
         $xoopsMailer = xoops_getMailer();
         $xoopsMailer->useMail();
         $tplPath = 'language/%s/mail_template/';
-        if (file_exists($xpHelper->path(sprintf($tplPath, $GLOBALS['xoopsConfig']['language'])))) {
-            $xoopsMailer->setTemplateDir($xpHelper->path(sprintf($tplPath, $GLOBALS['xoopsConfig']['language'])));
+        if (file_exists($helper->path(sprintf($tplPath, $GLOBALS['xoopsConfig']['language'])))) {
+            $xoopsMailer->setTemplateDir($helper->path(sprintf($tplPath, $GLOBALS['xoopsConfig']['language'])));
         } else {
-            $xoopsMailer->setTemplateDir($xpHelper->path(sprintf($tplPath, 'english')));
+            $xoopsMailer->setTemplateDir($helper->path(sprintf($tplPath, 'english')));
         }
         $xoopsMailer->setTemplate('join.tpl');
         $xoopsMailer->assign(

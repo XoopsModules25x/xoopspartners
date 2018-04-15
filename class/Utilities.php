@@ -22,7 +22,7 @@
  */
 
  /**
-  * XoopspartnersUtilities
+  * Xoopspartners\Utilities
   *
   * Static utilities class to provide common functionality
   *

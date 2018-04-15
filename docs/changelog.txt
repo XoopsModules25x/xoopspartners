@@ -10,7 +10,7 @@
 - removed language translations (see Transifex for translations)
 - removed .assets/images/admin files, deprecated (no longer used)
 - removed .assets/images/icons files, deprecated (no longer used)
-- created XoopspartnersUtilities class for install/update routines
+- created Xoopspartners\Utilities class for install/update routines
 - updated pre-install/pre-update version check routines
 - updated changelog.txt to indicate new XOOPS/PHP versions requirement
 - updated code for PSR-x standards (line lengths <120 chars, naming, etc)

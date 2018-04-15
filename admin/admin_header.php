@@ -17,22 +17,21 @@
  * @link         https://xoops.org XOOPS
  * @since        1.11
  */
-use Xmf\Module\Helper;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 require $GLOBALS['xoops']->path('/include/cp_header.php');
 
 $moduleDirName = basename(dirname(__DIR__));
-$xpHelper      = Helper::getHelper($moduleDirName);
+$helper      = \XoopsModules\Xoopspartners\Helper::getInstance();
 
 if (!interface_exists('XoopspartnersConstants')) {
-    require_once $xpHelper->path('class/constants.php');
+    require_once $helper->path('class/constants.php');
 }
 
 //Load languages
-$xpHelper->loadLanguage('admin');
-$xpHelper->loadLanguage('modinfo');
-$xpHelper->loadLanguage('main');
+$helper->loadLanguage('admin');
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('main');
 
 $myts = \MyTextSanitizer::getInstance();
 

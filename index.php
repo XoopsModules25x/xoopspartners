@@ -34,8 +34,8 @@ $start = Request::getInt('start', 0, 'GET');
 $GLOBALS['xoopsOption']['template_main'] = 'xoopspartners_index.tpl';
 include $GLOBALS['xoops']->path('/header.php');
 
-$xpPartnersHandler = $xpHelper->getHandler('partners');
-$modConfigs        = $xpHelper->getConfig();
+$xpPartnersHandler = $helper->getHandler('partners');
+$modConfigs        = $helper->getConfig();
 
 $criteria = new \CriteriaCompo();
 $criteria->add(new \Criteria('status', XoopspartnersConstants::STATUS_ACTIVE, '='));
@@ -85,7 +85,7 @@ foreach ($partnersArray as $thisPartner) {
         $thisPartner['image'] = $thisPartner['image'] . $sep . $thisPartner['title'];
     }
 
-    if (isset($GLOBALS['xoopsUser']) && $xpHelper->isUserAdmin()) {
+    if (isset($GLOBALS['xoopsUser']) && $helper->isUserAdmin()) {
         $thisPartner['admin_option'] =
             "<a href='admin/main.php?op=editPartner&amp;id={$thisPartner['id']}'>"
           . "<img src='" . Admin::iconUrl('edit.png', '16') . "' alt='" . _EDIT . "' title='" . _EDIT . "'></a>&nbsp;"
