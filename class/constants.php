@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Xoopspartners;
+<?php
+
+namespace XoopsModules\Xoopspartners;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -19,20 +21,17 @@
  * work correctly if trying to upgrade if these values have been changed.
  *
  * @package      module\Xoopspartners\class
- * @author       zyspec <owners@zyspec.com>
+ * @author       zyspec <zyspec@yahoo.com>
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  * @since        1.12
  */
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 /**
- * class Constants
+ * interface Constants
  */
-class Constants
+interface Constants
 {
     /**#@+
      * Constant definition

@@ -8,16 +8,14 @@
  * @link            https://xoops.org XOOPS
  */
 
-
 use XoopsModules\Xoopspartners;
 
 /**
  * Prepares system prior to attempting to uninstall module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to uninstall, false if not
  */
-
 function xoops_module_pre_uninstall_xoopspartners(\XoopsModule $module)
 {
     // Do some synchronization
@@ -25,25 +23,25 @@ function xoops_module_pre_uninstall_xoopspartners(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during uninstallation of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if uninstallation successful, false if not
  */
 function xoops_module_uninstall_xoopspartners(\XoopsModule $module)
 {
-//    return true;
+    //    return true;
 
-    $moduleDirName = basename(dirname(__DIR__));
-     $helper      =Xoopspartners\Helper::getInstance();
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    /** @var \Xoopspartners\Helper $helper */
+    $helper = Xoopspartners\Helper::getInstance();
 
     /** @var \XoopsModules\Xoopspartners\Utility $utility */
     $utility = new \XoopsModules\Xoopspartners\Utility();
 
     $success = true;
     $helper->loadLanguage('admin');
-
 
     //------------------------------------------------------------------
     // Remove uploads folder (and all subfolders) if they exist

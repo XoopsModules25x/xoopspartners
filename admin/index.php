@@ -11,6 +11,7 @@
  * Project: The XOOPS Project
  * -------------------------------
  */
+
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
@@ -18,17 +19,18 @@
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  * @since        1.11
  */
+
 use Xmf\Module\Admin;
 
-require __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 $moduleAdmin = Admin::getInstance();
 
 //-----------------------
-$xpPartnersHandler = $helper->getHandler('partners');
+$xpPartnersHandler = $helper->getHandler('Partners');
 
 $totalPartners          = $xpPartnersHandler->getCount();
 $totalNonActivePartners = $xpPartnersHandler->getCount(new \Criteria('status', 0, '='));
@@ -43,4 +45,4 @@ $moduleAdmin->addInfoBoxLine(sprintf('<infolabel>' . _MD_XOOPSPARTNERS_TOTALPART
 $moduleAdmin->displayNavigation(basename(__FILE__));
 $moduleAdmin->displayIndex();
 
-require __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

@@ -12,6 +12,7 @@
  * Project: The XOOPS Project
  *--------------------------------------
  */
+
 /**
  * XoopsPartners - a partner affiliation links module
  *
@@ -19,23 +20,25 @@
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
+
 use Xmf\Request;
+use XoopsModules\Xoopspartners;
 
-require __DIR__ . '/header.php';
-$xpPartnersHandler = $helper->getHandler('partners');
+require_once __DIR__ . '/header.php';
+$xpPartnersHandler = $helper->getHandler('Partners');
 
-$id = Request::getInt('id', XoopspartnersConstants::DEFAULT_PID, 'GET');
-if (\XoopspartnersConstants::DEFAULT_PID === $id) {
-    $helper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
+$id = Request::getInt('id', Xoopspartners\Constants::DEFAULT_PID, 'GET');
+if (\Xoopspartners\Constants::DEFAULT_PID === $id) {
+    $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }
 
 $partnerObj = $xpPartnersHandler->get($id);
-if (($partnerObj instanceof XoopspartnersPartners)
+if (($partnerObj instanceof \Xoopspartners\Partners)
     && $partnerObj->getVar('url')
-    && (\XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
+    && (\Xoopspartners\Constants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
     if (!isset($GLOBALS['xoopsUser'])        // not a registered user
         || !$helper->isUserAdmin()         // registered but not an admin
         || $helper->getConfig('incadmin')) { // admin but want to include admin hits
@@ -47,13 +50,8 @@ if (($partnerObj instanceof XoopspartnersPartners)
             $xpPartnersHandler->insert($partnerObj);
         }
     }
-    echo "<html>\n"
-       . "  <head>\n"
-       . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url'), ENT_QUOTES | ENT_HTML5) . "'>\n"
-       . "  </head>\n"
-       . "  <body></body>\n"
-       . "</html>\n";
+    echo "<html>\n" . "  <head>\n" . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url'), ENT_QUOTES | ENT_HTML5) . "'>\n" . "  </head>\n" . "  <body></body>\n" . "</html>\n";
 } else {
     unset($xpPartnersHandler);
-    $helper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
+    $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }

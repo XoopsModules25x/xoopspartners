@@ -7,22 +7,23 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
  * @package      module\Xoopspartners\admin
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  * @since        1.11
  */
-
 require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-require $GLOBALS['xoops']->path('/include/cp_header.php');
+require_once $GLOBALS['xoops']->path('/include/cp_header.php');
 
 $moduleDirName = basename(dirname(__DIR__));
-$helper      = \XoopsModules\Xoopspartners\Helper::getInstance();
+/** @var \XoopsModules\Xoopspartners\Helper $helper */
+$helper = \XoopsModules\Xoopspartners\Helper::getInstance();
 
 if (!interface_exists('XoopspartnersConstants')) {
     require_once $helper->path('class/constants.php');
@@ -35,7 +36,7 @@ $helper->loadLanguage('main');
 
 $myts = \MyTextSanitizer::getInstance();
 
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('/class/template.php');
     $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }

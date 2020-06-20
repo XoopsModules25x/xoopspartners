@@ -11,15 +11,16 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
  * @author       XOOPS Development Team
  */
 
+use XoopsModules\Xoopspartners;
+
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
-    || !$GLOBALS['xoopsUser']->IsAdmin()
-) {
+    || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
 
@@ -36,50 +37,46 @@ function tableExists($tablename)
 }
 
 /**
- *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
 function xoops_module_pre_update_xoopspartners(\XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var Xoopspartners\Helper $helper */
-    /** @var Xoopspartners\Utility $utility */
-    $helper       = Xoopspartners\Helper::getInstance();
-    $utility      = new \Xoopspartners\Utility();
+    /** @var \Xoopspartners\Helper $helper */
+    /** @var \Xoopspartners\Utility $utility */
+    $helper  = Xoopspartners\Helper::getInstance();
+    $utility = new Xoopspartners\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
+
     return $xoopsSuccess && $phpSuccess;
 }
 
 /**
- *
  * Performs tasks required during update of the module
- * @param XoopsModule $module {@link XoopsModule}
- * @param null        $previousVersion
+ * @param \XoopsModule $module {@link XoopsModule}
+ * @param null         $previousVersion
  *
  * @return bool true if update successful, false if not
  */
-
 function xoops_module_update_xoopspartners(\XoopsModule $module, $previousVersion = null)
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    $capsDirName   = strtoupper($moduleDirName);
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var Xoopspartners\Helper $helper */
-    /** @var Xoopspartners\Utility $utility */
-    /** @var Xoopspartners\Configurator $configurator */
-    $helper  = Xoopspartners\Helper::getInstance();
-    $utility = new \Xoopspartners\Utility();
-    $configurator = new \Xoopspartners\Configurator();
+    /** @var \Xoopspartners\Helper $helper */ /** @var \Xoopspartners\Utility $utility */
+    /** @var \Xoopspartners\Common\Configurator $configurator */
+    $helper       = Xoopspartners\Helper::getInstance();
+    $utility      = new Xoopspartners\Utility();
+    $configurator = new Xoopspartners\Common\Configurator();
 
     if ($previousVersion < 240) {
-
         //rename column EXAMPLE
-        $tables     = new Tables();
+        $tables     = new \Xmf\Database\Tables();
         $table      = 'xoopspartnersx_categories';
         $column     = 'ordre';
         $newName    = 'order';
@@ -87,7 +84,7 @@ function xoops_module_update_xoopspartners(\XoopsModule $module, $previousVersio
         if ($tables->useTable($table)) {
             $tables->alterColumn($table, $column, $attributes, $newName);
             if (!$tables->executeQueue()) {
-                echo '<br>' . _AM_XXXXX_UPGRADEFAILED0 . ' ' . $migrate->getLastError();
+                echo '<br>' . _AM_XOOPSPARTNERS_UPGRADEFAILED0 . ' ' . $tables->getLastError();
             }
         }
 
@@ -126,7 +123,7 @@ function xoops_module_update_xoopspartners(\XoopsModule $module, $previousVersio
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
             foreach (array_keys($configurator->oldFolders) as $i) {
                 $tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
-                /* @var $folderHandler XoopsObjectHandler */
+                /* @var XoopsObjectHandler $folderHandler */
                 $folderHandler = XoopsFile::getHandler('folder', $tempFolder);
                 $folderHandler->delete($tempFolder);
             }
@@ -142,7 +139,7 @@ function xoops_module_update_xoopspartners(\XoopsModule $module, $previousVersio
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
-            $file =  dirname(__DIR__) . '/assets/images/blank.png';
+            $file = dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator->copyBlankFiles) as $i) {
                 $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);
@@ -153,9 +150,11 @@ function xoops_module_update_xoopspartners(\XoopsModule $module, $previousVersio
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . '\' AND `tpl_file` LIKE \'%.html%\'';
         $GLOBALS['xoopsDB']->queryF($sql);
 
-        /** @var XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
+
         return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }
+
     return true;
 }

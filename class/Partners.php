@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xoopspartners;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -19,42 +22,39 @@
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 /**
- * Class XoopspartnersPartners
+ * Class Partners
  *
  * {@inheritDoc}
  * @see XoopsObject
  */
-class XoopspartnersPartners extends \XoopsObject
+class Partners extends \XoopsObject
 {
     protected $db;
 
     /**
      * constructor
      *
-     * @todo change 'url' to XOBJ_DTYPE_URL
      * @param null $id
+     * @todo change 'url' to XOBJ_DTYPE_URL
      */
     public function __construct($id = null)
     {
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
 
-        $this->initVar('id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('weight', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('hits', XOBJ_DTYPE_INT, null, true, 10);
-        $this->initVar('url', XOBJ_DTYPE_TXTBOX, null, true);
-        $this->initVar('image', XOBJ_DTYPE_TXTBOX, null, true);
-        $this->initVar('title', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('description', XOBJ_DTYPE_TXTBOX, null, true);
-        $this->initVar('status', XOBJ_DTYPE_INT, null, false, 0);
+        $this->initVar('id', \XOBJ_DTYPE_INT, null, false);
+        $this->initVar('weight', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('hits', \XOBJ_DTYPE_INT, null, true, 10);
+        $this->initVar('url', \XOBJ_DTYPE_TXTBOX, null, true);
+        $this->initVar('image', \XOBJ_DTYPE_TXTBOX, null, true);
+        $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('description', \XOBJ_DTYPE_TXTBOX, null, true);
+        $this->initVar('status', \XOBJ_DTYPE_INT, null, false, 0);
         if (!empty($id)) {
-            if (is_array($id)) {
+            if (\is_array($id)) {
                 $this->assignVars($id);
             } else {
                 $this->load((int)$id);
@@ -70,25 +70,5 @@ class XoopspartnersPartners extends \XoopsObject
     public function __toString()
     {
         return $this->getVar('title', 's');
-    }
-}
-
-/**
- *
- * {@inheritDoc}
- * @see XoopsPersistableObjectHandler
- * @copyright copyright &copy; 2000 XOOPS.org
- *
- */
-class XoopspartnersPartnersHandler extends \XoopsPersistableObjectHandler
-{
-    /**
-     * XoopspartnersPartnersHandler constructor
-     *
-     * @param XoopsDatabase $db
-     */
-    public function __construct(\XoopsDatabase $db)
-    {
-        parent::__construct($db, 'partners', 'XoopspartnersPartners', 'id', 'title');
     }
 }

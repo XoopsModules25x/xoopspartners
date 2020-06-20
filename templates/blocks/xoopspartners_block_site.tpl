@@ -34,7 +34,7 @@
         <a href="<{$xoops_url}>/modules/<{$block.xpDir}>/vpartner.php?id=<{$partner.id}>" rel="external">
             <span id="xo-partnerstitlelink"><{$partner.title}></span></a>
         <{/if}>
-        <{if true == $block.insertBr}><br><{/if}>
+        <{if true === $block.insertBr}><br><{/if}>
         <{/foreach}>
     </div>
 </div>

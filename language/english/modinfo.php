@@ -12,6 +12,7 @@
  * Project: The XOOPS Project
  *--------------------------------------
  */
+
 /**
  * XoopsPartners - a partner affiliation links module
  *
@@ -19,10 +20,9 @@
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-
 define('_MI_XOOPSPARTNERS_NAME', 'Partners');
 define('_MI_XOOPSPARTNERS_DESC', 'Shows partner sites in a block and in a module');
 define('_MI_XOOPSPARTNERS_ADMIN', 'Manage Partners');

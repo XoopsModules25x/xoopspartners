@@ -9,22 +9,24 @@
  WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Module: xoopsPartners
  *
  * @package         module\Xoopspartners\include
- * @author          ZySpec <owners@zyspec.com>
+ * @author          ZySpec <zyspec@yahoo.com>
  * @copyright       https://xoops.org 2001-2016 XOOPS Project
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @since           1.13
  */
-
 $moduleDirName = basename(dirname(__DIR__));
-$helper = \Xmf\Module\Helper::getHelper($modueDirName);
+$helper        = \Xmf\Module\Helper::getHelper($modueDirName);
 $helper->loadLanguage('admin');
 //require_once dirname(__DIR__) . "/language/english/admin.php"; // messages will be in english
 
-session_start();
+if (false === @session_start()) {
+    throw new \RuntimeException('Session could not start.');
+}
 
 global $hdrs;
 $hdrs = [];
@@ -32,7 +34,7 @@ $hdrs = [];
  * Function to put HTTP headers in an array
  *
  * @param unknown $curl
- * @param string $hdrLine
+ * @param string  $hdrLine
  *
  * @return int length of header line put into array
  */
@@ -40,11 +42,11 @@ function xoopspartnersHandleHeaderLine($curl, $hdrLine)
 {
     global $hdrs;
     $hdrs[] = trim($hdrLine);
-    return strlen($hdrLine);
+
+    return mb_strlen($hdrLine);
 }
 
 /**
- *
  * @param string $hdr
  * @param        $hdrArray
  * @param bool   $asArray
@@ -55,10 +57,11 @@ function xoopspartnersGetHeaderFromArray($hdr, $hdrArray, $asArray = false)
     $val = '';
     foreach ($hdrArray as $thisHdr) {
         if (preg_match("/^{$hdr}/i", $thisHdr)) {
-            $val = substr($thisHdr, strlen($hdr));
+            $val = mb_substr($thisHdr, mb_strlen($hdr));
             break;
         }
     }
+
     return (bool)$asArray ? [$hdr => trim($val)] : trim($val);
 }
 
@@ -70,7 +73,7 @@ $sKeyHdrSize  = "{$sessPrefix}github_hdr_size";
 $sKeyResponse = "{$sessPrefix}github_curl_response";
 $sKeyArray    = [$sKeyEtag, $sKeyHdrSize, $sKeyResponse];
 
-$cachedEtag = (isset($_SESSION[$sKeyEtag])) ? base64_decode(unserialize($_SESSION[$sKeyEtag])) : false;
+$cachedEtag = isset($_SESSION[$sKeyEtag]) ? base64_decode(unserialize($_SESSION[$sKeyEtag]), true) : false;
 if ($cachedEtag) {
     // found the session var so check to see if anything's changed since last time we checked
     $curl = curl_init($serviceUrl);
@@ -85,10 +88,10 @@ if ($cachedEtag) {
             CURLOPT_USERAGENT      => "XOOPS-{$moduleDirName}",
             CURLOPT_HTTPHEADER     => [
                 'Content-type:application/json',
-                                     'If-None-Match: ' . $cachedEtag
+                'If-None-Match: ' . $cachedEtag,
             ],
             CURLINFO_HEADER_OUT    => true,
-            CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine'
+            CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine',
         ]
     );
     // execute the session
@@ -100,12 +103,8 @@ if ($cachedEtag) {
     $status = xoopspartnersGetHeaderFromArray('Status: ', $hdrs);
     if (preg_match('/^304 Not Modified/', $status)) {
         // hasn't been modified so get response & header size from session
-        $curl_response = isset($_SESSION[$sKeyResponse])
-                               ? base64_decode(unserialize($_SESSION[$sKeyResponse]))
-                               : [];
-        $hdrSize       = isset($_SESSION[$sKeyHdrSize])
-                               ? unserialize($_SESSION[$sKeyHdrSize])
-                               : 0;
+        $curl_response = isset($_SESSION[$sKeyResponse]) ? base64_decode(unserialize($_SESSION[$sKeyResponse]), true) : [];
+        $hdrSize       = isset($_SESSION[$sKeyHdrSize]) ? unserialize($_SESSION[$sKeyHdrSize]) : 0;
     } elseif (preg_match('/^200 OK/', $status)) {
         // ok - request new info
         $hdrs = []; //reset the header array for new curl op
@@ -120,7 +119,7 @@ if ($cachedEtag) {
                 CURLOPT_HTTPGET        => true,
                 CURLOPT_USERAGENT      => "XOOPS-{$moduleDirName}",
                 CURLOPT_HTTPHEADER     => ['Content-type:application/json'],
-                CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine'
+                CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine',
             ]
         );
         // execute the session
@@ -129,17 +128,17 @@ if ($cachedEtag) {
         $hdrSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         curl_close($curl);
 
-        $hdrEtag = xoopspartnersGetHeaderFromArray('Etag: ', $hdrs);
-        $_SESSION[$sKeyEtag] = serialize(base64_encode($hdrEtag));
-        $_SESSION[$sKeyHdrSize] = serialize((int)$hdrSize);
+        $hdrEtag                 = xoopspartnersGetHeaderFromArray('Etag: ', $hdrs);
+        $_SESSION[$sKeyEtag]     = serialize(base64_encode($hdrEtag));
+        $_SESSION[$sKeyHdrSize]  = serialize((int)$hdrSize);
         $_SESSION[$sKeyResponse] = serialize(base64_encode($curl_response));
     } elseif (preg_match('/^403 Forbidden/', $status)) {
         // probably exceeded rate limit
         $responseArray = explode('\n', $curl_response);
-        $msgEle        = array_search('message: ', $responseArray);
+        $msgEle        = array_search('message: ', $responseArray, true);
         if (false !== $msgEle) {
             //found the error message so set it
-            $err = substr($responseArray[$msgEle], 8); //get the message
+            $err = mb_substr($responseArray[$msgEle], 8); //get the message
         } else {
             // couldn't find error message, but something went wrong
             // clear session vars
@@ -172,7 +171,7 @@ if ($cachedEtag) {
             CURLOPT_HTTPGET        => true,
             CURLOPT_USERAGENT      => "XOOPS-{$moduleDirName}",
             CURLOPT_HTTPHEADER     => ['Content-type:application/json'],
-            CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine'
+            CURLOPT_HEADERFUNCTION => 'xoopspartnersHandleHeaderLine',
         ]
     );
     // execute the session
@@ -181,41 +180,51 @@ if ($cachedEtag) {
     $hdrSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
     curl_close($curl);
 
-    $hdrEtag = xoopspartnersGetHeaderFromArray('Etag: ', $hdrs);
+    $hdrEtag                 = xoopspartnersGetHeaderFromArray('Etag: ', $hdrs);
     $_SESSION[$sKeyEtag]     = serialize(base64_encode($hdrEtag));
     $_SESSION[$sKeyHdrSize]  = serialize((int)$hdrSize);
     $_SESSION[$sKeyResponse] = serialize(base64_encode($curl_response));
 }
-$hdr        = substr($curl_response, 0, $hdrSize);
-$rspSize    = strlen($curl_response) - $hdrSize;
-$response   = substr($curl_response, - $rspSize);
+$hdr        = mb_substr($curl_response, 0, $hdrSize);
+$rspSize    = mb_strlen($curl_response) - $hdrSize;
+$response   = mb_substr($curl_response, -$rspSize);
 $issuesObjs = json_decode($response); //get as objects
 
 echo "    <br>\n"
-     . '    <h4 class="odd">' . _AM_XOOPSPARTNERS_ISSUES_OPEN . "</h4>\n"
-   . "    <p class=\"even\">\n"
-   . "    <table>\n"
-   . "      <thead>\n"
-   . "      <tr>\n"
-     . '        <th class="center width10">' . _AM_XOOPSPARTNERS_HELP_ISSUE . "</th>\n"
-     . '        <th class="center width10">' . _AM_XOOPSPARTNERS_HELP_DATE . "</th>\n"
-     . '        <th class="center">' . _AM_XOOPSPARTNERS_HELP_TITLE . "</th>\n"
-     . '        <th class="center width10">' . _AM_XOOPSPARTNERS_HELP_SUBMITTER . "</th>\n"
-   . "      </tr>\n"
-   . "      </thead>\n"
-   . "      <tbody>\n";
+     . '    <h4 class="odd">'
+     . _AM_XOOPSPARTNERS_ISSUES_OPEN
+     . "</h4>\n"
+     . "    <p class=\"even\">\n"
+     . "    <table>\n"
+     . "      <thead>\n"
+     . "      <tr>\n"
+     . '        <th class="center width10">'
+     . _AM_XOOPSPARTNERS_HELP_ISSUE
+     . "</th>\n"
+     . '        <th class="center width10">'
+     . _AM_XOOPSPARTNERS_HELP_DATE
+     . "</th>\n"
+     . '        <th class="center">'
+     . _AM_XOOPSPARTNERS_HELP_TITLE
+     . "</th>\n"
+     . '        <th class="center width10">'
+     . _AM_XOOPSPARTNERS_HELP_SUBMITTER
+     . "</th>\n"
+     . "      </tr>\n"
+     . "      </thead>\n"
+     . "      <tbody>\n";
 
 $pullReqFound = false;
-$suffix = '';
-$cssClass = 'odd';
-$i = 0;
+$suffix       = '';
+$cssClass     = 'odd';
+$i            = 0;
 if (!empty($issuesObjs)) {
     foreach ($issuesObjs as $issue) {
         if (isset($issue->pull_request)) {
-            /** @internal {uncomment the following line if you don't want to see pull requests as issues}}}*/
-//            continue; // github counts pull requests as open issues so ignore these
+            /** @internal {uncomment the following line if you don't want to see pull requests as issues}}} */
+            //            continue; // github counts pull requests as open issues so ignore these
 
-            $suffix = '*';
+            $suffix       = '*';
             $pullReqFound = true;
         } else {
             $suffix = '';
@@ -226,36 +235,37 @@ if (!empty($issuesObjs)) {
         ++$i; // issue count
 
         echo "      <tr>\n"
-           . "        <td class=\"{$cssClass} center\">"
-             . '<a href="' . $issue->html_url . '" target="_blank">'
-           .               (int)$issue->number . "{$suffix}</a>"
-           .         "</td>\n"
-           . "        <td class=\"{$cssClass} center\">{$dispDate}</td>\n"
-           . "        <td class=\"{$cssClass} left\" style=\"padding-left: 2em;\">"
+             . "        <td class=\"{$cssClass} center\">"
+             . '<a href="'
+             . $issue->html_url
+             . '" target="_blank">'
+             . (int)$issue->number
+             . "{$suffix}</a>"
+             . "</td>\n"
+             . "        <td class=\"{$cssClass} center\">{$dispDate}</td>\n"
+             . "        <td class=\"{$cssClass} left\" style=\"padding-left: 2em;\">"
              . htmlspecialchars($issue->title, ENT_QUOTES | ENT_HTML5)
-           .         "</td>\n"
-           . "        <td class=\"{$cssClass} center\">"
-             . '<a href="' . htmlspecialchars($issue->user->html_url, ENT_QUOTES | ENT_HTML5) . '" '
-             . 'target="_blank">' . htmlspecialchars($issue->user->login, ENT_QUOTES | ENT_HTML5) . '</a>'
-           .         "</td>\n"
-           . "      </tr>\n";
+             . "</td>\n"
+             . "        <td class=\"{$cssClass} center\">"
+             . '<a href="'
+             . htmlspecialchars($issue->user->html_url, ENT_QUOTES | ENT_HTML5)
+             . '" '
+             . 'target="_blank">'
+             . htmlspecialchars($issue->user->login, ENT_QUOTES | ENT_HTML5)
+             . '</a>'
+             . "</td>\n"
+             . "      </tr>\n";
         $cssClass = ('odd' === $cssClass) ? 'even' : 'odd';
     }
 }
 
 if (!empty($err)) {
-    echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">"
-         . htmlspecialchars($err, ENT_QUOTES | ENT_HTML5)
-       .     "</td></tr>\n";
+    echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">" . htmlspecialchars($err, ENT_QUOTES | ENT_HTML5) . "</td></tr>\n";
 } elseif (0 == $i) { // no issues found
-    echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">"
-       .        _AM_XOOPSPARTNERS_ISSUES_NONE
-       .     "</td></tr>\n";
+    echo "    <tr><td colspan=\"4\" class=\"{$cssClass} center bold italic\">" . _AM_XOOPSPARTNERS_ISSUES_NONE . "</td></tr>\n";
 }
 
 if ($pullReqFound) {
-    echo "    <tfoot>\n"
-         . '      <tr><td colspan="4" class="left italic marg3 foot">' . _AM_XOOPSPARTNERS_ISSUES_NOTE . "</td></tr>\n"
-        . "    </tfoot>\n";
+    echo "    <tfoot>\n" . '      <tr><td colspan="4" class="left italic marg3 foot">' . _AM_XOOPSPARTNERS_ISSUES_NOTE . "</td></tr>\n" . "    </tfoot>\n";
 }
 echo "    </tbody></table></p>\n";
