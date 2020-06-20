@@ -1,20 +1,29 @@
+<h5>2.01 Beta 1   [2020-06-20]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.6
+<hr>
+- namespaces (mamba)
+- class autoloading (mamba)
+- added Migrate (mamba)
+- renamed 'PHP_SELF' to 'SCRIPT_NAME' (mamba)
+- moved include/config.php to /config/config.ph (mamba)
+- test data (mamba)
+
 <u><b>1.13 RC1 [2017-04-08]</b></u>
-- created GITHUB issues tab in ./admin/help
-- changed to use Xmf for Request, module Admin and Helper
-- changed to use Xmf\Helper instead of redirect_header()
-- changed form input field lengths to match sql variable lengths
-- fix bug in index.php where checking if user is Admin didn't work
-- fix bug where admin hit count wasn't set correctly
-- fix bug in XoopsModule definition in ./admin/admin_header.php
-- fix bug to initialize partners array in block
-- removed language translations (see Transifex for translations)
-- removed .assets/images/admin files, deprecated (no longer used)
-- removed .assets/images/icons files, deprecated (no longer used)
-- created Xoopspartners\Utility class for install/update routines
-- updated pre-install/pre-update version check routines
-- updated changelog.txt to indicate new XOOPS/PHP versions requirement
-- updated code for PSR-x standards (line lengths <120 chars, naming, etc)
-- updated phpDoc comments
+- created GITHUB issues tab in ./admin/help (zyspec)
+- changed to use Xmf for Request, module Admin and Helper (zyspec)
+- changed to use Xmf\Helper instead of redirect_header() (zyspec)
+- changed form input field lengths to match sql variable lengths (zyspec)
+- fix bug in index.php where checking if user is Admin didn't work (zyspec)
+- fix bug where admin hit count wasn't set correctly (zyspec)
+- fix bug in XoopsModule definition in ./admin/admin_header.php (zyspec)
+- fix bug to initialize partners array in block (zyspec)
+- removed language translations (see Transifex for translations) (zyspec)
+- removed .assets/images/admin files, deprecated (no longer used) (zyspec)
+- removed .assets/images/icons files, deprecated (no longer used) (zyspec)
+- created Xoopspartners\Utility class for install/update routines (zyspec)
+- updated pre-install/pre-update version check routines (zyspec)
+- updated changelog.txt to indicate new XOOPS/PHP versions requirement (zyspec)
+- updated code for PSR-x standards (line lengths <120 chars, naming, etc) (zyspec)
+- updated phpDoc comments (zyspec)
 
 <u><b>1.12 Final [2016-07-10]</b></u>
 - require XOOPS 2.5.8+

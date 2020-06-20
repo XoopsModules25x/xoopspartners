@@ -28,15 +28,15 @@ use Xmf\Request;
 use XoopsModules\Xoopspartners;
 
 require_once __DIR__ . '/header.php';
-$xpPartnersHandler = $helper->getHandler('Partners');
+$partnersHandler = $helper->getHandler('Partners');
 
 $id = Request::getInt('id', Xoopspartners\Constants::DEFAULT_PID, 'GET');
 if (\Xoopspartners\Constants::DEFAULT_PID === $id) {
     $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }
 
-$partnerObj = $xpPartnersHandler->get($id);
-if (($partnerObj instanceof \Xoopspartners\Partners)
+$partnerObj = $partnersHandler->get($id);
+if (($partnerObj instanceof Xoopspartners\Partners)
     && $partnerObj->getVar('url')
     && (\Xoopspartners\Constants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
     if (!isset($GLOBALS['xoopsUser'])        // not a registered user
@@ -47,11 +47,11 @@ if (($partnerObj instanceof \Xoopspartners\Partners)
             $hitCount = $partnerObj->getVar('hits');
             ++$hitCount;
             $partnerObj->setVar('hits', $hitCount);
-            $xpPartnersHandler->insert($partnerObj);
+            $partnersHandler->insert($partnerObj);
         }
     }
     echo "<html>\n" . "  <head>\n" . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url'), ENT_QUOTES | ENT_HTML5) . "'>\n" . "  </head>\n" . "  <body></body>\n" . "</html>\n";
 } else {
-    unset($xpPartnersHandler);
+    unset($partnersHandler);
     $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }

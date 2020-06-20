@@ -47,7 +47,7 @@ function b_xoopspartners_show($options)
     $moduleDirName = basename(dirname(__DIR__));
     /** @var \XoopsModules\Xoopspartners\Helper $helper */
     $helper            = \XoopsModules\Xoopspartners\Helper::getInstance();
-    $xpPartnersHandler = $helper->getHandler('Partners');
+    $partnersHandler = $helper->getHandler('Partners');
 
     $block = ['xpDir' => $moduleDirName];
 
@@ -60,7 +60,7 @@ function b_xoopspartners_show($options)
         $criteria->setSort($options[5]);
         $criteria->setOrder($options[6]);
     }
-    $pObjs = $xpPartnersHandler->getAll($criteria, $pFields);
+    $pObjs = $partnersHandler->getAll($criteria, $pFields);
     foreach ($pObjs as $pObj) {
         $partners    = [];
         $url         = $pObj->getVar('url');

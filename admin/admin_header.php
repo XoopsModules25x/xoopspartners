@@ -18,12 +18,20 @@
  * @link         https://xoops.org XOOPS
  * @since        1.11
  */
-require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-require_once $GLOBALS['xoops']->path('/include/cp_header.php');
+
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
+require  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+
+require  dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
+
 /** @var \XoopsModules\Xoopspartners\Helper $helper */
 $helper = \XoopsModules\Xoopspartners\Helper::getInstance();
+
+/** @var \Xmf\Module\Admin $adminObject */
+$adminObject = \Xmf\Module\Admin::getInstance();
 
 if (!interface_exists('XoopspartnersConstants')) {
     require_once $helper->path('class/constants.php');
@@ -33,6 +41,7 @@ if (!interface_exists('XoopspartnersConstants')) {
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('main');
+$helper->loadLanguage('common');
 
 $myts = \MyTextSanitizer::getInstance();
 

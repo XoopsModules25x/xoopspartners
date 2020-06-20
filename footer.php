@@ -25,8 +25,8 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
  */
 if (is_object($xoTheme)) {
     //    $helper = Helper::getHelper(basename(__DIR__));
-    /** @var \XoopsModules\Rating\Helper $helper */
-    $helper = \XoopsModules\Rating\Helper::getInstance();
+    /** @var \XoopsModules\Xoopspartners\Helper $helper */
+    $helper = \XoopsModules\Xoopspartners\Helper::getInstance();
     $xoTheme->addStylesheet($helper->url('assets/css/partners.css'));
 }
 

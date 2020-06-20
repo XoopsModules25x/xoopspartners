@@ -52,7 +52,7 @@ $weight = isset($_POST['weight']) ? is_array($_POST['weight']) ? Request::getArr
 switch ($op) {
     case 'partnersAdmin':
     default:
-        $xpPartnersHandler = $helper->getHandler('Partners');
+        $partnersHandler = $helper->getHandler('Partners');
 
         $moduleAdmin->displayNavigation('main.php');
         $moduleAdmin->addItemButton(_AM_XOOPSPARTNERS_ADD, 'main.php' . '?op=partnersAdminAdd', $icon = 'add');
@@ -90,7 +90,7 @@ switch ($op) {
         $criteria = new \CriteriaCompo();
         $criteria->setSort('status DESC, weight ASC, title');
         $criteria->setOrder('DESC');
-        $partnerObjs = $xpPartnersHandler->getAll($criteria);
+        $partnerObjs = $partnersHandler->getAll($criteria);
         $class       = 'even';
         $maxWidth    = $GLOBALS['xoopsModuleConfig']['maxwidth'];
         $maxHeight   = $GLOBALS['xoopsModuleConfig']['maxheight'];
@@ -199,17 +199,17 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             $helper->redirect('admin/main.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        $xpPartnersHandler = $helper->getHandler('Partners');
-        $partnerCount      = $xpPartnersHandler->getCount();
+        $partnersHandler = $helper->getHandler('Partners');
+        $partnerCount      = $partnersHandler->getCount();
         if ($partnerCount) {
             foreach ($weight as $id => $order) {
                 if ((int)$id > Xoopspartners\Constants::DEFAULT_PID) {
                     $order   = (!empty($order) && ((int)$order > Xoopspartners\Constants::DEFAULT_WEIGHT)) ? (int)$order : Xoopspartners\Constants::DEFAULT_WEIGHT;
                     $stat    = (!empty($status[$id]) && ($status[$id] > Xoopspartners\Constants::STATUS_INACTIVE)) ? (int)$status[$id] : Xoopspartners\Constants::STATUS_INACTIVE;
-                    $thisObj = $xpPartnersHandler->get($id);
-                    if (!empty($thisObj) && ($thisObj instanceof \Xoopspartners\Partners)) {
+                    $thisObj = $partnersHandler->get($id);
+                    if (!empty($thisObj) && ($thisObj instanceof Xoopspartners\Partners)) {
                         $thisObj->setVars(['weight' => $order, 'status' => $stat]);
-                        $xpPartnersHandler->insert($thisObj);
+                        $partnersHandler->insert($thisObj);
                         unset($thisObj);
                     }
                 }
@@ -220,15 +220,15 @@ switch ($op) {
         }
         break;
     case 'reorderAutoPartners':
-        $xpPartnersHandler = $helper->getHandler('Partners');
-        $partnerObjs       = $xpPartnersHandler->getAll(null, ['weight']);
+        $partnersHandler = $helper->getHandler('Partners');
+        $partnerObjs       = $partnersHandler->getAll(null, ['weight']);
         $partnerCount      = count($partnerObjs);
         $weight            = Xoopspartners\Constants::DEFAULT_WEIGHT;
         if ($partnerCount > 1) {
             foreach ($partnerObjs as $thisObj) {
                 ++$weight;
                 $thisObj->setVar('weight', $weight);
-                $xpPartnersHandler->insert($thisObj);
+                $partnersHandler->insert($thisObj);
                 unset($thisObj);
             }
             $helper->redirect('admin/main.php', Xoopspartners\Constants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
@@ -263,8 +263,8 @@ switch ($op) {
         require_once __DIR__ . '/admin_footer.php';
         break;
     case 'addPartner':
-        $xpPartnersHandler = $helper->getHandler('Partners');
-        $newPartner        = $xpPartnersHandler->create();
+        $partnersHandler = $helper->getHandler('Partners');
+        $newPartner        = $partnersHandler->create();
         $status            = (!empty($status) && ((int)$status > 0)) ? (int)$status : Xoopspartners\Constants::STATUS_INACTIVE;
         $weight            = Request::getInt('weight', Xoopspartners\Constants::DEFAULT_WEIGHT, 'POST');
         $title             = trim($title);
@@ -286,7 +286,7 @@ switch ($op) {
             ]
         );
 
-        if ($GLOBALS['xoopsSecurity']->check() && $xpPartnersHandler->insert($newPartner)) {
+        if ($GLOBALS['xoopsSecurity']->check() && $partnersHandler->insert($newPartner)) {
             $helper->redirect('admin/main.php', Xoopspartners\Constants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
         } else {
             $helper->redirect('admin/main.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _AM_XOOPSPARTNERS_NOTUPDATED . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -296,9 +296,9 @@ switch ($op) {
         $moduleAdmin->displayNavigation('main.php');
         $id = $id > Xoopspartners\Constants::DEFAULT_PID ? $id : Xoopspartners\Constants::DEFAULT_PID;
 
-        $xpPartnersHandler = $helper->getHandler('Partners');
-        $partnerObj        = $xpPartnersHandler->get($id);
-        if (!empty($partnerObj) && ($partnerObj instanceof \Xoopspartners\Partners)) {
+        $partnersHandler = $helper->getHandler('Partners');
+        $partnerObj        = $partnersHandler->get($id);
+        if (!empty($partnerObj) && ($partnerObj instanceof Xoopspartners\Partners)) {
             $partnerVars = $partnerObj->getValues();
             /*url, image, title, and description are all txtboxes so they have gone through
              * htmlspecialchars via XoopsObject getVar
@@ -347,8 +347,8 @@ switch ($op) {
             $helper->redirect("admin/main.php?op=edit_partner&amp;id={$id}", Xoopspartners\Constants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_BESURE);
         }
 
-        $xpPartnersHandler = $helper->getHandler('Partners');
-        $partnerObj        = $xpPartnersHandler->get($id);
+        $partnersHandler = $helper->getHandler('Partners');
+        $partnerObj        = $partnersHandler->get($id);
         if ($GLOBALS['xoopsSecurity']->check() && ($partnerObj instanceof Partners)) {
             $partnerObj->setVar('url', $myts->addSlashes(formatURL($url)));
             $partnerObj->setVar('title', $myts->addSlashes($title));
@@ -357,7 +357,7 @@ switch ($op) {
             $partnerObj->setVar('weight', $weight);
             $partnerObj->setVar('status', $status);
             $partnerObj->setVar('image', $image);
-            $success = $xpPartnersHandler->insert($partnerObj);
+            $success = $partnersHandler->insert($partnerObj);
             if ($success) {
                 $helper->redirect('admin/main.php', Xoopspartners\Constants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
             }
@@ -366,10 +366,10 @@ switch ($op) {
         break;
     case 'delPartner':
         if ((\Xoopspartners\Constants::CONFIRM_OK === $del) && ($id > Xoopspartners\Constants::DEFAULT_PID)) {
-            $xpPartnersHandler = $helper->getHandler('Partners');
-            $partnerObj        = $xpPartnersHandler->get($id);
-            if ($partnerObj instanceof \Xoopspartners\Partners) {
-                if ($xpPartnersHandler->delete($partnerObj)) {
+            $partnersHandler = $helper->getHandler('Partners');
+            $partnerObj        = $partnersHandler->get($id);
+            if ($partnerObj instanceof Xoopspartners\Partners) {
+                if ($partnersHandler->delete($partnerObj)) {
                     $helper->redirect('admin/main.php', Xoopspartners\Constants::REDIRECT_DELAY_SHORT, _AM_XOOPSPARTNERS_UPDATED);
                 }
             }

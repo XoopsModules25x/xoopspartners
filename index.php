@@ -37,7 +37,7 @@ $start = Request::getInt('start', 0, 'GET');
 $GLOBALS['xoopsOption']['template_main'] = 'xoopspartners_index.tpl';
 require_once $GLOBALS['xoops']->path('/header.php');
 
-$xpPartnersHandler = $helper->getHandler('Partners');
+$partnersHandler = $helper->getHandler('Partners');
 $modConfigs        = $helper->getConfig();
 
 $criteria = new \CriteriaCompo();
@@ -51,7 +51,7 @@ if (!empty($modConfigs['modlimit']) && ($start > 0)) {
 }
 
 $partnerFields = ['id', 'hits', 'url', 'image', 'title', 'description'];
-$partnersArray = $xpPartnersHandler->getAll($criteria, $partnerFields, false, false);
+$partnersArray = $partnersHandler->getAll($criteria, $partnerFields, false, false);
 $numPartners   = is_array($partnersArray) ? count($partnersArray) : 0;
 
 $GLOBALS['xoopsTpl']->assign('partner_join', ($GLOBALS['xoopsUser'] instanceof \XoopsUser) ? Xoopspartners\Constants::JOIN_OK : Xoopspartners\Constants::JOIN_NOT_OK);

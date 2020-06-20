@@ -41,7 +41,7 @@ $myts   = \MyTextSanitizer::getInstance();
 $xpInfo = $helper->getModule()->getInfo();
 
 switch ($op) {
-    case 'sendMail':
+    case 'sendmail':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
@@ -72,14 +72,14 @@ switch ($op) {
                     //                          'tiff' => 'image/tiff',
                     //                           'tif' => 'image/tif',
                 ];
-                $maxFileSize       = (int)$xpInfo['maxuploadsize'] > 0 ? (int)$xpInfo['maxuploadsize'] : Xoopspartners\Constants::DEFAULT_UPLOAD_SIZE;
+                $maxFileSize       = $helper->getConfig('maxuploadsize') > 0 ? $helper->getConfig('maxuploadsize') : Xoopspartners\Constants::DEFAULT_UPLOAD_SIZE;
                 /*                $maxFileWidth  = (int)$xpInfo['maxwidth'] > 0
                                                  ? (int)$xpInfo['maxwidth']
                                                  : Xoopspartners\Constants::DEFAULT_MAX_WIDTH; */
                 /*                $maxFileHeight = (int)$xpInfo['maxheight'] > 0
                                                  ? (int)$xpInfo('maxheight')
                                                  : Xoopspartners\Constants::DEFAULT_MAX_HEIGHT; */
-                if (preg_match('^http[s]?:\/\/[^\s]', $image)) {
+                if (preg_match('^http[s]?:\/\/[\s]^', $image)) {
                     // image is from external source
                     xoops_load('xoopsmediauploader');
                     $uploader = new \XoopsMediaUploader(XOOPS_UPLOAD_PATH . "/{$moduleDirName}", $allowed_mimetypes, $maxFileSize);
@@ -160,7 +160,7 @@ switch ($op) {
         $urlPartner   = new \XoopsFormText(_MD_XOOPSPARTNERS_URL, 'url', 50, 150, 'http://');
         $descrPartner = new \XoopsFormTextArea(_MD_XOOPSPARTNERS_DESCRIPTION, 'description', '', 5, 51);
         $opHidden     = new \XoopsFormHidden('op', 'sendMail');
-        $submitButton = new \XoopsFormButton('', 'dbsubmit', _MD_XOOPSPARTNERS_SUBMIT, 'submit');
+        $submitButton = new \XoopsFormButton('', 'dbsubmit', _SUBMIT, 'submit');
         $form->addElement($titlePartner, true);
         $form->addElement($imagePartner);
         $form->addElement($urlPartner, true);

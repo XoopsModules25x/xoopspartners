@@ -44,12 +44,14 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 $modversion = [
+    'version'             => 2.01,
+    'module_status'       => 'Beta 11',
+    'release_date'        => '2020/06/20',
     'name'                => _MI_XOOPSPARTNERS_NAME,
     'description'         => _MI_XOOPSPARTNERS_DESC,
-    'version'             => 1.13,
-    'module_status'       => 'RC1',
     'official'            => 0,  // 1 if maintained by XOOPS CORE Development Team
     'author'              => 'Raul Recio (unfor)',
     'credits'             => 'Mage, Mamba, ZySpec',
@@ -58,39 +60,23 @@ $modversion = [
     'help'                => 'page=help',
     'image'               => 'assets/images/logoModule.png',
     'dirname'             => $moduleDirName,
-
     //help files
-    'helpsection'         => [
-        [
-            'name' => _MI_XOOPSPARTNERS_HELP_OVERVIEW,
-            'link' => 'page=help',
-        ],
-        [
-            'name' => _MI_XOOPSPARTNERS_HELP_ISSUES,
-            'link' => 'page=issues',
-        ],
+    'helpsection' => [
+        ['name' => _MI_XOOPSPARTNERS_HELP_OVERVIEW, 'link' => 'page=help',],
+        ['name' => _MI_XOOPSPARTNERS_HELP_ISSUES, 'link' => 'page=issues',],
     ],
-
-    /**
-     * About
-     */
     'author_website_url'  => 'https://xoops.org',
     'author_website_name' => 'XOOPS',
     'module_website_url'  => 'https://xoops.org',
     'module_website_name' => 'XOOPS Community',
-    'release_date'        => '2017/04/08',
     'min_php'             =>  '7.2',
     'min_xoops'           => '2.5.10',
     'min_db'              => ['mysql' => '5.5'],
     'min_admin'           => '1.2',
-    //    'dirmoduleadmin'      => 'Frameworks/moduleclasses',
-    //    'icons16'             => 'Frameworks/moduleclasses/icons/16',
-    //    'icons32'             => 'Frameworks/moduleclasses/icons/32',
-
     //    'onInstall'   => 'include/action.module.php',
     //    'onUpdate'    => 'include/action.module.php',
     //    'onUninstall' => 'include/action.module.php',
-    'onInstall'           => 'include/uninstall.php',
+    'onInstall'           => 'include/onuninstall.php',
     'onUpdate'            => 'include/onupdate.php',
     'onUninstall'         => 'include/onuninstall.php',
     /**
@@ -266,6 +252,30 @@ $modversion = [
             'formtype'    => 'textbox',
             'valuetype'   => 'int',
             'default'     => 110,
+        ],
+
+        /**
+         * Make Sample button visible?
+         */
+        [
+            'name'        => 'displaySampleButton',
+            'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON',
+            'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON_DESC',
+            'formtype'    => 'yesno',
+            'valuetype'   => 'int',
+            'default'     => 1,
+        ],
+
+        /**
+         * Show Developer Tools?
+         */
+        [
+            'name'        => 'displayDeveloperTools',
+            'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
+            'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC',
+            'formtype'    => 'yesno',
+            'valuetype'   => 'int',
+            'default'     => 0,
         ],
     ],
 ];
