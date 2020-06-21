@@ -33,7 +33,7 @@ $hdrs = [];
 /**
  * Function to put HTTP headers in an array
  *
- * @param unknown $curl
+ * @param resource $curl
  * @param string  $hdrLine
  *
  * @return int length of header line put into array
@@ -50,7 +50,7 @@ function xoopspartnersHandleHeaderLine($curl, $hdrLine)
  * @param string $hdr
  * @param        $hdrArray
  * @param bool   $asArray
- * @return array|false array($hdr=>value) or false if not found
+ * @return array|false|string array($hdr=>value) or false if not found
  */
 function xoopspartnersGetHeaderFromArray($hdr, $hdrArray, $asArray = false)
 {
@@ -155,7 +155,7 @@ if ($cachedEtag) {
             $_SESSION[$key] = null;
             unset($_SESSION[$key]);
         }
-        $err = _AM_XOOPSPARTNERS_ISSUES_STATUS_UNKNOWN;
+        $err = _AM_XOOPSPARTNERS_ISSUES_ERR_STATUS;
     }
 } else {
     // nothing in session so request new info

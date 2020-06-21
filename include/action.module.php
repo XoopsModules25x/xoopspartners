@@ -44,11 +44,11 @@ if ((!defined('XOOPS_ROOT_PATH'))
 function xoops_module_pre_install_xoopspartners(\XoopsModule $module)
 {
     //check for minimum XOOPS version
-    if (!Utility::checkXoopsVer($module)) {
+    if (!Utility::checkVerXoops($module)) {
         return false;
     }
     // check for minimum PHP version
-    if (!Utility::checkPHPVer($module)) {
+    if (!Utility::checkVerPhp($module)) {
         return false;
     }
 
