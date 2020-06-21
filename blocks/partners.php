@@ -25,6 +25,8 @@
  * @package      module\Xoopspartners\blocks
  */
 
+use XoopsModules\Xoopspartners\Helper;
+
 /**
  * Show partners in block
  * @param array $options from block preferences
@@ -46,7 +48,7 @@ function b_xoopspartners_show($options)
 
     $moduleDirName = basename(dirname(__DIR__));
     /** @var \XoopsModules\Xoopspartners\Helper $helper */
-    $helper            = \XoopsModules\Xoopspartners\Helper::getInstance();
+    $helper            = Helper::getInstance();
     $partnersHandler = $helper->getHandler('Partners');
 
     $block = ['xpDir' => $moduleDirName];

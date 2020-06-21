@@ -19,6 +19,9 @@
  * @since        1.11
  */
 
+use Xmf\Module\Admin;
+use XoopsModules\Xoopspartners\Helper;
+
 include dirname(__DIR__) . '/preloads/autoloader.php';
 
 require  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
@@ -28,10 +31,10 @@ require  dirname(__DIR__) . '/include/common.php';
 $moduleDirName = basename(dirname(__DIR__));
 
 /** @var \XoopsModules\Xoopspartners\Helper $helper */
-$helper = \XoopsModules\Xoopspartners\Helper::getInstance();
+$helper = Helper::getInstance();
 
 /** @var \Xmf\Module\Admin $adminObject */
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 if (!interface_exists('XoopspartnersConstants')) {
     require_once $helper->path('class/constants.php');

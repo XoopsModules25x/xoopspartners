@@ -27,11 +27,12 @@
 
 use Xmf\Module\Admin;
 use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Helper;
 
 // require_once  dirname(__DIR__) . '/class/Helper.php';
 //require_once  dirname(__DIR__) . '/include/common.php';
-/** @var \Xoopspartners\Helper $helper */
-$helper = Xoopspartners\Helper::getInstance();
+/** @var Helper $helper */
+$helper = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');
 

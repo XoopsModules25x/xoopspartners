@@ -18,6 +18,9 @@
  * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
+
+use XoopsModules\Xoopspartners\Helper;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
@@ -26,7 +29,7 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 if (is_object($xoTheme)) {
     //    $helper = Helper::getHelper(basename(__DIR__));
     /** @var \XoopsModules\Xoopspartners\Helper $helper */
-    $helper = \XoopsModules\Xoopspartners\Helper::getInstance();
+    $helper = Helper::getInstance();
     $xoTheme->addStylesheet($helper->url('assets/css/partners.css'));
 }
 

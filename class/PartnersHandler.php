@@ -33,7 +33,7 @@ use XoopsModules\Xoopspartners;
 
 /**
  * {@inheritDoc}
- * @see       XoopsPersistableObjectHandler
+ * @see       \XoopsPersistableObjectHandler
  * @copyright copyright &copy; 2000 XOOPS.org
  */
 class PartnersHandler extends \XoopsPersistableObjectHandler

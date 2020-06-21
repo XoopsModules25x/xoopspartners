@@ -18,6 +18,9 @@
  */
 
 use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Helper;
+use XoopsModules\Xoopspartners\Utility;
+use XoopsModules\Xoopspartners\Common;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -33,7 +36,7 @@ function tableExists($tablename)
 {
     $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0) ? true : false;
+    return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
 }
 
 /**
@@ -45,10 +48,10 @@ function tableExists($tablename)
 function xoops_module_pre_update_xoopspartners(\XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var \Xoopspartners\Helper $helper */
-    /** @var \Xoopspartners\Utility $utility */
-    $helper  = Xoopspartners\Helper::getInstance();
-    $utility = new Xoopspartners\Utility();
+    /** @var Helper $helper */
+    /** @var Utility $utility */
+    $helper  = Helper::getInstance();
+    $utility = new Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -68,11 +71,11 @@ function xoops_module_update_xoopspartners(\XoopsModule $module, $previousVersio
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var \Xoopspartners\Helper $helper */ /** @var \Xoopspartners\Utility $utility */
-    /** @var \Xoopspartners\Common\Configurator $configurator */
-    $helper       = Xoopspartners\Helper::getInstance();
-    $utility      = new Xoopspartners\Utility();
-    $configurator = new Xoopspartners\Common\Configurator();
+    /** @var Helper $helper */ /** @var Utility $utility */
+    /** @var Common\Configurator $configurator */
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Common\Configurator();
 
     if ($previousVersion < 240) {
         //rename column EXAMPLE

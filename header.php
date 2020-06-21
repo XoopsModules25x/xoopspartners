@@ -23,6 +23,9 @@
  * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
+
+use XoopsModules\Xoopspartners\Helper;
+
 $moduleDirName = basename(__DIR__);
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 xoops_load('pagenav');
@@ -31,5 +34,5 @@ xoops_load('pagenav');
 //}
 
 //$helper = Helper::getHelper($moduleDirName);
-/** @var \XoopsModules\Xoopspartners\Helper $helper */
-$helper = \XoopsModules\Xoopspartners\Helper::getInstance();
+/** @var Helper $helper */
+$helper = Helper::getInstance();

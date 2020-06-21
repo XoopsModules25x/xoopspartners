@@ -9,6 +9,8 @@
  */
 
 use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Helper;
+use XoopsModules\Xoopspartners\Utility;
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -34,11 +36,11 @@ function xoops_module_uninstall_xoopspartners(\XoopsModule $module)
 
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    /** @var \Xoopspartners\Helper $helper */
-    $helper = Xoopspartners\Helper::getInstance();
+    /** @var Helper $helper */
+    $helper = Helper::getInstance();
 
-    /** @var \XoopsModules\Xoopspartners\Utility $utility */
-    $utility = new \XoopsModules\Xoopspartners\Utility();
+    /** @var Utility $utility */
+    $utility = new Utility();
 
     $success = true;
     $helper->loadLanguage('admin');

@@ -12,14 +12,14 @@
 <tr><td rowspan="1" colspan="3">Sort Automatic</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/xtest251/modules/xoopspartners/admin/main.php?op=default</td>
-	<td></td>
+    <td>open</td>
+    <td>/xtest251/modules/xoopspartners/admin/main.php?op=default</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>document.forms[0].elements['button'][1]</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>document.forms[0].elements['button'][1]</td>
+    <td></td>
 </tr>
 
 </tbody></table>

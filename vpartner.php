@@ -26,19 +26,20 @@
 
 use Xmf\Request;
 use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Constants;
 
 require_once __DIR__ . '/header.php';
 $partnersHandler = $helper->getHandler('Partners');
 
-$id = Request::getInt('id', Xoopspartners\Constants::DEFAULT_PID, 'GET');
-if (\Xoopspartners\Constants::DEFAULT_PID === $id) {
-    $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
+$id = Request::getInt('id', Constants::DEFAULT_PID, 'GET');
+if (Constants::DEFAULT_PID === $id) {
+    $helper->redirect('index.php', Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }
 
 $partnerObj = $partnersHandler->get($id);
 if (($partnerObj instanceof Xoopspartners\Partners)
     && $partnerObj->getVar('url')
-    && (\Xoopspartners\Constants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
+    && (Constants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
     if (!isset($GLOBALS['xoopsUser'])        // not a registered user
         || !$helper->isUserAdmin()         // registered but not an admin
         || $helper->getConfig('incadmin')) { // admin but want to include admin hits
@@ -53,5 +54,5 @@ if (($partnerObj instanceof Xoopspartners\Partners)
     echo "<html>\n" . "  <head>\n" . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url'), ENT_QUOTES | ENT_HTML5) . "'>\n" . "  </head>\n" . "  <body></body>\n" . "</html>\n";
 } else {
     unset($partnersHandler);
-    $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
+    $helper->redirect('index.php', Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }

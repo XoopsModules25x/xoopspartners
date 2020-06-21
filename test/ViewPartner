@@ -12,14 +12,14 @@
 <tr><td rowspan="1" colspan="3">View Partner</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/xtest251/modules/xoopspartners/</td>
-	<td></td>
+    <td>open</td>
+    <td>/xtest251/modules/xoopspartners/</td>
+    <td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Partners</td>
-	<td></td>
+    <td>clickAndWait</td>
+    <td>link=Partners</td>
+    <td></td>
 </tr>
 
 </tbody></table>

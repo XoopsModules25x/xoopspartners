@@ -28,6 +28,7 @@ use Xmf\Module;
 use Xmf\Module\Admin;
 use Xmf\Request;
 use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Constants;
 
 require_once __DIR__ . '/header.php';
 
@@ -41,7 +42,7 @@ $partnersHandler = $helper->getHandler('Partners');
 $modConfigs        = $helper->getConfig();
 
 $criteria = new \CriteriaCompo();
-$criteria->add(new \Criteria('status', Xoopspartners\Constants::STATUS_ACTIVE, '='));
+$criteria->add(new \Criteria('status', Constants::STATUS_ACTIVE, '='));
 $criteria->setSort($modConfigs['modsort']);
 $criteria->setOrder($modConfigs['modorder']);
 $criteria->setLimit($modConfigs['modlimit']);
@@ -54,7 +55,7 @@ $partnerFields = ['id', 'hits', 'url', 'image', 'title', 'description'];
 $partnersArray = $partnersHandler->getAll($criteria, $partnerFields, false, false);
 $numPartners   = is_array($partnersArray) ? count($partnersArray) : 0;
 
-$GLOBALS['xoopsTpl']->assign('partner_join', ($GLOBALS['xoopsUser'] instanceof \XoopsUser) ? Xoopspartners\Constants::JOIN_OK : Xoopspartners\Constants::JOIN_NOT_OK);
+$GLOBALS['xoopsTpl']->assign('partner_join', ($GLOBALS['xoopsUser'] instanceof \XoopsUser) ? Constants::JOIN_OK : Constants::JOIN_NOT_OK);
 
 /**
  * XOOPS Module config ['modshow']
@@ -64,7 +65,7 @@ $GLOBALS['xoopsTpl']->assign('partner_join', ($GLOBALS['xoopsUser'] instanceof \
  */
 $modShow = (int)$modConfigs['modshow'];
 foreach ($partnersArray as $thisPartner) {
-    if ($modShow & Xoopspartners\Constants::SHOW_IMAGE) { // want image
+    if ($modShow & Constants::SHOW_IMAGE) { // want image
         if (empty($thisPartner['image'])) { //but there isn't one
             $thisPartner['image'] = $thisPartner['title'];
         } else {
@@ -73,11 +74,11 @@ foreach ($partnersArray as $thisPartner) {
     } else {
         $thisPartner['image'] = '';
     }
-    if ((($modShow & Xoopspartners\Constants::SHOW_TITLE) // want text or invalid setting
-         || (0 === ($modShow & (Xoopspartners\Constants::SHOW_TITLE && Xoopspartners\Constants::SHOW_IMAGE))))
+    if ((($modShow & Constants::SHOW_TITLE) // want text or invalid setting
+         || (0 === ($modShow && (Constants::SHOW_TITLE && Constants::SHOW_IMAGE))))
         && ($thisPartner['image'] !== $thisPartner['title'])) { // and valid image saved
         $sep                  = $modShow ? '' : '<br>';
-        $thisPartner['image'] = $thisPartner['image'] . $sep . $thisPartner['title'];
+        $thisPartner['image'] .= $sep . $thisPartner['title'];
     }
 
     if (isset($GLOBALS['xoopsUser']) && $helper->isUserAdmin()) {

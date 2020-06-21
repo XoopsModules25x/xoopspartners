@@ -18,6 +18,9 @@
  */
 
 use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Helper;
+use XoopsModules\Xoopspartners\Utility;
+use XoopsModules\Xoopspartners\Common;
 
 //require_once __DIR__ . '/setup.php';
 
@@ -30,8 +33,8 @@ use XoopsModules\Xoopspartners;
 function xoops_module_pre_install_xoopspartners(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var \Utility $utility */
-    $utility      = new \XoopsModules\Xoopspartners\Utility();
+    /** @var Utility $utility */
+    $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -56,10 +59,10 @@ function xoops_module_install_xoopspartners(\XoopsModule $module)
     require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var \Xoopspartners\Helper $helper */
-    $helper       = Xoopspartners\Helper::getInstance();
-    $utility      = new Xoopspartners\Utility();
-    $configurator = new Xoopspartners\Common\Configurator();
+    /** @var Helper $helper */
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');

@@ -22,6 +22,8 @@
  */
 
 use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Helper;
+use XoopsModules\Xoopspartners\Utility;
 
 /**
  * @internal {Make sure you PROTECT THIS FILE}
@@ -42,11 +44,11 @@ if ((!defined('XOOPS_ROOT_PATH'))
 function xoops_module_pre_install_xoopspartners(\XoopsModule $module)
 {
     //check for minimum XOOPS version
-    if (!Xoopspartners\Utility::checkXoopsVer($module)) {
+    if (!Utility::checkXoopsVer($module)) {
         return false;
     }
     // check for minimum PHP version
-    if (!Xoopspartners\Utility::checkPHPVer($module)) {
+    if (!Utility::checkPHPVer($module)) {
         return false;
     }
 
@@ -66,7 +68,9 @@ function xoops_module_install_xoopspartners(\XoopsModule $module)
     //Create the "uploads" directory for the module
     $module_uploads = $GLOBALS['xoops']->path('/uploads/' . $module->dirname());
     if (!is_dir($module_uploads)) {
-        mkdir($module_uploads, 0777);
+        if (!mkdir($module_uploads, 0777) && !is_dir($module_uploads)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $module_uploads));
+        }
     }
     chmod($module_uploads, 0777);
     //now copy the index file to help prevent 'browsing' the directory
@@ -83,11 +87,11 @@ function xoops_module_install_xoopspartners(\XoopsModule $module)
  */
 function xoops_module_pre_update_xoopspartners(\XoopsModule $module)
 {
-    /** @var \Xoopspartners\Helper $helper */
-    /** @var \Xoopspartners\Utility $utility */
+    /** @var Helper $helper */
+    /** @var Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
-    $helper        = Xoopspartners\Helper::getInstance();
-    $utility       = new Xoopspartners\Utility();
+    $helper        = Helper::getInstance();
+    $utility       = new Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);

@@ -48,7 +48,7 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 $modversion = [
     'version'             => 2.01,
-    'module_status'       => 'Beta 11',
+    'module_status'       => 'Beta 1',
     'release_date'        => '2020/06/20',
     'name'                => _MI_XOOPSPARTNERS_NAME,
     'description'         => _MI_XOOPSPARTNERS_DESC,

@@ -26,10 +26,11 @@
 
 use Xmf\Request;
 use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Constants;
 
 require_once __DIR__ . '/header.php';
 if (!isset($GLOBALS['xoopsUser']) || !$GLOBALS['xoopsUser'] instanceof \XoopsUser) {
-    $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _NOPERM);
+    $helper->redirect('index.php', Constants::REDIRECT_DELAY_MEDIUM, _NOPERM);
 }
 
 /** @var string $xoopsOption */
@@ -43,7 +44,7 @@ $xpInfo = $helper->getModule()->getInfo();
 switch ($op) {
     case 'sendmail':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            $helper->redirect('index.php', Xoopspartners\Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+            $helper->redirect('index.php', Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_ERROR1 . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         extract($_POST, EXTR_PREFIX_ALL, 'unsafe');
         if (empty($unsafe_title) || empty($unsafe_description) || empty($unsafe_url) || 'http://' === $unsafe_url) {
@@ -72,13 +73,13 @@ switch ($op) {
                     //                          'tiff' => 'image/tiff',
                     //                           'tif' => 'image/tif',
                 ];
-                $maxFileSize       = $helper->getConfig('maxuploadsize') > 0 ? $helper->getConfig('maxuploadsize') : Xoopspartners\Constants::DEFAULT_UPLOAD_SIZE;
+                $maxFileSize       = $helper->getConfig('maxuploadsize') > 0 ? $helper->getConfig('maxuploadsize') : Constants::DEFAULT_UPLOAD_SIZE;
                 /*                $maxFileWidth  = (int)$xpInfo['maxwidth'] > 0
                                                  ? (int)$xpInfo['maxwidth']
-                                                 : Xoopspartners\Constants::DEFAULT_MAX_WIDTH; */
+                                                 : Constants::DEFAULT_MAX_WIDTH; */
                 /*                $maxFileHeight = (int)$xpInfo['maxheight'] > 0
                                                  ? (int)$xpInfo('maxheight')
-                                                 : Xoopspartners\Constants::DEFAULT_MAX_HEIGHT; */
+                                                 : Constants::DEFAULT_MAX_HEIGHT; */
                 if (preg_match('^http[s]?:\/\/[\s]^', $image)) {
                     // image is from external source
                     xoops_load('xoopsmediauploader');

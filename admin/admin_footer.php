@@ -20,10 +20,11 @@
  */
 
 use Xmf\Module\Admin;
+use XoopsModules\Xoopspartners\Helper;
 
 $moduleDirName = basename(dirname(__DIR__));
-/** @var \XoopsModules\Xoopspartners\Helper $helper */
-$helper   = \XoopsModules\Xoopspartners\Helper::getInstance();
+/** @var Helper $helper */
+$helper   = Helper::getInstance();
 $xpModule = $helper->getModule();
 
 echo "<div class='adminfooter'>\n"

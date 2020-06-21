@@ -29,7 +29,7 @@ namespace XoopsModules\Xoopspartners;
  * Class Partners
  *
  * {@inheritDoc}
- * @see XoopsObject
+ * @see \XoopsObject
  */
 class Partners extends \XoopsObject
 {
