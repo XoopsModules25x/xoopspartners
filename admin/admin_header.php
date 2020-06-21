@@ -7,38 +7,50 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\admin
+ * @package      module\Xoopspartners\admin
  * @author       XOOPS Module Development Team
- * @copyright    {@link http://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @link         http://xoops.org XOOPS
+ * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @link         https://xoops.org XOOPS
  * @since        1.11
  */
-use Xmf\Module\Helper;
 
-require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-require $GLOBALS['xoops']->path('/include/cp_header.php');
+use Xmf\Module\Admin;
+use XoopsModules\Xoopspartners\Helper;
+
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
+require  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+
+require  dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
-$xpHelper      = Helper::getHelper($moduleDirName);
+
+/** @var \XoopsModules\Xoopspartners\Helper $helper */
+$helper = Helper::getInstance();
+
+/** @var \Xmf\Module\Admin $adminObject */
+$adminObject = Admin::getInstance();
 
 if (!interface_exists('XoopspartnersConstants')) {
-    require_once $xpHelper->path('class/constants.php');
+    require_once $helper->path('class/constants.php');
 }
 
 //Load languages
-$xpHelper->loadLanguage('admin');
-$xpHelper->loadLanguage('modinfo');
-$xpHelper->loadLanguage('main');
+$helper->loadLanguage('admin');
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('main');
+$helper->loadLanguage('common');
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
-    include_once $GLOBALS['xoops']->path('/class/template.php');
-    $GLOBALS['xoopsTpl'] = new XoopsTpl();
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
+    require_once $GLOBALS['xoops']->path('/class/template.php');
+    $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
 
 xoops_cp_header();

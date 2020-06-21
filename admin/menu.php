@@ -12,38 +12,54 @@
  * Project: The XOOPS Project
  *------------------------------------
 */
+
 /**
  * Module: XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\admin
+ * @package      module\Xoopspartners\admin
  * @author       Mage, Mamba
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-use Xmf\Module\Admin;
 
-$adminmenu = array(
-    array(
+use Xmf\Module\Admin;
+use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Helper;
+
+// require_once  dirname(__DIR__) . '/class/Helper.php';
+//require_once  dirname(__DIR__) . '/include/common.php';
+/** @var Helper $helper */
+$helper = Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
+
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+}
+
+$adminmenu = [
+    [
         'title' => _MI_XOOPSPARTNERS_ADMIN_HOME,
         'link'  => 'admin/index.php',
-        'icon'  => Admin::menuIconPath('home.png')
-    ),
-    array(
+        'icon'  => Admin::menuIconPath('home.png'),
+    ],
+    [
         'title' => _MI_XOOPSPARTNERS_ADMIN_MANAGE,
         'link'  => 'admin/main.php',
-        'icon'  => Admin::menuIconPath('manage.png')
-    ),
-    array(
+        'icon'  => Admin::menuIconPath('manage.png'),
+    ],
+    [
         'title' => _MI_XOOPSPARTNERS_ADMIN_ADDP,
         'link'  => 'admin/main.php?op=partnersAdminAdd',
-        'icon'  => Admin::menuIconPath('add.png')
-    ),
-    array(
+        'icon'  => Admin::menuIconPath('add.png'),
+    ],
+    [
         'title' => _MI_XOOPSPARTNERS_ADMIN_ABOUT,
         'link'  => 'admin/about.php',
-        'icon'  => Admin::menuIconPath('about.png')
-    )
-);
+        'icon'  => Admin::menuIconPath('about.png'),
+    ],
+];

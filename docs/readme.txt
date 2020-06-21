@@ -25,7 +25,7 @@ Operating instructions
 ----------------------
 To set up this module you need to:
 
-i)   Enter your partner’s details – including a URL for their website and
+i)   Enter your partnerï¿½s details ï¿½ including a URL for their website and
      (optionally) a logo plus a short description (see 'Adding a partner')
 
 ii)  Configure your preferences for the module (see 'Preferences') and
@@ -40,4 +40,4 @@ available in the XOOPS Operations Manual (goo.gl/o2gHGl)
 
 Tutorial
 --------
-You can find a more detailed tutorial here: (https://www.gitbook.com/book/xoops/xoopspartners-tutorial/)
+You can find a more detailed tutorial here: (https://xoops.gitbook.io/xoopspartners-tutorial/)

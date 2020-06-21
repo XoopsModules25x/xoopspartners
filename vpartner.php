@@ -12,50 +12,47 @@
  * Project: The XOOPS Project
  *--------------------------------------
  */
+
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\frontside
+ * @package      module\Xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
+
 use Xmf\Request;
+use XoopsModules\Xoopspartners;
+use XoopsModules\Xoopspartners\Constants;
 
-require __DIR__ . '/header.php';
-$xpPartnersHandler = $xpHelper->getHandler('partners');
+require_once __DIR__ . '/header.php';
+$partnersHandler = $helper->getHandler('Partners');
 
-$id = Request::getInt('id', XoopspartnersConstants::DEFAULT_PID, 'GET');
-if (XoopspartnersConstants::DEFAULT_PID === $id) {
-    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
+$id = Request::getInt('id', Constants::DEFAULT_PID, 'GET');
+if (Constants::DEFAULT_PID === $id) {
+    $helper->redirect('index.php', Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }
 
-$partnerObj = $xpPartnersHandler->get($id);
-if (($partnerObj instanceof XoopspartnersPartners)
+$partnerObj = $partnersHandler->get($id);
+if (($partnerObj instanceof Xoopspartners\Partners)
     && $partnerObj->getVar('url')
-    && (XoopspartnersConstants::STATUS_ACTIVE == $partnerObj->getVar('status')))
-{
+    && (Constants::STATUS_ACTIVE == $partnerObj->getVar('status'))) {
     if (!isset($GLOBALS['xoopsUser'])        // not a registered user
-        || !$xpHelper->isUserAdmin()         // registered but not an admin
-        || $xpHelper->getConfig('incadmin')) // admin but want to include admin hits
-    {
+        || !$helper->isUserAdmin()         // registered but not an admin
+        || $helper->getConfig('incadmin')) { // admin but want to include admin hits
         if (!isset($_COOKIE['partners'][$id])) {
-            setcookie("partners[{$id}]", $id, time() + $xpHelper->getConfig('cookietime'));
+            setcookie("partners[{$id}]", $id, time() + $helper->getConfig('cookietime'));
             $hitCount = $partnerObj->getVar('hits');
             ++$hitCount;
             $partnerObj->setVar('hits', $hitCount);
-            $xpPartnersHandler->insert($partnerObj);
+            $partnersHandler->insert($partnerObj);
         }
     }
-    echo "<html>\n"
-       . "  <head>\n"
-       . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url')) . "'>\n"
-       . "  </head>\n"
-       . "  <body></body>\n"
-       . "</html>\n";
+    echo "<html>\n" . "  <head>\n" . "    <meta http-equiv='Refresh' content='0; URL=" . htmlentities($partnerObj->getVar('url'), ENT_QUOTES | ENT_HTML5) . "'>\n" . "  </head>\n" . "  <body></body>\n" . "</html>\n";
 } else {
-    unset($xpPartnersHandler);
-    $xpHelper->redirect('index.php', XoopspartnersConstants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
+    unset($partnersHandler);
+    $helper->redirect('index.php', Constants::REDIRECT_DELAY_MEDIUM, _MD_XOOPSPARTNERS_NOPART);
 }

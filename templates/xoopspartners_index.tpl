@@ -1,6 +1,6 @@
 <h4><{$sitename}> <{$lang_main_partner}></h4>
 
-<table class='bnone width100' style='margin: 0px;'>
+<table class='bnone width100' style='margin: 0;'>
     <tr>
         <{*        <td class='left width50'><{$partner_join}></td> *}>
         <td class='right width50 bold'><{if ($partner_join)}><a href='join.php' title='<{$smarty.const._MD_XOOPSPARTNERS_JOIN}>'><{$smarty.const._MD_XOOPSPARTNERS_JOIN}></a><{else}>&nbsp;<{/if}></td>
@@ -30,7 +30,7 @@
 
 </table>
 
-<table class='bnone width100' style='margin: 0px;'>
+<table class='bnone width100' style='margin: 0;'>
     <tr>
         <{*        <td class='left width50'><{$partner_join}></td> *}>
         <td class='right width50 bold'><{if ($partner_join)}><a href='join.php' title='<{$smarty.const._MD_XOOPSPARTNERS_JOIN}>'><{$smarty.const._MD_XOOPSPARTNERS_JOIN}></a><{else}>&nbsp;<{/if}></td>

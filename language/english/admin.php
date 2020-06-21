@@ -12,18 +12,18 @@
  * Project: The XOOPS Project
  *--------------------------------------
  */
+
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\language
+ * @package      module\Xoopspartners\language
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-
-//$moduleDirName = basename(dirname(dirname(__DIR__)));
+$moduleDirName = basename(dirname(dirname(__DIR__)));
 
 define('_AM_XOOPSPARTNERS_URL', 'URL');
 define('_AM_XOOPSPARTNERS_HITS', 'Hits');
@@ -73,7 +73,7 @@ define('_AM_XOOPSPARTNERS_ACTIONS', 'Actions');
 define('_AM_XOOPSPARTNERS_INVALIDID', 'No partner exists with this ID');
 
 // text in admin footer
-define('_AM_XOOPSPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$moduleDirname}</strong> is maintained by the <a class='tooltip' rel='external' href='http://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
+define('_AM_XOOPSPARTNERS_ADMIN_FOOTER', "<div class='center smallsmall italic pad5'><strong>{$moduleDirName}</strong> is maintained by the <a class='tooltip' rel='external' href='https://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>");
 
 //1.12
 define('_AM_XOOPSPARTNERS_NOPARTNERS', 'No Partners in the database.');
@@ -86,13 +86,12 @@ define('_AM_XOOPSPARTNERS_ADMIN_FOOTER_STR1', 'is maintainted by the');
 define('_AM_XOOPSPARTNERS_ADMIN_FOOTER_STR2', 'Visit');
 
 // Help Issues page defines
-define('_AM_XOOPSPARTNERS_ISSUES_ERR_UNKNOWN', "Unknown Error");
-define('_AM_XOOPSPARTNERS_ISSUES_ERR_STATUS', "Unknown Status");
-define('_AM_XOOPSPARTNERS_ISSUES_NONE', "There are currently no open issues.");
-define('_AM_XOOPSPARTNERS_ISSUES_NOTE', "Note: * indicates issue is a GitHub pull request");
-define('_AM_XOOPSPARTNERS_ISSUES_OPEN', "Open Issues");
-define('_AM_XOOPSPARTNERS_HELP_ISSUE', "Issue #");
-define('_AM_XOOPSPARTNERS_HELP_DATE', "Date");
-define('_AM_XOOPSPARTNERS_HELP_TITLE', "Title");
-define('_AM_XOOPSPARTNERS_HELP_SUBMITTER', "Submitter");
-
+define('_AM_XOOPSPARTNERS_ISSUES_ERR_UNKNOWN', 'Unknown Error');
+define('_AM_XOOPSPARTNERS_ISSUES_ERR_STATUS', 'Unknown Status');
+define('_AM_XOOPSPARTNERS_ISSUES_NONE', 'There are currently no open issues.');
+define('_AM_XOOPSPARTNERS_ISSUES_NOTE', 'Note: * indicates issue is a GitHub pull request');
+define('_AM_XOOPSPARTNERS_ISSUES_OPEN', 'Open Issues');
+define('_AM_XOOPSPARTNERS_HELP_ISSUE', 'Issue #');
+define('_AM_XOOPSPARTNERS_HELP_DATE', 'Date');
+define('_AM_XOOPSPARTNERS_HELP_TITLE', 'Title');
+define('_AM_XOOPSPARTNERS_HELP_SUBMITTER', 'Submitter');

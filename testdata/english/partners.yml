@@ -1,0 +1,18 @@
+-
+    id: '1'
+    weight: '99'
+    hits: '0'
+    url: 'http://xoops.org'
+    image: 'https://xoops.org/themes/xoopsorg/images/logo.png'
+    title: XOOPS
+    description: 'Best CMS on the Market'
+    status: '1'
+-
+    id: '2'
+    weight: '1'
+    hits: '0'
+    url: 'http://github.com'
+    image: 'http://is.gd/C8mHeU'
+    title: GitHub
+    description: 'Best Version Control Hub'
+    status: '1'

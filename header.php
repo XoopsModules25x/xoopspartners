@@ -12,23 +12,27 @@
  * Project: The XOOPS Project
  *--------------------------------------
  */
+
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\frontside
+ * @package      module\Xoopspartners\frontside
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-use Xmf\Module\Helper;
+
+use XoopsModules\Xoopspartners\Helper;
 
 $moduleDirName = basename(__DIR__);
-require __DIR__ . '/../../mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 xoops_load('pagenav');
-if (!interface_exists('XoopspartnersConstants')) {
-    require_once __DIR__ . '/class/constants.php';
-}
+//if (!interface_exists('Xoopspartners\Constants')) {
+//    require_once __DIR__ . '/class/constants.php';
+//}
 
-$xpHelper = Helper::getHelper($moduleDirName);
+//$helper = Helper::getHelper($moduleDirName);
+/** @var Helper $helper */
+$helper = Helper::getInstance();

@@ -7,17 +7,19 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Xoopspartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\frontside
- * @author       zyspec <owners@zyspec.com>
+ * @package      module\Xoopspartners\frontside
+ * @author       zyspec <zyspec@yahoo.com>
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-use Xmf\Module\Helper;
+
+use XoopsModules\Xoopspartners\Helper;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
@@ -25,8 +27,10 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
  * Module specific tpl includes
  */
 if (is_object($xoTheme)) {
-    $xpHelper = Helper::getHelper(basename(__DIR__));
-    $xoTheme->addStylesheet($xpHelper->url('assets/css/partners.css'));
+    //    $helper = Helper::getHelper(basename(__DIR__));
+    /** @var \XoopsModules\Xoopspartners\Helper $helper */
+    $helper = Helper::getInstance();
+    $xoTheme->addStylesheet($helper->url('assets/css/partners.css'));
 }
 
-include_once $GLOBALS['xoops']->path('/footer.php');
+require_once $GLOBALS['xoops']->path('/footer.php');

@@ -12,17 +12,17 @@
  * Project: The XOOPS Project
  *--------------------------------------
  */
+
 /**
  * XoopsPartners - a partner affiliation links module
  *
- * @package      module\xoopspartners\language
+ * @package      module\Xoopspartners\language
  * @author       Raul Recio (aka UNFOR)
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  */
-
 define('_MD_XOOPSPARTNERS_JOIN', 'Become a Partner');
 define('_MD_XOOPSPARTNERS_PARTNERS', 'Partners');
 define('_MD_XOOPSPARTNERS_PARTNER', 'Partner');
@@ -34,7 +34,7 @@ define('_MD_XOOPSPARTNERS_IMAGE', 'Image:');
 define('_MD_XOOPSPARTNERS_TITLE', 'Title:');
 define('_MD_XOOPSPARTNERS_URL', 'URL:');
 define('_MD_XOOPSPARTNERS_SEND', 'Send Email');
-define('_MD_XOOPSPARTNERS_ERROR1', "<center>ERROR: There was an error. <a href='javascript:history.back(1)'>Try again</a></center>");
+define('_MD_XOOPSPARTNERS_ERROR1', "<div style=\"text-align: center;\">ERROR: There was an error. <a href='javascript:history.back(1)'>Try again</a></div>");
 define('_MD_XOOPSPARTNERS_ERROR2', "<span style='text-align: center'>" . "Image size is larger than 150x110. <a href='javascript:history.back(1)'>Try with another image</a></span>");
 define('_MD_XOOPSPARTNERS_ERROR3', "<style='text-align: center;'>" . "The %s image file doesn't exist. <a href='javascript:history.back(1)'>Try with another image</a></span>");
 define('_MD_XOOPSPARTNERS_ERROR4', "<style='text-align: center;'>" . "The image file type is invalid. <a href='javascript:history.back(1)'>Try with another image</a></span>");

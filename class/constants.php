@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xoopspartners;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,21 +20,18 @@
  * the value(s) before module installation. Additionally the module may not
  * work correctly if trying to upgrade if these values have been changed.
  *
- * @package      module\xoopspartners\class
- * @author       zyspec <owners@zyspec.com>
+ * @package      module\Xoopspartners\class
+ * @author       zyspec <zyspec@yahoo.com>
  * @author       XOOPS Module Development Team
  * @copyright    {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @license      {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
  * @link         https://xoops.org XOOPS
  * @since        1.12
  */
-
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
-
 /**
- * Interface XoopspartnersConstants
+ * interface Constants
  */
-interface XoopspartnersConstants
+interface Constants
 {
     /**#@+
      * Constant definition
@@ -39,74 +39,74 @@ interface XoopspartnersConstants
     /**
      * no delay XOOPS redirect delay (in seconds)
      */
-    const REDIRECT_DELAY_NONE = 0;
+    public const REDIRECT_DELAY_NONE = 0;
     /**
      * short XOOPS redirect delay (in seconds)
      */
-    const REDIRECT_DELAY_SHORT = 1;
+    public const REDIRECT_DELAY_SHORT = 1;
     /**
      * medium XOOPS redirect delay (in seconds)
      */
-    const REDIRECT_DELAY_MEDIUM = 3;
+    public const REDIRECT_DELAY_MEDIUM = 3;
     /**
      * long XOOPS redirect delay (in seconds)
      */
-    const REDIRECT_DELAY_LONG = 7;
+    public const REDIRECT_DELAY_LONG = 7;
     /**
      * default image width  (don't change here, change in Preferences)
      */
-    const DEFAULT_MAX_WIDTH = 150;
+    public const DEFAULT_MAX_WIDTH = 150;
     /**
      * default image height (don't change here, change in Preferences)
      */
-    const DEFAULT_MAX_HEIGHT = 110;
+    public const DEFAULT_MAX_HEIGHT = 110;
     /**
      * value indicates poll options are shown as list
      */
-    const DEFAULT_UPLOAD_SIZE = 1048576;
+    public const DEFAULT_UPLOAD_SIZE = 1048576;
     /**
      * default partner ID
      */
-    const DEFAULT_PID = 0;
+    public const DEFAULT_PID = 0;
     /**
      * default module ID
      */
-    const DEFAULT_MID = 0;
+    public const DEFAULT_MID = 0;
     /**
      *  indicates a partner title should be displayed
      */
-    const SHOW_TITLE = 2;
+    public const SHOW_TITLE = 2;
     /**
      *  indicates a partner image should be displayed
      */
-    const SHOW_IMAGE = 1;
+    public const SHOW_IMAGE = 1;
     /**
      *  indicates a partner listing is inactive
      */
-    const STATUS_INACTIVE = 0;
+    public const STATUS_INACTIVE = 0;
     /**
      *  indicates a partner listing is active
      */
-    const STATUS_ACTIVE = 1;
+    public const STATUS_ACTIVE = 1;
     /**
      * default poll weight for display order
      */
-    const DEFAULT_WEIGHT = 0;
+    public const DEFAULT_WEIGHT = 0;
     /**
      * cannot join
      */
-    const JOIN_NOT_OK = 0;
+    public const JOIN_NOT_OK = 0;
     /**
      * ok to join
      */
-    const JOIN_OK = 1;
+    public const JOIN_OK = 1;
     /**
      * confirm not ok to take action
      */
-    const CONFIRM_NOT_OK = 0;
+    public const CONFIRM_NOT_OK = 0;
     /**
      * confirm ok to take action
      */
-    const CONFIRM_OK = 1;
+    public const CONFIRM_OK = 1;
     /**#@-*/
 }
